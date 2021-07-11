@@ -3,16 +3,15 @@ package com.ck.dev.tiptap.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
-import com.ck.dev.tiptap.models.GameLevel
+import com.ck.dev.tiptap.models.FindTheNumGameLevel
 import com.ck.dev.tiptap.ui.GameLevelsFragmentDirections
 import kotlinx.android.synthetic.main.list_item_levels.view.*
 
 class GameLevelsAdapter(
-    private val list: List<GameLevel>,
+    private val list: List<FindTheNumGameLevel>,
     private val navController: NavController
 ) :
     RecyclerView.Adapter<GameLevelsAdapter.ViewHolder>() {
@@ -30,10 +29,6 @@ class GameLevelsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
-            /*  val layerDrawable = context.fetchDrawable(R.drawable.layer_list_number) as LayerDrawable
-              val btnBg = layerDrawable.findDrawableByLayerId(R.id.btn_front) as GradientDrawable
-              val btnShadow = layerDrawable.findDrawableByLayerId(R.id.btn_shadow) as GradientDrawable
-              btnBg.setColor(context.fetchColor(R.color.primaryDarkColor))*/
             level_num_text.text = list[position].levelNum
             setOnClickListener {
                 if (list[position].isGameUnlocked) {
@@ -52,18 +47,18 @@ class GameLevelsAdapter(
             }
             if (list[position].isGameUnlocked) {
                 lock_iv.visibility = View.GONE
-                val textParam = RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.WRAP_CONTENT,
-                    RelativeLayout.LayoutParams.WRAP_CONTENT
-                )
-                textParam.addRule(RelativeLayout.CENTER_IN_PARENT)
-                level_num_text.layoutParams = textParam
-                level_num_text.textSize =
-                    context.resources.getDimension(R.dimen.app_text_size_xsmall)
+                coins_reqd_container.visibility = View.VISIBLE
+                high_score_tv.text = list[position].highScore.toString()
+                deductCoins(list[position].rule.coinsReqd)
 
             } else {
                 lock_iv.visibility = View.VISIBLE
+                coins_reqd_container.visibility = View.GONE
             }
         }
+    }
+
+    private fun deductCoins(coinsReqd: Int) {
+        //TO BE IMPLEMENTED LATER
     }
 }

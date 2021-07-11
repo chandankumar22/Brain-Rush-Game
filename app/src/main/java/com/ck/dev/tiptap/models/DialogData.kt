@@ -21,9 +21,7 @@ data class DialogData(
     )
 
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
-    }
+    override fun writeToParcel(dest: Parcel?, flags: Int) {}
 
     override fun describeContents(): Int {
         return Parcelable.CONTENTS_FILE_DESCRIPTOR

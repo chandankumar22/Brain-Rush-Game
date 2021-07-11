@@ -9,10 +9,12 @@ import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.ui.GameMainScreen
 import kotlinx.android.synthetic.main.activity_find_the_numbers.*
 import kotlinx.android.synthetic.main.activity_game_main_screen.*
+import timber.log.Timber
 
 class FindTheNumbersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.i("onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_the_numbers)
         find_the_num_header.setBackgroundColor(fetchColor(R.color.primaryLightColor))

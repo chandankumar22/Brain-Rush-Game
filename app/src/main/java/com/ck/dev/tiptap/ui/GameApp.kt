@@ -2,11 +2,19 @@ package com.ck.dev.tiptap.ui
 
 import android.app.Application
 import com.ck.dev.tiptap.BuildConfig
+import com.ck.dev.tiptap.data.AppDatabase
+import com.ck.dev.tiptap.data.DatabaseFactory
 import timber.log.Timber
 
 class GameApp:Application() {
 
+    companion object{
+        lateinit var appDatabase: AppDatabase
+    }
+
+
     override fun onCreate() {
+        Timber.i("onCreate called")
         super.onCreate()
         if (BuildConfig.DEBUG) {
             Timber.plant(object : Timber.DebugTree() {

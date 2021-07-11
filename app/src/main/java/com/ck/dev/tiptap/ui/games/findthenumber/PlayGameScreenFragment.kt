@@ -5,9 +5,12 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -15,21 +18,29 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.FindTheNumGridAdapter
 import com.ck.dev.tiptap.adapters.GridNumSelectCallback
+import com.ck.dev.tiptap.data.entity.Games
 import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.extensions.getRandomColor
+import com.ck.dev.tiptap.helpers.AppConstants
+import com.ck.dev.tiptap.helpers.AppConstants.FIND_THE_NUM_GAME_RULE_FILE_NAME
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_COMPLETE_TAG
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_EXIT_TAG
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_PAUSE_TAG
+import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME
+import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.DialogData
+import com.ck.dev.tiptap.models.GameLevelData
 import com.ck.dev.tiptap.models.GridNumberElement
 import com.ck.dev.tiptap.models.VisibleNumberElement
+import com.ck.dev.tiptap.ui.GameLevelsFragmentDirections
 import com.ck.dev.tiptap.ui.custom.MarqueeLayout
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
+import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
 import kotlinx.android.synthetic.main.list_item_visible_number.view.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
-
 
 class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_play_screen),
     GridNumSelectCallback {
@@ -51,10 +62,13 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private var isPausePopUpShown = false
     private var isExit = false
     private lateinit var currentLevel: String
-
+    private val viewModel: FindTheNumberViewModel by activityViewModels {
+        FindTheNumberVmFactory(requireContext())
+    }
     private val gameArgs: PlayGameScreenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Timber.i("onViewCreated called")
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         gridSize = gameArgs.gridSize
@@ -81,7 +95,9 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun handlePlayPauseGame() {
+        Timber.i("handlePlayPauseGame called")
         pause_play_block.setOnClickListener {
+            Timber.i("pause_play_block.setOnClickListener called")
             if (!isPaused) {
                 pause_play_block.apply {
                     text = "Resume"
@@ -111,6 +127,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun setBackButtonHandling() {
+        Timber.i("setBackButtonHandling called")
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             val dialogData = DialogData(
                 title = getString(R.string.game_exit_title),
@@ -125,9 +142,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
                 },
                 megListener = {
-
+                    startTimer(currentTimeSpentInGame)
                 }
             )
+            timer.cancel()
             val instance = ConfirmationDialog.newInstance(dialogData)
             instance.isCancelable = false
             instance.show(parentFragmentManager, GAME_EXIT_TAG)
@@ -135,6 +153,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun startTimer(gameTimeLimit: Long) {
+        Timber.i("startTimer called")
         timer = object : CountDownTimer(gameTimeLimit, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 if (!isExit) {
@@ -153,6 +172,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     override fun onPause() {
+        Timber.i("onPause called")
         super.onPause()
         if (!isExit) {
             isPausePopUpShown = true
@@ -161,6 +181,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun setGrid() {
+        Timber.i("setGrid called")
         for (i in 0 until endLimit) {
             for (j in 0 until replFactor) {
                 gridNums.add(GridNumberElement((i + 1), getRandomColor()))
@@ -179,6 +200,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     override fun onResume() {
+        Timber.i("onResume called isPausePopUpShown: $isPausePopUpShown")
         super.onResume()
         /*for (listOfNum in listOfNums) {
             createTextView("${listOfNum.number}")
@@ -240,7 +262,6 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun createTextView(element: VisibleNumberElement) {
-        Timber.i("createTextView called")
         val view = LayoutInflater.from(requireContext())
             .inflate(R.layout.list_item_visible_number, moving_num_list, false)
         view.id = View.generateViewId()
@@ -294,6 +315,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     }
 
     private fun setMovingListNumbers() {
+        Timber.i("setMovingListNumbers called")
         listOfNums.clear()
         moving_num_list.removeAllViews()
         var nums = ArrayList<String>()
@@ -384,8 +406,8 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
             posBtnText = getString(R.string.game_pause_positive_btn_txt),
             negBtnText = getString(R.string.game_pause_negative_btn_txt),
             posListener = {
-                    isPausePopUpShown = false
-                    startTimer(currentTimeSpentInGame)
+                isPausePopUpShown = false
+                startTimer(currentTimeSpentInGame)
 
             },
             megListener = {
@@ -406,18 +428,31 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
     private fun showGameCompletePopup() {
         Timber.i("showGameCompletePopup called")
+        lifecycleScope.launch {
+           /* viewModel.updateGameScore(
+                FIND_THE_NUMBER_GAME_NAME,
+                (currentLevel.toInt() + 1).toString(),
+                GameLevelData(currentLevel, currentScore)
+            )*/
+            viewModel.apply {
+                updateHighScoreIfApplicable(FIND_THE_NUMBER_GAME_NAME,currentLevel,currentScore)
+                updateGameLevel(FIND_THE_NUMBER_GAME_NAME,(currentLevel.toInt() + 1).toString())
+            }
+        }
+
         val dialogData = DialogData(
             title = getString(R.string.game_complete_title),
             content = getString(
                 R.string.game_complete_content,
                 currentScore.toString(),
-                gameTimeLimit.toString()
+                (gameTimeLimit / 1000).toString()
             ),
             posBtnText = getString(R.string.game_complete_positive_btn_txt),
             negBtnText = getString(R.string.game_complete_negative_btn_txt),
             posListener = {
                 if (::navController.isInitialized) {
-                    navController.popBackStack()
+                    navController.navigate(R.id.action_gameScreenFragment_self)
+                    setNextLevel()
                 }
             },
             megListener = {
@@ -429,4 +464,22 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         instance.isCancelable = false
         instance.show(parentFragmentManager, GAME_COMPLETE_TAG)
     }
+
+    private fun setNextLevel() {
+        Timber.i("setNextLevel called")
+        val rulesJson = (requireActivity() as AppCompatActivity).readJsonFromAsset(FIND_THE_NUM_GAME_RULE_FILE_NAME)
+        val gameRule = rulesJson[currentLevel.toInt()]
+        gameTimeLimit=0L
+        timer.cancel()
+        val action =
+            PlayGameScreenFragmentDirections.actionGameScreenFragmentSelf(
+                gridSize = gameRule.gridSize,
+                visibleNums = gameRule.visibleNumSize,
+                time = gameRule.time, level = gameRule.level
+            )
+        /*val action = GameLevelsFragmentDirections.actionGameLevelsFragmentToGameScreenFragment(name)
+        v.findNavController().navigate(action)*/
+        navController.navigate(action)
+    }
+
 }

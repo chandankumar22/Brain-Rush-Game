@@ -6,10 +6,12 @@ import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.GameChangerAdapter
 import kotlinx.android.synthetic.main.activity_game_main_screen.*
 import kotlinx.android.synthetic.main.layout_header.view.*
+import timber.log.Timber
 
 class GameMainScreen : AppCompatActivity() {
 
    override fun onCreate(savedInstanceState: Bundle?) {
+       Timber.i("onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_main_screen)
        intent.getStringExtra("userName")?.let {

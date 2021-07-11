@@ -37,6 +37,9 @@
             android:name="level"
             app:argType="string"
             android:defaultValue="1" />
+        <action
+            android:id="@+id/action_gameScreenFragment_self"
+            app:destination="@id/gameScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"

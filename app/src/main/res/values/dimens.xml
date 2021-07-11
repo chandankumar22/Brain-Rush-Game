@@ -11,6 +11,7 @@
     <dimen name="logo_text_size">@dimen/_64ssp</dimen>
     <dimen name="icon_size_normal">@dimen/_24sdp</dimen>
     <dimen name="icon_size_small">@dimen/_18sdp</dimen>
+    <dimen name="icon_size_xsmall">@dimen/_12sdp</dimen>
     <dimen name="level_list_item_size">@dimen/_48sdp</dimen>
     <dimen name="screen_mg">@dimen/_12sdp</dimen>
     <dimen name="depth">@dimen/_10sdp</dimen>

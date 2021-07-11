@@ -9,6 +9,7 @@ import com.ck.dev.tiptap.extensions.fetchColor
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.activity_find_the_numbers.*
 import kotlinx.android.synthetic.main.fragment_find_the_number_menu_screen.*
+import timber.log.Timber
 
 class FindTheNumberMenuScreen : BaseFragment(R.layout.fragment_find_the_number_menu_screen) {
 
@@ -20,6 +21,7 @@ class FindTheNumberMenuScreen : BaseFragment(R.layout.fragment_find_the_number_m
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Timber.i("onViewCreated called")
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         time_bound_play.setOnClickListener {
@@ -30,7 +32,9 @@ class FindTheNumberMenuScreen : BaseFragment(R.layout.fragment_find_the_number_m
             }
         }
     }
+
     override fun onResume() {
+        Timber.i("onResume called")
         super.onResume()
         (requireActivity() as FindTheNumbersActivity).find_the_num_header.setBackgroundColor(
             requireContext().fetchColor(R.color.primaryLightColor)

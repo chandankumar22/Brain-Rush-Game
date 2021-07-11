@@ -211,7 +211,7 @@
     "coinsReqd": 0
   },
   {
-    "level": "30*",
+    "level": "30",
     "gridSize": 3,
     "visibleNumSize": 3,
     "time": 60000,
