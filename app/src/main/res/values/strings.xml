@@ -10,8 +10,10 @@
     <string name="game_3">Jumbled\n Words</string>
     <string name="game_4">The Quiz</string>
     <string name="find_the_number">Find \nthe \nNumber</string>
-    <string name="time_left">%s seconds</string>
+    <string name="remember_card">Remember \nthe \nCard</string>
+    <string name="time_left">%s sec</string>
     <string name="find_the_number_game_name">Find the Number</string>
+    <string name="rem_the_card_game_name">Remember the Card</string>
     <string name="jumbled_words_game_name">Jumbled words</string>
     <string name="game_exit_title">Exit Game ?</string>
     <string name="game_exit_content">Are you sure you want to exit this game ? This game progress will be lost forever.</string>
@@ -37,4 +39,6 @@
     <string name="best_score">Best Score\n%s</string>
     <string name="total_games_text">Total games : %s</string>
     <string name="total_time_played">Total time : %s minutes</string>
+    <string name="go_to_game">Go to game</string>
+    <string name="you_have_s_seconds_to_remember_the_cards">You have %s seconds to remember the cards</string>
 </resources>

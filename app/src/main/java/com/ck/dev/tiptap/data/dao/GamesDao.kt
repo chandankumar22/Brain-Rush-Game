@@ -11,7 +11,7 @@ import com.ck.dev.tiptap.data.entity.Games
 interface GamesDao {
 
     @Query("SELECT * FROM games WHERE gameName=:gameName")
-    suspend fun getGameDataByName(gameName: String): Games
+    suspend fun getGameDataByName(gameName: String): Games?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertGame(game: Games)

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/remember_the_card_navigation"
+    app:startDestination="@id/rememberTheCardMenuFragment">
+
+    <fragment
+        android:id="@+id/rememberTheCardMenuFragment"
+        android:name="com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardMenuFragment"
+        android:label="RememberTheCardMenuFragment" >
+        <action
+            android:id="@+id/action_rememberTheCardMenuFragment_to_rememberTheCardGameLevelsFragment"
+            app:destination="@id/rememberTheCardGameLevelsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rememberTheCardGameLevelsFragment"
+        android:name="com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameLevelsFragment"
+        android:label="fragment_remember_the_card_game_levels"
+        tools:layout="@layout/fragment_remember_the_card_game_levels" >
+        <action
+            android:id="@+id/action_rememberTheCardGameLevelsFragment_to_playRememberTheCardGameFragment"
+            app:destination="@id/playRememberTheCardGameFragment" />
+        <argument
+            android:name="gameName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/playRememberTheCardGameFragment"
+        android:name="com.ck.dev.tiptap.ui.games.rememberthecard.PlayRememberTheCardGameFragment"
+        android:label="fragment_play_remember_the_card_game"
+        tools:layout="@layout/fragment_play_remember_the_card_game" >
+        <argument
+            android:name="row"
+            app:argType="integer" />
+        <argument
+            android:name="timeLimit"
+            app:argType="long" />
+        <argument
+            android:name="level"
+            app:argType="string" />
+        <argument
+            android:name="isEndless"
+            app:argType="boolean" />
+        <argument android:name="col"
+            app:argType="integer" />
+        <argument
+            android:name="cardVisibleTime"
+            app:argType="integer" />
+        <argument
+            android:name="gameName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_playRememberTheCardGameFragment_self"
+            app:destination="@id/playRememberTheCardGameFragment" />
+        <action
+            android:id="@+id/action_playRememberTheCardGameFragment_to_rememberTheCardMenuFragment"
+            app:destination="@id/rememberTheCardMenuFragment" />
+    </fragment>
+</navigation>

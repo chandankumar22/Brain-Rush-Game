@@ -9,12 +9,10 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.getGameExitPopup
@@ -25,8 +23,7 @@ import com.ck.dev.tiptap.models.*
 import com.ck.dev.tiptap.ui.custom.CrosswordPuzzleView
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import com.ck.dev.tiptap.ui.games.findthenumber.FindTheNumberViewModel
-import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
+import com.google.android.flexbox.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_jumbled_words.*
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
@@ -60,9 +57,6 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
 
     private val gameArgs: PlayJumbledWordsGameFragmentArgs by navArgs()
     private lateinit var navController: NavController
-    private val viewModel: FindTheNumberViewModel by activityViewModels {
-        FindTheNumberVmFactory(requireContext())
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
@@ -78,7 +72,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         }
         setRandomChars()
         setListeners()
-        val listOfRules: ArrayList<JumbledWord> = getListOfRules()
+        val listOfRules: ArrayList<JumbledWordData> = getListOfRules()
         crosswordPuzzleView = CrosswordPuzzleView(requireContext(), listOfRules, size)
         play_jumbled_root.addView(crosswordPuzzleView)
         startTimer(infTime - timeSpentInEndless)
@@ -151,10 +145,19 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         val chars = words.toCharArray().toMutableList() as ArrayList
         chars.shuffle()
         charAdapter = RandomCharAdapter(chars, this)
-        val gridLayoutManager =
-            GridLayoutManager(requireContext(), 5/*, LinearLayoutManager.HORIZONTAL, false*/)
+        val gridLayoutManager = FlexboxLayoutManager(requireContext())
+        gridLayoutManager.justifyContent = JustifyContent.CENTER
+        gridLayoutManager.alignItems = AlignItems.CENTER
+        gridLayoutManager.flexDirection = FlexDirection. ROW
+        gridLayoutManager.flexWrap = FlexWrap.WRAP
         play_jumbled_chars.layoutManager = gridLayoutManager
         play_jumbled_chars.adapter = charAdapter
+
+
+        /*val gridLayoutManager =
+            GridLayoutManager(requireContext(), 5*//*, LinearLayoutManager.HORIZONTAL, false*//*)
+        play_jumbled_chars.layoutManager = gridLayoutManager
+        play_jumbled_chars.adapter = charAdapter*/
     }
 
     private fun initGameInputs() {
@@ -172,9 +175,9 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         }
     }
 
-    private fun getListOfRules(): java.util.ArrayList<JumbledWord> {
+    private fun getListOfRules(): java.util.ArrayList<JumbledWordData> {
         Timber.i("getListOfRules called")
-        val list = Array(size) { i -> Array(size) { j -> JumbledWord("$i-$j", false, ' ', false) } }
+        val list = Array(size) { i -> Array(size) { j -> JumbledWordData("$i-$j", false, ' ', false) } }
         var charPos = 0
         unJumbledWord.forEach {
             jumbledFormed.add(it.word)
@@ -192,18 +195,18 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
             }
             if (startPosI != endPosI && startPosJ == endPosJ) {//0-1 to 2-1 (vertical)
                 for (i in startPosI..endPosI) {
-                    list[i][endPosJ] = JumbledWord("$i-$endPosJ", true, it.word[charPos], false)
+                    list[i][endPosJ] = JumbledWordData("$i-$endPosJ", true, it.word[charPos], false)
                     charPos++
                 }
             } else if (startPosJ != endPosJ && startPosI == endPosI) {//1-0 to 1-2 (horizontal)
                 for (i in startPosJ..endPosJ) {
-                    list[startPosI][i] = JumbledWord("$startPosI-$i", true, it.word[charPos], false)
+                    list[startPosI][i] = JumbledWordData("$startPosI-$i", true, it.word[charPos], false)
                     charPos++
                 }
             }
             charPos = 0
         }
-        val ret = ArrayList<JumbledWord>()
+        val ret = ArrayList<JumbledWordData>()
         for (i in 0 until size) {
             for (j in 0 until size) {
                 ret.add(list[i][j])
@@ -213,10 +216,10 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
 
         return ret
 
-        /*val list = ArrayList<JumbledWord>()
+        /*val list = ArrayList<JumbledWordData>()
 
         for(i in 0 until size){
-            list.add(JumbledWord("1-1", true, 'A', true))
+            list.add(JumbledWordData("1-1", true, 'A', true))
         }
         return list*/
     }
@@ -235,7 +238,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         )
         val json = JSONObject(rulesJson)
         val easyGameRules = json.getJSONArray("easy").toString()
-        val obj = Gson().fromJson(easyGameRules, Array<Level>::class.java)
+        val obj = Gson().fromJson(easyGameRules, Array<JumbledWordGameLevelData>::class.java)
         val gameRule = obj[level.toInt()]
         timer.cancel()
         val action =

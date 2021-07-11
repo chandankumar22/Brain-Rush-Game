@@ -3,18 +3,18 @@
     package="com.ck.dev.tiptap">
 
     <application
-        android:name=".ui.games.findthenumber.GameApp"
+        android:name=".ui.GameApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TipTap">
-        <activity android:name=".ui.games.jumbledwords.JumbledWordsActivity"></activity>
+        <activity android:name=".ui.games.rememberthecard.RememberTheCardActivity"></activity>
+        <activity android:name=".ui.games.jumbledwords.JumbledWordsActivity" />
         <activity android:name=".ui.games.findthenumber.FindTheNumbersActivity" />
         <activity android:name=".ui.GameMainScreen" />
-        <activity
-            android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

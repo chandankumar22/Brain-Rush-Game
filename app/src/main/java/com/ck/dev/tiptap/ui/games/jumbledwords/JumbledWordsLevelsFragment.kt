@@ -3,7 +3,6 @@ package com.ck.dev.tiptap.ui.games.jumbledwords
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,10 +19,8 @@ import com.ck.dev.tiptap.helpers.GameConstants.JUMBLED_NUMBER_GAME_NAME_HARD
 import com.ck.dev.tiptap.helpers.GameConstants.JUMBLED_NUMBER_GAME_NAME_MED
 import com.ck.dev.tiptap.helpers.GameConstants.MEDIUM_MODE
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
-import com.ck.dev.tiptap.models.Level
+import com.ck.dev.tiptap.models.JumbledWordGameLevelData
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import com.ck.dev.tiptap.ui.games.findthenumber.FindTheNumberViewModel
-import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_game_levels.*
 import kotlinx.coroutines.Dispatchers
@@ -40,10 +37,6 @@ class JumbledWordsLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
     private var mode = EASY_MODE
     private var gameData: Games = Games(JUMBLED_NUMBER_GAME_NAME_EASY)
     private var gameName = JUMBLED_NUMBER_GAME_NAME_EASY
-
-    private val viewModel: FindTheNumberViewModel by activityViewModels {
-        FindTheNumberVmFactory(requireContext())
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
@@ -79,7 +72,7 @@ class JumbledWordsLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
 
                 val json = JSONObject(rulesJson)
                 val easyGameRules = json.getJSONArray(mode).toString()
-                val jumbledRules = Gson().fromJson(easyGameRules, Array<Level>::class.java)
+                val jumbledRules = Gson().fromJson(easyGameRules, Array<JumbledWordGameLevelData>::class.java)
                 val getLevels = viewModel.getJumbledWordGameRules(gameData, jumbledRules)
                 game_levels_tv.text = "${gameData?.currentLevel}/${getLevels.size}"
                 val gridLayoutManager = GridLayoutManager(requireContext(), 5)

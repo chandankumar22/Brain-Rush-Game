@@ -21,22 +21,29 @@ import com.ck.dev.tiptap.ui.games.BaseFragment
 import com.ck.dev.tiptap.ui.games.findthenumber.FindTheNumberViewModel
 import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
 import kotlinx.android.synthetic.main.fragment_jumbled_words_menu_screen.*
+import timber.log.Timber
 
 class JumbledWordsMenuScreenFragment : BaseFragment(R.layout.fragment_jumbled_words_menu_screen) {
 
     private lateinit var navController: NavController
     private var mode = EASY_MODE
 
-    private val viewModel: FindTheNumberViewModel by activityViewModels {
-        FindTheNumberVmFactory(requireContext())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController =
             Navigation.findNavController(requireActivity(), R.id.jumbled_words_nav_host_fragment)
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
+        setListeners()
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
+        getAndDisplayHighScore()
+    }
+
+    private fun setListeners(){
+        Timber.i("setListeners called")
         easy_play.setOnClickListener {
+            Timber.i("easy_play.onclick called")
             (requireActivity() as JumbledWordsActivity).apply {
                 mode = EASY_MODE
                 val action =
@@ -48,6 +55,7 @@ class JumbledWordsMenuScreenFragment : BaseFragment(R.layout.fragment_jumbled_wo
             }
         }
         medium_play.setOnClickListener {
+            Timber.i("medium_play.onclick called")
             mode = MEDIUM_MODE
             val action =
                 JumbledWordsMenuScreenFragmentDirections.actionJumbledWordsMenuScreenFragmentToJumbledWordsLevelsFragment(
@@ -57,6 +65,7 @@ class JumbledWordsMenuScreenFragment : BaseFragment(R.layout.fragment_jumbled_wo
             navController.navigate(action)
         }
         hard_play.setOnClickListener {
+            Timber.i("hard_play.onclick called")
             mode = HARD_MODE
             val action =
                 JumbledWordsMenuScreenFragmentDirections.actionJumbledWordsMenuScreenFragmentToJumbledWordsLevelsFragment(
@@ -65,11 +74,10 @@ class JumbledWordsMenuScreenFragment : BaseFragment(R.layout.fragment_jumbled_wo
             //jumbled_words_nav_host_fragment.visibility = View.VISIBLE
             navController.navigate(action)
         }
+    }
 
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            requireActivity().finish()
-        }
+    private fun getAndDisplayHighScore() {
+        Timber.i("getAndDisplayHighScore called")
         lifecycleScope.launchWhenCreated {
             val easy = viewModel.getGameDataByName(JUMBLED_NUMBER_GAME_NAME_EASY)
             val medium = viewModel.getGameDataByName(JUMBLED_NUMBER_GAME_NAME_MED)

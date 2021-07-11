@@ -31,10 +31,6 @@ class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
 
     private var gameData: Games = Games(FIND_THE_NUMBER_GAME_NAME)
 
-    private val viewModel: FindTheNumberViewModel by activityViewModels {
-        FindTheNumberVmFactory(requireContext())
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
         super.onViewCreated(view, savedInstanceState)

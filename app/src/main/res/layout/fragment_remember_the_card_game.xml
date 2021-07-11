@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layer_list_card"
-    tools:context=".ui.games.RememberTheCardGameFragment">
+    tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/rem_the_card_game_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="@string/remember_card"
+        android:textSize="@dimen/app_text_size_xlarge"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/score_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Remember the card game" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/screen_mg">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_score_tv"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            tools:text="Best Score : 12"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_time_tv"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            tools:text="Best Time : 45 selects in 15 sec"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/best_score_tv"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/rem_the_card_go_to_game_menu"
+        style="@style/CustomButtonStyle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/go_to_game"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/screen_mg"/>
+
+</RelativeLayout>

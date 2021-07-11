@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
+    tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/rem_the_card_game_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="@string/rem_the_card_game_name"
+        android:textSize="@dimen/app_text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/score_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rem_the_card_game_name_tv">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rem_the_card_best_score_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_games_text"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/rem_the_card_best_time_tv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/rem_the_card_best_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_time_played"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/rem_the_card_best_score_tv"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scroller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/score_container"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="@dimen/_1sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Play"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        android:id="@+id/rem_the_card_time_bound_play"
+                        style="@style/MenuButtonStyle"
+                        android:text="Time Bound"
+                        app:leftIcon="@drawable/ic_timer" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        android:id="@+id/rem_the_card_infinite_game_play"
+                        style="@style/MenuButtonStyle"
+                        android:text="Endless"
+                        app:leftIcon="@drawable/ic_infinite" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        android:id="@+id/rem_the_card_va_comp"
+                        style="@style/MenuButtonStyle"
+                        android:text="TOO HARD"
+                        app:leftIcon="@drawable/ic_infinite" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="View"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Score"
+                        app:leftIcon="@drawable/ic_stats" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Leaderboard"
+                        app:leftIcon="@drawable/ic_leaderboard" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Get coins"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Share game"
+                        app:leftIcon="@drawable/ic_game_share" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Watch ad"
+                        app:leftIcon="@drawable/ic_ad" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsGameFragment
 import com.ck.dev.tiptap.ui.games.findthenumber.FindNumbersMainScreenFragment
-import com.ck.dev.tiptap.ui.games.RememberTheCardGameFragment
+import com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameFragment
 import com.ck.dev.tiptap.ui.games.TheQuizGameFragment
 
 class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mContext) {

@@ -4,4 +4,4 @@ data class JumbledWordGameLevel(
         val level: String,
         val isGameUnlocked: Boolean,
         val stars: Int,
-        val rule: Level)
+        val rule: JumbledWordGameLevelData)

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ck.dev.tiptap.ui.custom.SquareView android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_8sdp"
+    android:layout_height="0dp"
+    android:background="@color/primaryLightColor"
+    android:layout_margin="@dimen/_3sdp"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_tv"
+        tools:src="@drawable/ic_avtar_boy_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+</com.ck.dev.tiptap.ui.custom.SquareView>

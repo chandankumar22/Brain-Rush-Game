@@ -67,9 +67,6 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private var timeSpentInEndless: Long = 0
     private var infTime = 9999999999L
 
-    private val viewModel: FindTheNumberViewModel by activityViewModels {
-        FindTheNumberVmFactory(requireContext())
-    }
     private val gameArgs: PlayGameScreenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

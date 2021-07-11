@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/find_the_num_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryDarkColor">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/live_timer_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/screen_mg"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:backgroundTint="@color/primaryLightColor"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_minus12sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/level_tv">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layer_list_card"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/time_left_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
+                android:text="Time left"
+                android:textSize="@dimen/app_text_size_medium" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/rem_card_timer_tv"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:gravity="center"
+                tools:text="@string/time_left"
+                android:textSize="@dimen/app_text_size_medium" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/rem_card_level_tv"
+        style="@style/CustomCardViewStyle"
+        android:text="@string/current_level"
+        app:layout_constraintStart_toEndOf="@id/live_timer_container"
+        app:layout_constraintEnd_toStartOf="@id/live_score_container"
+        app:layout_constraintBottom_toBottomOf="@id/live_timer_container"
+        app:layout_constraintTop_toTopOf="@id/live_timer_container" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/live_score_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/screen_mg"
+        android:backgroundTint="@color/primaryLightColor"
+        app:cardCornerRadius="@dimen/_20sdp"
+        app:cardElevation="@dimen/_minus12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/live_timer_container"
+        app:layout_constraintStart_toEndOf="@id/rem_card_level_tv">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layer_list_card"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
+                android:text="Score"
+                android:textSize="@dimen/app_text_size_medium" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/live_score_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:gravity="center"
+                android:text="999"
+                android:textSize="@dimen/app_text_size_medium" />
+
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/game_container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/msg_tv"
+        app:layout_constraintTop_toBottomOf="@id/live_timer_container"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/msg_tv"
+        style="@style/AppTextStyle"
+        android:background="@color/primaryDarkColor"
+        android:gravity="center"
+        android:text="@string/you_have_s_seconds_to_remember_the_cards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.fetchColor
-import com.ck.dev.tiptap.models.JumbledWord
+import com.ck.dev.tiptap.models.JumbledWordData
 import kotlinx.android.synthetic.main.layout_crossword_puzzle.view.*
 import kotlinx.android.synthetic.main.list_item_jumbled_word.view.*
 import timber.log.Timber
@@ -22,11 +22,11 @@ class CrosswordPuzzleView : LinearLayout {
     private lateinit var array: Array<Array<SquareView>>
     private var size: Int = 0
     private lateinit var adapter: JumbledWordsAdapter
-    private lateinit var model: ArrayList<JumbledWord>
+    private lateinit var model: ArrayList<JumbledWordData>
 
 
 
-    constructor(context: Context, model: ArrayList<JumbledWord>, size: Int) : super(context) {
+    constructor(context: Context, model: ArrayList<JumbledWordData>, size: Int) : super(context) {
         this.model = model
         this.size = size
         array = Array(size){i->Array(size){j->SquareView(context)} }
@@ -149,7 +149,7 @@ class CrosswordPuzzleView : LinearLayout {
 
 }
 
-class JumbledWordsAdapter(private val jumbledChar: List<JumbledWord>) :
+class JumbledWordsAdapter(private val jumbledChar: List<JumbledWordData>) :
     RecyclerView.Adapter<JumbledWordsAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -210,8 +210,8 @@ class JumbledWordsAdapter(private val jumbledChar: List<JumbledWord>) :
 
 }
 
-class PuzzleAdapter(context: Context, courseModelArrayList: ArrayList<JumbledWord>) :
-    ArrayAdapter<JumbledWord>(context, 0, courseModelArrayList) {
+class PuzzleAdapter(context: Context, courseModelArrayList: ArrayList<JumbledWordData>) :
+    ArrayAdapter<JumbledWordData>(context, 0, courseModelArrayList) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var listitemView = convertView
         if (listitemView == null) {
