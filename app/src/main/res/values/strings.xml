@@ -43,4 +43,9 @@
     <string name="total_time_played">Total time : %s minutes</string>
     <string name="go_to_game">Go to game</string>
     <string name="you_have_s_seconds_to_remember_the_cards">You have %s seconds to remember the cards</string>
+    <string name="best_score_in_level">Best score : %s points in level %s</string>
+    <string name="total_time_mins">Total time : %s minutes</string>
+    <string name="total_games">"Total games : %s "</string>
+    <string name="current_level_on">Current Level : %s</string>
+    <string name="never_played">Never played</string>
 </resources>

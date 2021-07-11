@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primaryLightColor">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/stats_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="Your stats for game played"
+        android:textSize="@dimen/app_text_size_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stats_tv"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:paddingBottom="@dimen/_1sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+                <LinearLayout style="@style/ContainerStyle">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Remember the card"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Time bound" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_best_score_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_total_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_total_games_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_total_current_level_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Current Level : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Endless" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_best_score_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_total_time_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_total_games_endless"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/rem_card_current_level_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="Current Level : %s in %s level" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout style="@style/ContainerStyle">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Find the number"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Time bound" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_best_score_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_total_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_total_games_bound"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_current_level_time_bound"
+                        style="@style/StatisticScreenStyle"
+                        android:text="Current Level : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Endless" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_best_score_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_total_time_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_total_games_endless"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/find_the_num_current_level_endless"
+                        style="@style/StatisticScreenStyle"
+                        android:text="Current Level : %s in %s level" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout style="@style/ContainerStyle">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Jumbled Words"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Easy" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_best_score_easy"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_time_easy"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_games_easy"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_current_level_easy"
+                        style="@style/StatisticScreenStyle"
+                        android:text="Current Level : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Medium" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_best_score_medium"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_time_medium"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_games_medium"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="Total games : %s in %s level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_current_level_medium"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/current_level_on" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/SubHeadingStyle"
+                        android:text="Hard" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_best_score_hard"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/best_score_in_level" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_time_hard"
+                        style="@style/StatisticScreenStyle"
+                        android:text="@string/total_time_mins" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_total_games_hard"
+                        style="@style/StatisticScreenStyle"
+                        tools:text="@string/total_games" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/jumbled_current_level_hard"
+                        style="@style/StatisticScreenStyle"
+                        android:text="Current Level : %s in %s level" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

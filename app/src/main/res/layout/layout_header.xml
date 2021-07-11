@@ -17,29 +17,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <LinearLayout
+        android:id="@+id/user_name_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/profile_img"
+        app:layout_constraintStart_toEndOf="@id/profile_img"
+        app:layout_constraintTop_toTopOf="@id/profile_img">
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
-        android:text="Guest user"
+        tools:text="Guest user"
         android:textSize="@dimen/app_text_size_medium"
         app:layout_constraintStart_toEndOf="@id/profile_img"
         app:layout_constraintTop_toTopOf="@id/profile_img" />
 
     <androidx.appcompat.widget.AppCompatRatingBar
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/user_game_rating"
+        style="@style/AppRatingBarStyle"
         android:layout_marginStart="@dimen/_4sdp"
-        android:background="@android:color/transparent"
-        android:numStars="8"
+        android:layout_marginTop="@dimen/_4sdp"
         android:progress="7"
-        android:progressTint="@color/golden"
-        android:rating="7"
         android:stepSize="0.5"
         app:layout_constraintStart_toEndOf="@id/profile_img"
         app:layout_constraintTop_toBottomOf="@id/user_name" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -48,7 +55,8 @@
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_name">
+        app:layout_constraintBottom_toBottomOf="@id/user_name_container"
+        app:layout_constraintTop_toTopOf="@id/user_name_container">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/icon_size_normal"
@@ -57,9 +65,10 @@
             app:srcCompat="@drawable/ic_coins_1" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/header_coins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1000000000"
+            tools:text="1000000000"
             android:textSize="@dimen/app_text_size_small" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

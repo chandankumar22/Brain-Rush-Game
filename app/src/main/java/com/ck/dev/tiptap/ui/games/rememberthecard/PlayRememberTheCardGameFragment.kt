@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.helpers.AppConstants
 import com.ck.dev.tiptap.helpers.GameConstants.arrayOfImages
 import com.ck.dev.tiptap.helpers.assetToBitmap
@@ -63,6 +64,7 @@ class PlayRememberTheCardGameFragment :
         Timber.i("onViewCreated called")
         super.onViewCreated(view, savedInstanceState)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.GONE
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryDarkColor)
         navController =
                 Navigation.findNavController(requireActivity(), R.id.rem_the_card_nav_host_fragment)
         initGameParameters()

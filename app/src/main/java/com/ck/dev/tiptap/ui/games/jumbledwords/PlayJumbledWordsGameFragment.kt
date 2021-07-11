@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.getGameExitPopup
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants
@@ -94,6 +95,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         jumbled_level_tv.text = getString(R.string.current_level, level)
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.GONE
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryDarkColor)
     }
 
     private fun setListeners() {

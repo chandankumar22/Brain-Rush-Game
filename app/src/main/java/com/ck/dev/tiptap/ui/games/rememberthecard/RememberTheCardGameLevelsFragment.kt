@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.RememberTheCardLevelsAdapter
 import com.ck.dev.tiptap.data.entity.Games
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants.REMEMBER_CARDS_GAME_RULE_FILE_NAME
 import com.ck.dev.tiptap.helpers.GameConstants
@@ -44,6 +45,7 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
             Navigation.findNavController(requireActivity(), R.id.rem_the_card_nav_host_fragment)
         setLevelsRecyclerView()
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
     }
 

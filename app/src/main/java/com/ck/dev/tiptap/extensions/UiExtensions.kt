@@ -1,22 +1,28 @@
 package com.ck.dev.tiptap.extensions
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
+import android.util.Base64
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.helpers.SharedPreferenceHelper
 import com.ck.dev.tiptap.models.DialogData
+import kotlinx.android.synthetic.main.activity_game_main_screen.*
+import kotlinx.android.synthetic.main.layout_header.*
+import kotlinx.android.synthetic.main.layout_header.user_name
+import kotlinx.android.synthetic.main.layout_header.view.*
+import kotlinx.android.synthetic.main.profile_image.view.*
 import timber.log.Timber
-import java.io.IOException
 import java.util.*
 
 fun Context.fetchDrawable(@DrawableRes drawable: Int): Drawable {
@@ -57,5 +63,19 @@ fun Context.getGameExitPopup(pos: () -> Unit, neg: () -> Unit): DialogData {
 }
 
 fun AppCompatActivity.setHeaderBgColor(@ColorRes color: Int) {
-    findViewById<ConstraintLayout>(R.id.header).setBackgroundColor(fetchColor(color))
+    findViewById<ConstraintLayout>(R.id.header).apply {
+        user_name.text = SharedPreferenceHelper.userName
+        val image = Base64.decode(SharedPreferenceHelper.profilePic, Base64.DEFAULT)
+        Glide.with(this).load(image).into(profile_img.profile_pic_iv)
+        header_coins.text = SharedPreferenceHelper.coins.toString()
+        user_game_rating.rating = SharedPreferenceHelper.currentUserRating
+        setBackgroundColor(fetchColor(color))
+    }
+}
+
+fun AppCompatActivity.changeStatusBarColor(@ColorRes color: Int) {
+    val window = this.window
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.statusBarColor = fetchColor(color)
 }

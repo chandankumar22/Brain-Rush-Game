@@ -8,7 +8,7 @@ import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsGameFragment
 import com.ck.dev.tiptap.ui.games.findthenumber.FindNumbersMainScreenFragment
 import com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameFragment
-import com.ck.dev.tiptap.ui.games.TheQuizGameFragment
+import com.ck.dev.tiptap.ui.lastscreen.LastScreenFragment
 
 class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mContext) {
 
@@ -31,7 +31,7 @@ class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mCon
             0 -> RememberTheCardGameFragment.newInstance()
             1 -> FindNumbersMainScreenFragment.newInstance()
             2 -> JumbledWordsGameFragment.newInstance()
-            3 -> TheQuizGameFragment.newInstance()
+            3 -> LastScreenFragment.newInstance()
             else -> null!!
         }
     }

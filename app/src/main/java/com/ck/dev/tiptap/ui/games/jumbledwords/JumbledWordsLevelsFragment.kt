@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.JumbledWordsLevelsAdapter
 import com.ck.dev.tiptap.data.entity.Games
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants.JUMBLED_WORDS_GAME_RULE_FILE_NAME
 import com.ck.dev.tiptap.helpers.GameConstants.EASY_MODE
@@ -50,6 +51,7 @@ class JumbledWordsLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
         setLevelsRecyclerView()
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
     }
 
     private fun setLevelsRecyclerView() {

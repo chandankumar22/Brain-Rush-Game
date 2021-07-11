@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorAccent">@color/primaryDarkColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primaryLightColor</item>
         <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
@@ -62,4 +63,36 @@
         <item name="colorControlNormal">@color/greyShadowColor</item>
         <item name="colorControlActivated">@color/golden</item>
     </style>
+
+    <style name="AppRatingBarStyle" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/RatingBar</item>
+        <item name="android:progressTint">@color/golden</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+
+    <style name="StatisticScreenStyle" parent="AppTextStyle">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginStart">@dimen/_24sdp</item>
+        <item name="android:layout_marginTop">@dimen/_2sdp</item>
+        <item name="android:textSize">@dimen/app_text_size_small</item>
+    </style>
+
+    <style name="SubHeadingStyle" parent="AppTextStyle">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginStart">@dimen/_18sdp</item>
+        <item name="android:layout_marginTop">@dimen/_4sdp</item>
+        <item name="android:textSize">@dimen/app_text_size_medium</item>
+    </style>
+
+    <style name="ContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/layer_list_depth</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:layout_margin">@dimen/_6sdp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

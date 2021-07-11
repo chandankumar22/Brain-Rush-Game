@@ -31,8 +31,8 @@ class RememberTheCardGameFragment : BaseFragment(R.layout.fragment_remember_the_
     private fun getAndDisplayHighScore() {
         Timber.i("getAndDisplayHighScore called")
         lifecycleScope.launchWhenCreated {
-            val timeBound = viewModel.getGameDataByName(GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND)
-            val endless = viewModel.getGameDataByName(GameConstants.REMEMBER_THE_CARD_NAME_GAME_ENDLESS)
+            val timeBound = viewModel.getGameDataByName(REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND)
+            val endless = viewModel.getGameDataByName(REMEMBER_THE_CARD_NAME_GAME_ENDLESS)
             if (timeBound == null && endless == null) {
                 rem_the_card_best_score_tv.text = ""
                 rem_the_card_best_time_tv.text = ""

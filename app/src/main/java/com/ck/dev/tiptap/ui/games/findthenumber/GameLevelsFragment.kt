@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.FindTheNumberLevelsAdapter
 import com.ck.dev.tiptap.data.entity.Games
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
+import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants
 import com.ck.dev.tiptap.helpers.GameConstants.DESTINATION_FIND_THE_NUMBER
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME
@@ -38,6 +40,8 @@ class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         setLevelsRecyclerView()
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
+        (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
     }
 
     private fun setLevelsRecyclerView() {

@@ -5,9 +5,11 @@
     android:layout_height="@dimen/_36sdp"
     android:layout_marginBottom="@dimen/_8sdp"
     android:layout_marginStart="@dimen/_4sdp"
+    android:padding="@dimen/_4sdp"
+    android:background="@drawable/shape_circle_fill"
     android:layout_marginTop="@dimen/_8sdp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avtar_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,8 +18,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:civ_border_width="@dimen/_1sdp"
-        app:civ_border_color="#FF000000"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

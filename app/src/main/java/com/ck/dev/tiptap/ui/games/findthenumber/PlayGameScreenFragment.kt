@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.adapters.FindTheNumGridAdapter
 import com.ck.dev.tiptap.adapters.GridNumSelectCallback
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.extensions.getRandomColor
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
@@ -90,6 +91,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         setBackButtonHandling()
         if (!isEndless) handlePlayPauseGame()
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryDarkColor)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.GONE
     }
 

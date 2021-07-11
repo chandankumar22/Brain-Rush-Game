@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.extensions.getRandomColor
+import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_infinite_play_game.*
 import timber.log.Timber
@@ -32,6 +35,8 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
         setListeners()
         visible_num_ip_tv.setBtnText(visibleNum)
         setVisibleNumPreview()
+        (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
+        (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
     }
 
     private fun setGridPreview(size: Int) {

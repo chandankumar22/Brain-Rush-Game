@@ -8,4 +8,8 @@ object AppConstants {
     const val GAME_EXIT_TAG = "game_exit_tag"
     const val GAME_PAUSE_TAG = "game_pause_tag"
     const val GAME_COMPLETE_TAG = "game_complete_tag"
+    const val SETTINGS_SCREEN_TAG = "settings_screen"
+    const val ABOUT_SCREEN_TAG = "about_screen"
+    const val STATISTICS_SCREEN_TAG = "statistics_screen"
+    const val GET_COINS_SCREEN_TAG = "get_coins_screen"
 }

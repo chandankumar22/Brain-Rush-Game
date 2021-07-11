@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.ui.custom.OnItemClick
 import kotlinx.android.synthetic.main.list_item_avtar.view.*
 
-class MainScreenAvtarAdapter(private val list: List<Drawable>) :
+class MainScreenAvtarAdapter(private val list: List<Drawable>,private val callback:OnItemClick) :
     RecyclerView.Adapter<MainScreenAvtarAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -24,7 +25,11 @@ class MainScreenAvtarAdapter(private val list: List<Drawable>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.apply {
-            Glide.with(context).load(list[position]).dontAnimate().into(avtar_img)
+            Glide.with(context).load(list[position]).into(avtar_img)
+            setOnClickListener {
+                callback.onPicSelected(position)
+            }
         }
     }
 }
+
