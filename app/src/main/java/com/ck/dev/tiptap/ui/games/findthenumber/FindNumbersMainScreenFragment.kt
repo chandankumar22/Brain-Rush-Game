@@ -26,7 +26,6 @@ class FindNumbersMainScreenFragment :
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
             startActivity(intent)
         }
-        Timber.i("setBackButtonHandling called")
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             requireActivity().finish()
         }

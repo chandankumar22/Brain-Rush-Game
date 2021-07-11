@@ -6,8 +6,10 @@ import com.google.gson.Gson
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
-fun AppCompatActivity.readJsonFromAsset(fileName: String): Array<FindTheNumberGameRule> {
+fun AppCompatActivity.readJsonFromAsset(fileName: String): String {
     Timber.i("readJsonFromAsset called")
    return  try {
         val inputStream: InputStream = assets.open(fileName)
@@ -15,9 +17,14 @@ fun AppCompatActivity.readJsonFromAsset(fileName: String): Array<FindTheNumberGa
         val buffer = ByteArray(size)
         inputStream.read(buffer)
         inputStream.close()
-        val json = String(buffer, Charsets.UTF_8)
-        Gson().fromJson(json, Array<FindTheNumberGameRule>::class.java)
+        String(buffer, Charsets.UTF_8)
     } catch (ex: IOException) {
-        emptyArray()
+        ""
     }
+}
+
+fun Double.roundTo2Digit(): Double {
+    val df = DecimalFormat("#.##")
+    df.roundingMode = RoundingMode.CEILING
+    return df.format(this).toDouble()
 }

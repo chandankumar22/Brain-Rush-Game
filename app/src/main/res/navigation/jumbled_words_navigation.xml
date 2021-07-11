@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/jumbled_words_navigation"
+    app:startDestination="@id/jumbledWordsMenuScreenFragment">
+
+    <fragment
+        android:id="@+id/jumbledWordsMenuScreenFragment"
+        android:name="com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsMenuScreenFragment"
+        android:label="JumbledWordsMenuScreenFragment" >
+        <action
+            android:id="@+id/action_jumbledWordsMenuScreenFragment_to_jumbledWordsLevelsFragment"
+            app:destination="@id/jumbledWordsLevelsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playJumbledWordsGameFragment"
+        android:name="com.ck.dev.tiptap.ui.games.jumbledwords.PlayJumbledWordsGameFragment"
+        android:label="fragment_play_jumbled_words_game"
+        tools:layout="@layout/fragment_play_jumbled_words_game" >
+        <argument
+            android:name="word"
+            app:argType="string" />
+        <argument
+            android:name="unjumbledWords"
+            app:argType="com.ck.dev.tiptap.models.UnJumbledWord[]" />
+        <argument
+            android:name="level"
+            app:argType="string" />
+        <argument
+            android:name="timeLimits"
+            app:argType="integer[]" />
+        <action
+            android:id="@+id/action_playJumbledWordsGameFragment_self"
+            app:destination="@id/playJumbledWordsGameFragment" />
+        <action
+            android:id="@+id/action_playJumbledWordsGameFragment_to_jumbledWordsMenuScreenFragment"
+            app:destination="@id/jumbledWordsMenuScreenFragment" />
+        <argument
+            android:name="gameMode"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/jumbledWordsLevelsFragment"
+        android:name="com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsLevelsFragment"
+        android:label="JumbledWordsLevelsFragment" >
+        <action
+            android:id="@+id/action_jumbledWordsLevelsFragment_to_playJumbledWordsGameFragment"
+            app:destination="@id/playJumbledWordsGameFragment" />
+        <argument
+            android:name="gameMode"
+            app:argType="string" />
+    </fragment>
+</navigation>

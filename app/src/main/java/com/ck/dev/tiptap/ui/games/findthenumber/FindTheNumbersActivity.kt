@@ -17,7 +17,7 @@ class FindTheNumbersActivity : AppCompatActivity() {
         Timber.i("onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_the_numbers)
-        find_the_num_header.setBackgroundColor(fetchColor(R.color.primaryLightColor))
+        header.setBackgroundColor(fetchColor(R.color.primaryLightColor))
     }
 
 }

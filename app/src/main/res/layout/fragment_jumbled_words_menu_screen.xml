@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryLightColor"
-    tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
+    android:background="@color/primaryLightColor">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/find_the_num_game_name_tv"
+        android:id="@+id/jumbled_words_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_mg"
-        android:text="@string/find_the_number_game_name"
+        android:text="@string/jumbled_words_game_name"
         android:textSize="@dimen/app_text_size_large"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,25 +20,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/score_container"
+        android:id="@+id/jum_score_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/find_the_num_game_name_tv">
+        android:layout_below="@id/jumbled_words_name_tv">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/best_score_tv"
+            android:id="@+id/jum_best_score_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_mg"
             android:text="@string/total_games_text"
             android:textSize="@dimen/app_text_size_small"
-            app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
+            app:layout_constraintEnd_toStartOf="@+id/jum_best_time_tv"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/best_time_tv"
+            android:id="@+id/jum_best_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_mg"
@@ -47,17 +46,17 @@
             android:textSize="@dimen/app_text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/best_score_tv"
+            app:layout_constraintStart_toEndOf="@+id/jum_best_score_tv"
             app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <ScrollView
-        android:id="@+id/scroller"
+        android:id="@+id/jumbled_game_scroller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:paddingBottom="@dimen/_1sdp"
         android:fitsSystemWindows="true"
-        android:layout_below="@id/score_container">
+        android:layout_below="@id/jum_score_container">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,15 +84,20 @@
                         android:textSize="@dimen/app_text_size_large" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
-                        android:id="@+id/time_bound_play"
+                        android:id="@+id/easy_play"
                         style="@style/MenuButtonStyle"
-                        android:text="Time Bound"
+                        android:text="Easy"
                         app:leftIcon="@drawable/ic_timer" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
-                        android:id="@+id/infinite_game_play"
+                        android:id="@+id/medium_play"
                         style="@style/MenuButtonStyle"
-                        android:text="Endless"
+                        android:text="Medium"
+                        app:leftIcon="@drawable/ic_infinite" />
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        android:id="@+id/hard_play"
+                        style="@style/MenuButtonStyle"
+                        android:text="Hard"
                         app:leftIcon="@drawable/ic_infinite" />
 
                 </LinearLayout>

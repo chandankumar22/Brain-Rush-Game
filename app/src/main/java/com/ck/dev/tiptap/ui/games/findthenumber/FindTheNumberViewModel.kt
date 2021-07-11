@@ -7,6 +7,8 @@ import com.ck.dev.tiptap.data.entity.BestScores
 import com.ck.dev.tiptap.data.entity.Games
 import com.ck.dev.tiptap.models.FindTheNumGameLevel
 import com.ck.dev.tiptap.models.FindTheNumberGameRule
+import com.ck.dev.tiptap.models.JumbledWordGameLevel
+import com.ck.dev.tiptap.models.Level
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,8 +43,8 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         val highScore = database.getHighScore(gameName, levelNum)
         if (highScore == null) {
             database.executeDbQuery(
-                successMsg = "successfully inserted high score for $gameName at level $levelNum with $score",
-                errorMsg = "exception in inserting high score for the $gameName"
+                    successMsg = "successfully inserted high score for $gameName at level $levelNum with $score",
+                    errorMsg = "exception in inserting high score for the $gameName"
             ) {
                 viewModelScope.launch {
                     database.insertBestScore(BestScores(gameName, levelNum, score))
@@ -52,8 +54,8 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         }
         if (highScore < score) {
             database.executeDbQuery(
-                successMsg = "successfully updated high score for $gameName at level $levelNum with $score",
-                errorMsg = "exception in updating high score for the $gameName"
+                    successMsg = "successfully updated high score for $gameName at level $levelNum with $score",
+                    errorMsg = "exception in updating high score for the $gameName"
             ) {
                 viewModelScope.launch {
                     database.updateBestScore(BestScores(gameName, levelNum, score))
@@ -89,8 +91,8 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
     }
 
     suspend fun getFindTheNumGameRules(
-        gameData: Games,
-        gameRulesList: Array<FindTheNumberGameRule>
+            gameData: Games,
+            gameRulesList: Array<FindTheNumberGameRule>
     ): ArrayList<FindTheNumGameLevel> {
         Timber.i("getFindTheNumGameRules called")
         return withContext(Dispatchers.Main) {
@@ -107,31 +109,31 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
                         if (level.toInt() <= gameData.currentLevel.toInt()) {
                             val highScore = getHighScore(gameData.gameName, level) ?: 0
                             list.add(
-                                FindTheNumGameLevel(
-                                    level,
-                                    true,
-                                    FindTheNumberGameRule(
-                                        level,
-                                        gridSize,
-                                        visibleNumSize,
-                                        time,
-                                        coinsReqd
-                                    ), highScore
-                                )
+                                    FindTheNumGameLevel(
+                                            level,
+                                            true,
+                                            FindTheNumberGameRule(
+                                                    level,
+                                                    gridSize,
+                                                    visibleNumSize,
+                                                    time,
+                                                    coinsReqd
+                                            ), highScore
+                                    )
                             )
                         } else {
                             list.add(
-                                FindTheNumGameLevel(
-                                    level,
-                                    false,
-                                    FindTheNumberGameRule(
-                                        level,
-                                        gridSize,
-                                        visibleNumSize,
-                                        time,
-                                        coinsReqd
+                                    FindTheNumGameLevel(
+                                            level,
+                                            false,
+                                            FindTheNumberGameRule(
+                                                    level,
+                                                    gridSize,
+                                                    visibleNumSize,
+                                                    time,
+                                                    coinsReqd
+                                            )
                                     )
-                                )
                             )
                         }
                     }
@@ -143,35 +145,62 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         }
     }
 
-    suspend fun getHighScoreForInfinite(gameName: String,gridSize:Int): BestScores {
+
+    suspend fun getJumbledWordGameRules(
+            gameData: Games,
+            gameRulesList: Array<Level>
+    ): ArrayList<JumbledWordGameLevel> {
+        Timber.i("getJumbledWordGameRules called")
+        return withContext(Dispatchers.Main) {
+            val list = ArrayList<JumbledWordGameLevel>()
+            try {
+                for (element in gameRulesList) {
+                    val level = element.level
+                    if (gameData.currentLevel.isNotEmpty()) {
+                        if (level.toInt() <= gameData.currentLevel.toInt()) {
+                            val highScore = getHighScore(gameData.gameName, level) ?: 0
+                            list.add(JumbledWordGameLevel(level, true, highScore, Level(level, element.unJumbledWords, element.word,element.timeLimit)))
+                        } else {
+                            list.add(JumbledWordGameLevel(level, false, 0, Level(level, element.unJumbledWords, element.word,element.timeLimit)))
+                        }
+                    }
+                }
+            } catch (ex: JSONException) {
+                Timber.e(ex, "exception while extracting game rules from json string")
+            }
+            list
+        }
+    }
+
+    suspend fun getHighScoreForInfinite(gameName: String, gridSize: Int): BestScores {
         Timber.i("getHighScoreForInfinite called")
         return withContext(Dispatchers.IO) {
-            database.getHighScoreForInfinite(gameName,gridSize)
+            database.getHighScoreForInfinite(gameName, gridSize)
         }
     }
 
-    suspend fun updateHighScoreForInfinite(gameName: String,gridSize: Int,highScore:Int,longestPlayed: Long){
+    suspend fun updateHighScoreForInfinite(gameName: String, gridSize: Int, highScore: Int, longestPlayed: Long) {
         Timber.i("updateHighScoreForInfinite called")
-        val existingData = getHighScoreForInfinite(gameName,gridSize)
+        val existingData = getHighScoreForInfinite(gameName, gridSize)
         if (existingData == null) {
             database.executeDbQuery {
                 viewModelScope.launch {
-                    database.insertBestScore(BestScores(gameName,"0",highScore,gridSize,longestPlayed))
+                    database.insertBestScore(BestScores(gameName, "0", highScore, gridSize, longestPlayed))
                 }
             }
-        }else{
-            if(existingData.bestScores==null || existingData.bestScores<highScore){
+        } else {
+            if (existingData.bestScores == null || existingData.bestScores < highScore) {
                 database.executeDbQuery {
                     viewModelScope.launch {
-                        database.updateBestScoreForInfiniteGame(gameName,gridSize,highScore)
+                        database.updateBestScoreForInfiniteGame(gameName, gridSize, highScore)
 
                     }
                 }
             }
-            if(existingData.longestPlayed==null || existingData.longestPlayed<longestPlayed){
+            if (existingData.longestPlayed == null || existingData.longestPlayed < longestPlayed) {
                 database.executeDbQuery {
                     viewModelScope.launch {
-                        database.updateLongestPlayedForInfiniteGame(gameName,gridSize,longestPlayed)
+                        database.updateLongestPlayedForInfiniteGame(gameName, gridSize, longestPlayed)
 
                     }
                 }
@@ -179,24 +208,21 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         }
     }
 
-    /*suspend fun updateLongestPlayedForInfinite(gameName: String,gridSize: Int,longestPlayed:Long){
-        Timber.i("updateLongestPlayedForInfinite called")
-        val existingData = getHighScoreForInfinite(gameName,gridSize)
-        if (existingData == null) {
-            database.executeDbQuery {
-                viewModelScope.launch {
-                    database.insertBestScore(BestScores(gameName,"0",0,gridSize,longestPlayed))
-                }
-            }
-        }else{
-            if(existingData.longestPlayed==null || existingData.longestPlayed<longestPlayed){
-                database.executeDbQuery {
-                    viewModelScope.launch {
-                        database.updateLongestPlayedForInfiniteGame(gameName,gridSize,longestPlayed)
-
-                    }
-                }
+    suspend fun updateTotalGamePlayed(gameName: String) {
+        Timber.i("updateTotalGamePlayed called")
+        database.executeDbQuery {
+            viewModelScope.launch {
+                database.updateTotalGamePlayed(gameName)
             }
         }
-    }*/
+    }
+
+    suspend fun updateTotalTimePlayed(gameName: String, totalTime: Long) {
+        Timber.i("updateTotalTimePlayed called")
+        database.executeDbQuery {
+            viewModelScope.launch {
+                database.updateTotalTimePlayed(gameName, totalTime)
+            }
+        }
+    }
 }

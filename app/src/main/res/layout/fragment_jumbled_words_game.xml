@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layer_list_card"
-    tools:context=".ui.games.JumbledWordsGameFragment">
+    android:background="@drawable/layer_list_card">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Jumbled words" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/jumbled_words_game_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="@string/game_3"
+        android:textSize="@dimen/app_text_size_xlarge"
+        />
 
-</FrameLayout>
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/go_to_jumbled_words"
+        style="@style/CustomButtonStyle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Go to game"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/screen_mg"/>
+
+</RelativeLayout>

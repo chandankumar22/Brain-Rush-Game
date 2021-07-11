@@ -5,11 +5,14 @@
     <string name="login_screen_hint">What should we call you ?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="game_1">Find the number</string>
-    <string name="game_2">Remember the cards</string>
+    <string name="game_1">Remember the cards</string>
+    <string name="game_2">Find the number</string>
+    <string name="game_3">Jumbled\n Words</string>
+    <string name="game_4">The Quiz</string>
     <string name="find_the_number">Find \nthe \nNumber</string>
     <string name="time_left">%s seconds</string>
     <string name="find_the_number_game_name">Find the Number</string>
+    <string name="jumbled_words_game_name">Jumbled words</string>
     <string name="game_exit_title">Exit Game ?</string>
     <string name="game_exit_content">Are you sure you want to exit this game ? This game progress will be lost forever.</string>
     <string name="game_exit_positive_btn_txt">Exit</string>
@@ -19,8 +22,10 @@
     <string name="game_pause_positive_btn_txt">Resume</string>
     <string name="game_pause_negative_btn_txt">Exit</string>
     <string name="game_complete_title">Time Over</string>
+    <string name="jumbled_game_complete_title">Level Complete</string>
     <string name="game_complete_infinite_title">Game Over</string>
     <string name="game_complete_content">Congo!!, You have completed this level. You scored %s in %s seconds</string>
+    <string name="jumbled_game_complete_content">Congo!!, You have completed this level. You earned %s stars in %s seconds</string>
     <string name="game_complete_infinite_content">Congo!!, You have played %s seconds and scored %s points</string>
     <string name="game_complete_negative_btn_txt">Exit</string>
     <string name="game_complete_positive_btn_txt">Next</string>
@@ -30,4 +35,6 @@
     <string name="game_retry_btn_txt">Retry</string>
     <string name="longest_played">Longest played\n%s seconds</string>
     <string name="best_score">Best Score\n%s</string>
+    <string name="total_games_text">Total games : %s</string>
+    <string name="total_time_played">Total time : %s minutes</string>
 </resources>

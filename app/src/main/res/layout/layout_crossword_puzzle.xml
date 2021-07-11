@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/crossword_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />-->
+
+    <GridLayout
+        android:id="@+id/grid_view"
+        android:useDefaultMargins="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </GridLayout>
+
+    <!--<GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:horizontalSpacing="0dp"
+        android:numColumns="4"
+        android:verticalSpacing="6dp" />-->
+
+</RelativeLayout>

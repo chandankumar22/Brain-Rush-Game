@@ -48,7 +48,6 @@
                 android:text="@string/time_left"
                 android:textSize="@dimen/app_text_size_medium" />
 
-
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -182,7 +181,8 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/finish_block"
         style="@style/CustomCardViewStyle"
-        app:drawableTopCompat="@drawable/ic_pause_game"
+        app:drawableTopCompat="@drawable/ic_finish"
+        android:visibility="gone"
         android:text="Finish Game"
         android:background="@drawable/layer_list_card"
         app:layout_constraintTop_toTopOf="@id/live_timer_container"

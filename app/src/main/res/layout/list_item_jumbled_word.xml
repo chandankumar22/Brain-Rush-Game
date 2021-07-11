@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.ck.dev.tiptap.ui.custom.SquareView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/level_list_item_size"
+    android:layout_height="0dp"
+    android:gravity="center"
+    android:background="@color/primaryLightColor"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/char_text"
+        tools:text="12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/primaryLightColor"
+        android:textSize="@dimen/app_text_size_large"/>
+</com.ck.dev.tiptap.ui.custom.SquareView>

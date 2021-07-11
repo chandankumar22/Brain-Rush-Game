@@ -2,11 +2,19 @@ package com.ck.dev.tiptap.ui.games.findthenumber
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.fetchColor
+import com.ck.dev.tiptap.extensions.setHeaderBgColor
+import com.ck.dev.tiptap.helpers.GameConstants
+import com.ck.dev.tiptap.helpers.roundTo2Digit
 import com.ck.dev.tiptap.ui.games.BaseFragment
+import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
 import kotlinx.android.synthetic.main.activity_find_the_numbers.*
 import kotlinx.android.synthetic.main.fragment_find_the_number_menu_screen.*
 import timber.log.Timber
@@ -14,10 +22,8 @@ import timber.log.Timber
 class FindTheNumberMenuScreen : BaseFragment(R.layout.fragment_find_the_number_menu_screen) {
 
     private lateinit var navController: NavController
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = FindTheNumberMenuScreen()
+    private val viewModel: FindTheNumberViewModel by activityViewModels{
+        FindTheNumberVmFactory(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,12 +45,26 @@ class FindTheNumberMenuScreen : BaseFragment(R.layout.fragment_find_the_number_m
                 navController.navigate(R.id.action_findNumbersMainScreenFragment_to_infinitePlayGameFragment)
             }
         }
+        lifecycleScope.launchWhenCreated {
+            val data = viewModel.getGameDataByName(GameConstants.FIND_THE_NUMBER_GAME_NAME)
+            if(data == null){
+                best_score_tv.text = ""
+                best_time_tv.text = ""
+            }else{
+                best_score_tv.text = getString(R.string.total_games_text,data.totalGamesPlayed.toString())
+                best_time_tv.text = getString(R.string.total_time_played,(data.totalTime/60f).toDouble().roundTo2Digit().toString())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
+        (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
     }
 
     override fun onResume() {
         Timber.i("onResume called")
         super.onResume()
-        (requireActivity() as FindTheNumbersActivity).find_the_num_header.setBackgroundColor(
+        (requireActivity() as FindTheNumbersActivity).header.setBackgroundColor(
             requireContext().fetchColor(R.color.primaryLightColor)
         )
     }

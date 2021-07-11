@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"
-        android:name="com.ck.dev.tiptap.ui.GameLevelsFragment"
+        android:name="com.ck.dev.tiptap.ui.games.findthenumber.GameLevelsFragment"
         android:label="fragment_game_levels"
         tools:layout="@layout/fragment_game_levels" >
         <action

@@ -20,6 +20,7 @@ import com.ck.dev.tiptap.adapters.FindTheNumGridAdapter
 import com.ck.dev.tiptap.adapters.GridNumSelectCallback
 import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.extensions.getRandomColor
+import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants.FIND_THE_NUM_GAME_RULE_FILE_NAME
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_COMPLETE_TAG
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_EXIT_TAG
@@ -28,11 +29,13 @@ import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_INFINITE_GAME_NAME
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.DialogData
+import com.ck.dev.tiptap.models.FindTheNumberGameRule
 import com.ck.dev.tiptap.models.GridNumberElement
 import com.ck.dev.tiptap.models.VisibleNumberElement
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
 import kotlinx.android.synthetic.main.list_item_visible_number.view.*
 import kotlinx.coroutines.Dispatchers
@@ -90,6 +93,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         }
         setBackButtonHandling()
         if (!isEndless) handlePlayPauseGame()
+(requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
     }
 
     private fun initGameParameters() {
@@ -426,13 +430,16 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         lifecycleScope.launch {
             if (isEndless) {
                 timer.cancel()
-                viewModel.updateHighScoreForInfinite(
-                    FIND_THE_NUMBER_INFINITE_GAME_NAME,
-                    gridSize,
-                    currentScore,
-                    timeSpentInEndless / 1000
-                )
-                //viewModel.updateLongestPlayedForInfinite(FIND_THE_NUMBER_INFINITE_GAME_NAME,gridSize,timeSpentInEndless)
+                viewModel.apply {
+                    updateHighScoreForInfinite(
+                        FIND_THE_NUMBER_INFINITE_GAME_NAME,
+                        gridSize,
+                        currentScore,
+                        timeSpentInEndless / 1000
+                    )
+                    updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
+                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,timeSpentInEndless/1000)
+                }
             } else {
                 viewModel.apply {
                     updateHighScoreIfApplicable(
@@ -444,10 +451,11 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                         FIND_THE_NUMBER_GAME_NAME,
                         (currentLevel.toInt() + 1).toString()
                     )
+                    updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
+                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,gameTimeLimit/1000)
                 }
             }
         }
-
         val dialogData = if (isEndless) DialogData(
             title = getString(R.string.game_complete_infinite_title),
             content = getString(
@@ -502,7 +510,8 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         val rulesJson = (requireActivity() as AppCompatActivity).readJsonFromAsset(
             FIND_THE_NUM_GAME_RULE_FILE_NAME
         )
-        val gameRule = rulesJson[currentLevel.toInt()]
+        val obj = Gson().fromJson(rulesJson, Array<FindTheNumberGameRule>::class.java)
+        val gameRule = obj[currentLevel.toInt()]
         gameTimeLimit = 0L
         timer.cancel()
         val action =

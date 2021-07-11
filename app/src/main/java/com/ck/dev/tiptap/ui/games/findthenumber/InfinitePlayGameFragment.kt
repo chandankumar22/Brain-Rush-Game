@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.extensions.getRandomColor
-import com.ck.dev.tiptap.ui.GameLevelsFragmentDirections
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_infinite_play_game.*
 import timber.log.Timber

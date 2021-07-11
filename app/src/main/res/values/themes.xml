@@ -57,4 +57,9 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/app_text_size_large</item>
     </style>
+
+    <style name="RatingBar" parent="Theme.MaterialComponents">
+        <item name="colorControlNormal">@color/greyShadowColor</item>
+        <item name="colorControlActivated">@color/golden</item>
+    </style>
 </resources>

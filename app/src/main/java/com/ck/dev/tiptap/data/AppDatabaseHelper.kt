@@ -16,4 +16,6 @@ interface AppDatabaseHelper {
     suspend fun updateLongestPlayedForInfiniteGame(gameName: String,gridSize:Int,longestPlayed:Long)
     suspend fun updateBestScoreForInfiniteGame(gameName: String,gridSize:Int,score:Int)
     suspend fun getHighScoreForInfinite(gameName: String,gridSize:Int):BestScores
+    suspend fun updateTotalTimePlayed(gameName: String, totalTime: Long)
+    suspend fun updateTotalGamePlayed(gameName: String)
 }

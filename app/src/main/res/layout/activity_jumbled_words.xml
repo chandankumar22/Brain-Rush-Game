@@ -13,12 +13,12 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
+        android:id="@+id/jumbled_words_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/game_naavigation" />
+        app:navGraph="@navigation/jumbled_words_navigation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
