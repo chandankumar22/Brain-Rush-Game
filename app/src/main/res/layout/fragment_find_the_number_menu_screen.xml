@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/primaryLightColor"
     tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
 
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_mg"
-            android:text="@string/total_games_text"
+            android:text="Best Score : 12"
             android:textSize="@dimen/app_text_size_small"
             app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
             app:layout_constraintHorizontal_bias="0.5"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/screen_mg"
-            android:text="@string/total_time_played"
+            android:text="Best Time : 45 selects in 15 sec"
             android:textSize="@dimen/app_text_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -88,13 +88,13 @@
                         android:id="@+id/time_bound_play"
                         style="@style/MenuButtonStyle"
                         android:text="Time Bound"
-                        app:leftIcon="@drawable/ic_timer" />
+                        app:leftIcon="@drawable/ic_number" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
                         android:id="@+id/infinite_game_play"
                         style="@style/MenuButtonStyle"
-                        android:text="Endless"
-                        app:leftIcon="@drawable/ic_infinite" />
+                        android:text="Infinitely"
+                        app:leftIcon="@drawable/ic_number" />
 
                 </LinearLayout>
 
@@ -124,12 +124,12 @@
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
                         style="@style/MenuButtonStyle"
                         android:text="Score"
-                        app:leftIcon="@drawable/ic_stats" />
+                        app:leftIcon="@drawable/ic_number" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
                         style="@style/MenuButtonStyle"
                         android:text="Leaderboard"
-                        app:leftIcon="@drawable/ic_leaderboard" />
+                        app:leftIcon="@drawable/ic_number" />
 
                 </LinearLayout>
 
@@ -158,13 +158,13 @@
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
                         style="@style/MenuButtonStyle"
-                        android:text="Share game"
-                        app:leftIcon="@drawable/ic_game_share" />
+                        android:text="Share"
+                        app:leftIcon="@drawable/ic_number" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
                         style="@style/MenuButtonStyle"
                         android:text="Watch ad"
-                        app:leftIcon="@drawable/ic_ad" />
+                        app:leftIcon="@drawable/ic_number" />
 
                 </LinearLayout>
 

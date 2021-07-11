@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ck.dev.tiptap.R
-import com.ck.dev.tiptap.ui.games.JumbledWordsGameFragment
 import com.ck.dev.tiptap.ui.games.findthenumber.FindNumbersMainScreenFragment
 import com.ck.dev.tiptap.ui.games.RememberTheCardGameFragment
-import com.ck.dev.tiptap.ui.games.TheQuizGameFragment
 
 class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mContext) {
 
@@ -16,9 +14,7 @@ class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mCon
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.game_1,
-            R.string.game_2,
-            R.string.game_3,
-            R.string.game_4
+            R.string.game_2
         )
     }
 
@@ -28,10 +24,8 @@ class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mCon
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> RememberTheCardGameFragment.newInstance()
-            1 -> FindNumbersMainScreenFragment.newInstance()
-            2 -> JumbledWordsGameFragment.newInstance()
-            3 -> TheQuizGameFragment.newInstance()
+            0 -> FindNumbersMainScreenFragment.newInstance()
+            1 -> RememberTheCardGameFragment.newInstance()
             else -> null!!
         }
     }

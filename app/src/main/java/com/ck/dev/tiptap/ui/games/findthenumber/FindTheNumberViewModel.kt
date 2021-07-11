@@ -179,21 +179,24 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         }
     }
 
-    suspend fun updateTotalGamePlayed(gameName: String) {
-        Timber.i("updateTotalGamePlayed called")
-        database.executeDbQuery {
-            viewModelScope.launch {
-                database.updateTotalGamePlayed(gameName)
+    /*suspend fun updateLongestPlayedForInfinite(gameName: String,gridSize: Int,longestPlayed:Long){
+        Timber.i("updateLongestPlayedForInfinite called")
+        val existingData = getHighScoreForInfinite(gameName,gridSize)
+        if (existingData == null) {
+            database.executeDbQuery {
+                viewModelScope.launch {
+                    database.insertBestScore(BestScores(gameName,"0",0,gridSize,longestPlayed))
+                }
             }
-        }
-    }
+        }else{
+            if(existingData.longestPlayed==null || existingData.longestPlayed<longestPlayed){
+                database.executeDbQuery {
+                    viewModelScope.launch {
+                        database.updateLongestPlayedForInfiniteGame(gameName,gridSize,longestPlayed)
 
-    suspend fun updateTotalTimePlayed(gameName: String,totalTime:Long) {
-        Timber.i("updateTotalTimePlayed called")
-        database.executeDbQuery {
-            viewModelScope.launch {
-                database.updateTotalTimePlayed(gameName,totalTime)
+                    }
+                }
             }
         }
-    }
+    }*/
 }

@@ -90,7 +90,6 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         }
         setBackButtonHandling()
         if (!isEndless) handlePlayPauseGame()
-
     }
 
     private fun initGameParameters() {
@@ -427,16 +426,13 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         lifecycleScope.launch {
             if (isEndless) {
                 timer.cancel()
-                viewModel.apply {
-                    updateHighScoreForInfinite(
-                        FIND_THE_NUMBER_INFINITE_GAME_NAME,
-                        gridSize,
-                        currentScore,
-                        timeSpentInEndless / 1000
-                    )
-                    updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
-                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,timeSpentInEndless/1000)
-                }
+                viewModel.updateHighScoreForInfinite(
+                    FIND_THE_NUMBER_INFINITE_GAME_NAME,
+                    gridSize,
+                    currentScore,
+                    timeSpentInEndless / 1000
+                )
+                //viewModel.updateLongestPlayedForInfinite(FIND_THE_NUMBER_INFINITE_GAME_NAME,gridSize,timeSpentInEndless)
             } else {
                 viewModel.apply {
                     updateHighScoreIfApplicable(
@@ -448,11 +444,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                         FIND_THE_NUMBER_GAME_NAME,
                         (currentLevel.toInt() + 1).toString()
                     )
-                    updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
-                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,gameTimeLimit/1000)
                 }
             }
         }
+
         val dialogData = if (isEndless) DialogData(
             title = getString(R.string.game_complete_infinite_title),
             content = getString(

@@ -14,6 +14,7 @@ class AppDatabaseHelperImpl(private val appDb: AppDatabase) : AppDatabaseHelper 
     override suspend fun updateGameLevel(gameName: String, currentLevel: String) =
         appDb.gamesDao().updateCurrentLevel(gameName, currentLevel)
 
+
     override suspend fun getCompletedLevels(gameName: String) =
         appDb.gamesDao().getCompletedGameList(gameName)
 
@@ -37,12 +38,6 @@ class AppDatabaseHelperImpl(private val appDb: AppDatabase) : AppDatabaseHelper 
 
     override suspend fun getHighScoreForInfinite(gameName: String,gridSize:Int) =
         appDb.gamesDao().getBestScoreForInfinite(gameName,gridSize)
-
-    override suspend fun updateTotalGamePlayed(gameName: String) =
-        appDb.gamesDao().updateTotalGamesPlayed(gameName)
-
-    override suspend fun updateTotalTimePlayed(gameName: String, totalTime: Long) =
-        appDb.gamesDao().updateTotalTimePlayed(gameName, totalTime)
 
     fun executeDbQuery(successMsg:String = "",errorMsg:String = "",query: () -> Unit) {
         try {
