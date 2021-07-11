@@ -84,13 +84,13 @@
                         android:textSize="@dimen/app_text_size_large" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
-                        android:id="@+id/easy_play"
+                        android:id="@+id/jum_endless_play"
                         style="@style/MenuButtonStyle"
                         android:text="Easy"
                         app:leftIcon="@drawable/ic_timer" />
 
                     <com.ck.dev.tiptap.ui.custom.CustomButtonView
-                        android:id="@+id/medium_play"
+                        android:id="@+id/jum_time_bound_play"
                         style="@style/MenuButtonStyle"
                         android:text="Medium"
                         app:leftIcon="@drawable/ic_infinite" />

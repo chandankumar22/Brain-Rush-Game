@@ -12,4 +12,5 @@ object AppConstants {
     const val ABOUT_SCREEN_TAG = "about_screen"
     const val STATISTICS_SCREEN_TAG = "statistics_screen"
     const val GET_COINS_SCREEN_TAG = "get_coins_screen"
+    const val NOT_PLAYED_TAG = -1
 }

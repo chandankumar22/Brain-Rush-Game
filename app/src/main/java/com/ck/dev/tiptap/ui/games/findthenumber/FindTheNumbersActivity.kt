@@ -1,19 +1,15 @@
 package com.ck.dev.tiptap.ui.games.findthenumber
 
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.fetchColor
-import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.helpers.GameConstants
-import com.ck.dev.tiptap.ui.GameMainScreen
+import com.ck.dev.tiptap.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_find_the_numbers.*
-import kotlinx.android.synthetic.main.activity_game_main_screen.*
 import timber.log.Timber
 
-class FindTheNumbersActivity : AppCompatActivity() {
+class FindTheNumbersActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Timber.i("onCreate called")
@@ -30,7 +26,7 @@ class FindTheNumbersActivity : AppCompatActivity() {
         val navGraph = graphInflater.inflate(R.navigation.game_naavigation)
         val navController = navHostFragment.navController
         val gameMode = intent.getStringExtra("gameMode")
-        val destination = if(gameMode == GameConstants.FIND_THE_NUMBER_GAME_NAME){
+        val destination = if(gameMode == GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND){
             R.id.gameLevelsFragment
         }else{
             R.id.infinitePlayGameFragment

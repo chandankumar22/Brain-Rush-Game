@@ -5,5 +5,5 @@ data class FindTheNumberGameRule(
     val gridSize: Int,
     val visibleNumSize: Int,
     val time: Long,
-    val coinsReqd:Int=0
+    val coins:Int=0
 )

@@ -1,5 +1,5 @@
 {
-  "easy": [
+  "time-bound": [
     {
       "level": "1",
       "word": "POT",
@@ -15,44 +15,36 @@
           "endPos": "2-3"
         }
       ],
-      "timeLimit": [15,20,25]
+      "timeLimit": 25,
+      "rowSize": 3,
+      "colSize": 3
     },
     {
       "level": "2",
-      "word": "CAT",
+      "word": "TIN",
       "unJumbledWords": [
         {
-          "word":"CAT",
-          "startPos": "1-1",
-          "endPos": "1-3"
+          "word":"IN",
+          "startPos": "0-2",
+          "endPos": "1-2"
         },
         {
-          "word":"ACT",
-          "startPos": "2-0",
-          "endPos": "4-0"
+          "word":"IT",
+          "startPos": "1-1",
+          "endPos": "2-1"
+        },
+        {
+          "word":"TIN",
+          "startPos": "1-0",
+          "endPos": "1-2"
         }
       ],
-      "timeLimit": [10,15,20]
+      "timeLimit": 40,
+      "rowSize": 3,
+      "colSize": 3
     },
     {
       "level": "3",
-      "word": "POT",
-      "unJumbledWords": [
-        {
-          "word":"TOP",
-          "startPos": "1-2",
-          "endPos": "3-2"
-        },
-        {
-          "word":"POT",
-          "startPos": "2-1",
-          "endPos": "2-3"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "4",
       "word": "CAT",
       "unJumbledWords": [
         {
@@ -66,115 +58,15 @@
           "endPos": "4-0"
         }
       ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "5",
-      "word": "POT",
-      "unJumbledWords": [
-        {
-          "word":"TOP",
-          "startPos": "1-2",
-          "endPos": "3-2"
-        },
-        {
-          "word":"POT",
-          "startPos": "2-1",
-          "endPos": "2-3"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "6",
-      "word": "CAT",
-      "unJumbledWords": [
-        {
-          "word":"CAT",
-          "startPos": "1-1",
-          "endPos": "1-3"
-        },
-        {
-          "word":"ACT",
-          "startPos": "2-0",
-          "endPos": "4-0"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "7",
-      "word": "POT",
-      "unJumbledWords": [
-        {
-          "word":"TOP",
-          "startPos": "1-2",
-          "endPos": "3-2"
-        },
-        {
-          "word":"POT",
-          "startPos": "2-1",
-          "endPos": "2-3"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "8",
-      "word": "CAT",
-      "unJumbledWords": [
-        {
-          "word":"CAT",
-          "startPos": "1-1",
-          "endPos": "1-3"
-        },
-        {
-          "word":"ACT",
-          "startPos": "2-0",
-          "endPos": "4-0"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "9",
-      "word": "POT",
-      "unJumbledWords": [
-        {
-          "word":"TOP",
-          "startPos": "1-2",
-          "endPos": "3-2"
-        },
-        {
-          "word":"POT",
-          "startPos": "2-1",
-          "endPos": "2-3"
-        }
-      ],
-      "timeLimit": [10,15,20]
-    },
-    {
-      "level": "10",
-      "word": "CAT",
-      "unJumbledWords": [
-        {
-          "word":"CAT",
-          "startPos": "1-1",
-          "endPos": "1-3"
-        },
-        {
-          "word":"ACT",
-          "startPos": "2-0",
-          "endPos": "4-0"
-        }
-      ],
-      "timeLimit": [10,15,20]
+      "timeLimit": 55,
+      "rowSize": 3,
+      "colSize": 3
     }
   ],
-  "medium": [
+  "endless": [
     {
       "level": "1",
-      "word": "POTPOTPOTA",
+      "word": "POT",
       "unJumbledWords": [
         {
           "word":"TOP",
@@ -187,10 +79,34 @@
           "endPos": "2-3"
         }
       ],
-      "timeLimit": [15,20,25]
+      "rowSize": 3,
+      "colSize": 3
     },
     {
       "level": "2",
+      "word": "TIN",
+      "unJumbledWords": [
+        {
+          "word":"IN",
+          "startPos": "0-2",
+          "endPos": "1-2"
+        },
+        {
+          "word":"IT",
+          "startPos": "1-1",
+          "endPos": "2-1"
+        },
+        {
+          "word":"TIN",
+          "startPos": "1-0",
+          "endPos": "1-2"
+        }
+      ],
+      "rowSize": 3,
+      "colSize": 3
+    },
+    {
+      "level": "3",
       "word": "CAT",
       "unJumbledWords": [
         {
@@ -204,26 +120,64 @@
           "endPos": "4-0"
         }
       ],
-      "timeLimit": [10,15,20]
-    }
-  ],
-  "hard": [
+      "rowSize": 3,
+      "colSize": 3
+    },
     {
-      "level": "1",
-      "word": "POTPOTPOTA",
+      "level": "4",
+      "word": "SIT",
       "unJumbledWords": [
         {
-          "word":"TOP",
-          "startPos": "1-2",
+          "word":"IS",
+          "startPos": "0-1",
+          "endPos": "1-1"
+        },
+        {
+          "word":"IT",
+          "startPos": "0-3",
+          "endPos": "1-3"
+        },
+        {
+          "word":"SIT",
+          "startPos": "1-1",
+          "endPos": "1-3"
+        },
+        {
+          "word":"TIS",
+          "startPos": "3-0",
           "endPos": "3-2"
         },
         {
-          "word":"POT",
-          "startPos": "2-1",
-          "endPos": "2-3"
+          "word":"ITS",
+          "startPos": "1-2",
+          "endPos": "3-2"
         }
       ],
-      "timeLimit": [15,20,25]
+      "rowSize": 4,
+      "colSize": 4
+    },
+    {
+      "level": "5",
+      "word": "HOW",
+      "unJumbledWords": [
+        {
+          "word":"WHO",
+          "startPos": "1-1",
+          "endPos": "3-1"
+        },
+        {
+          "word":"HOW",
+          "startPos": "3-0",
+          "endPos": "3-2"
+        },
+        {
+          "word":"OH",
+          "startPos": "2-0",
+          "endPos": "2-1"
+        }
+      ],
+      "rowSize": 3,
+      "colSize": 3
     }
   ]
 }

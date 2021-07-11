@@ -178,30 +178,6 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/SubHeadingStyle"
-                        android:text="Easy" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_best_score_easy"
-                        style="@style/StatisticScreenStyle"
-                        android:text="@string/best_score_in_level" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_total_time_easy"
-                        style="@style/StatisticScreenStyle"
-                        android:text="@string/total_time_mins" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_total_games_easy"
-                        style="@style/StatisticScreenStyle"
-                        tools:text="Total games : %s in %s level" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_current_level_easy"
-                        style="@style/StatisticScreenStyle"
-                        android:text="Current Level : %s in %s level" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/SubHeadingStyle"
                         android:text="Medium" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -226,25 +202,25 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/SubHeadingStyle"
-                        android:text="Hard" />
+                        android:text="Easy" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_best_score_hard"
+                        android:id="@+id/jumbled_best_score_easy"
                         style="@style/StatisticScreenStyle"
                         android:text="@string/best_score_in_level" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_total_time_hard"
+                        android:id="@+id/jumbled_total_time_easy"
                         style="@style/StatisticScreenStyle"
                         android:text="@string/total_time_mins" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_total_games_hard"
+                        android:id="@+id/jumbled_total_games_easy"
                         style="@style/StatisticScreenStyle"
-                        tools:text="@string/total_games" />
+                        tools:text="Total games : %s in %s level" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/jumbled_current_level_hard"
+                        android:id="@+id/jumbled_current_level_easy"
                         style="@style/StatisticScreenStyle"
                         android:text="Current Level : %s in %s level" />
 

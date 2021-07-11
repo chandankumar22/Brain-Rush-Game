@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.helpers.AppConstants
 import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.models.RememberTheCardGameLevel
 import com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameLevelsFragmentDirections
@@ -53,7 +54,9 @@ class RememberTheCardLevelsAdapter(
             if (list[position].isGameUnlocked) {
                 lock_iv.visibility = View.GONE
                 coins_reqd_container.visibility = View.VISIBLE
-                high_score_tv.text = list[position].highScore.toString()
+                high_score_tv.text = String.format("%s", if (list[position].highScore == AppConstants.NOT_PLAYED_TAG ||list[position].highScore == 0 ) "-" else {
+                    "${list[position].highScore} moves"
+                })
             } else {
                 lock_iv.visibility = View.VISIBLE
                 coins_reqd_container.visibility = View.GONE

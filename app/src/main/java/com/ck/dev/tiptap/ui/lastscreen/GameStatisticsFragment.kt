@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.changeStatusBarColor
-import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.helpers.roundTo2Digit
 import com.ck.dev.tiptap.ui.games.BaseFragment
@@ -14,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_game_statistics.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-
 
 class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
 
@@ -109,13 +107,13 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
     private fun setFindTheNumStats() {
         Timber.i("setFindTheNumStats called")
         lifecycleScope.launchWhenCreated {
-            val dataTimeBound = viewModel.getGameDataByName(GameConstants.FIND_THE_NUMBER_GAME_NAME)
+            val dataTimeBound = viewModel.getGameDataByName(GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
             val dataEndless =
-                viewModel.getGameDataByName(GameConstants.FIND_THE_NUMBER_INFINITE_GAME_NAME)
+                viewModel.getGameDataByName(GameConstants.FIND_THE_NUMBER_GAME_NAME_ENDLESS)
             val highScoreEndless =
-                viewModel.getHighScoreAndLevel(GameConstants.FIND_THE_NUMBER_INFINITE_GAME_NAME)
+                viewModel.getHighScoreAndLevel(GameConstants.FIND_THE_NUMBER_GAME_NAME_ENDLESS)
             val highScoreTimeBound =
-                viewModel.getHighScoreAndLevel(GameConstants.FIND_THE_NUMBER_GAME_NAME)
+                viewModel.getHighScoreAndLevel(GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
             withContext(Dispatchers.Main) {
                 with(dataTimeBound) {
                     if (this == null) {
@@ -180,20 +178,16 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
     private fun setJumbledWordsStats() {
         Timber.i("setJumbledWordsStats called")
         lifecycleScope.launchWhenCreated {
-            val dataEasy = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_EASY)
-            val highScoreTimeEasy =
-                viewModel.getHighScoreAndLevel(GameConstants.JUMBLED_NUMBER_GAME_NAME_EASY)
+            val dataEndless = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_ENDLESS)
+            val highScoreTimeEndless =
+                viewModel.getHighScoreAndLevel(GameConstants.JUMBLED_NUMBER_GAME_NAME_ENDLESS)
 
-            val dataMedium = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_MED)
-            val highScoreMedium =
-                viewModel.getHighScoreAndLevel(GameConstants.JUMBLED_NUMBER_GAME_NAME_MED)
-
-            val dataHard = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_HARD)
-            val highScoreHard =
-                viewModel.getHighScoreAndLevel(GameConstants.JUMBLED_NUMBER_GAME_NAME_HARD)
+            val dataTimeBound = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_TIME_BOUND)
+            val highScoreTimeBound =
+                viewModel.getHighScoreAndLevel(GameConstants.JUMBLED_NUMBER_GAME_NAME_TIME_BOUND)
 
             withContext(Dispatchers.Main) {
-                with(dataEasy) {
+                with(dataEndless) {
                     if (this == null) {
                         getString(R.string.never_played).apply {
                             jumbled_best_score_easy.text = this
@@ -204,8 +198,8 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
                     } else {
                         jumbled_best_score_easy.text = getString(
                             R.string.best_score_in_level,
-                            highScoreTimeEasy[0],
-                            highScoreTimeEasy[1]
+                            highScoreTimeEndless[0],
+                            highScoreTimeEndless[1]
                         )
                         jumbled_total_time_easy.text = getString(
                             R.string.total_time_mins,
@@ -221,7 +215,7 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
                         )
                     }
                 }
-                with(dataMedium) {
+                with(dataTimeBound) {
                     if (this == null) {
                         getString(R.string.never_played).apply {
                             jumbled_best_score_medium.text = this
@@ -232,8 +226,8 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
                     } else {
                         jumbled_best_score_medium.text = getString(
                             R.string.best_score_in_level,
-                            highScoreMedium[0],
-                            highScoreMedium[1]
+                            highScoreTimeBound[0],
+                            highScoreTimeBound[1]
                         )
                         jumbled_total_time_medium.text = getString(
                             R.string.total_time_mins,
@@ -244,34 +238,6 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
                             totalGamesPlayed.toString()
                         )
                         jumbled_current_level_medium.text = getString(
-                            R.string.current_level_on,
-                            currentLevel
-                        )
-                    }
-                }
-                with(dataMedium) {
-                    if (this == null) {
-                        getString(R.string.never_played).apply {
-                            jumbled_best_score_hard.text = this
-                            jumbled_total_time_hard.visibility = View.GONE
-                            jumbled_total_games_hard.visibility = View.GONE
-                            jumbled_current_level_hard.visibility = View.GONE
-                        }
-                    } else {
-                        jumbled_best_score_hard.text = getString(
-                            R.string.best_score_in_level,
-                            highScoreMedium[0],
-                            highScoreMedium[1]
-                        )
-                        jumbled_total_time_hard.text = getString(
-                            R.string.total_time_mins,
-                            (totalTime / 60f).toDouble().roundTo2Digit().toString()
-                        )
-                        jumbled_total_games_hard.text = getString(
-                            R.string.total_games,
-                            totalGamesPlayed.toString()
-                        )
-                        jumbled_current_level_hard.text = getString(
                             R.string.current_level_on,
                             currentLevel
                         )

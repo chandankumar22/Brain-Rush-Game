@@ -19,14 +19,23 @@
             android:name="level"
             app:argType="string" />
         <argument
-            android:name="timeLimits"
-            app:argType="integer[]" />
+            android:name="timeLimit"
+            app:argType="integer" />
         <action
             android:id="@+id/action_playJumbledWordsGameFragment_self"
             app:destination="@id/playJumbledWordsGameFragment" />
         <argument
             android:name="gameMode"
             app:argType="string" />
+        <argument
+            android:name="rowSize"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_playJumbledWordsGameFragment_to_jumbledWordsLevelsFragment"
+            app:destination="@id/jumbledWordsLevelsFragment" />
+        <argument
+            android:name="colSize"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/jumbledWordsLevelsFragment"

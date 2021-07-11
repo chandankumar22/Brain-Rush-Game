@@ -27,6 +27,7 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
     private var visibleNum: String = "1"
     private var gridSize = 0
     private lateinit var navController: NavController
+    private var coins = 100
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
@@ -65,26 +66,32 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
         box_size_2_by_2.setOnClickListener {
             setCheckedButton(2)
             setGridPreview(2)
+            coins = 100
         }
         box_size_3_by_3.setOnClickListener {
             setCheckedButton(3)
             setGridPreview(3)
+            coins = 200
         }
         box_size_4_by_4.setOnClickListener {
             setCheckedButton(4)
             setGridPreview(4)
+            coins = 300
         }
         box_size_5_by_5.setOnClickListener {
             setCheckedButton(5)
             setGridPreview(5)
+            coins = 400
         }
         box_size_6_by_6.setOnClickListener {
             setCheckedButton(6)
             setGridPreview(6)
+            coins = 500
         }
         box_size_7_by_7.setOnClickListener {
             setCheckedButton(7)
             setGridPreview(7)
+            coins = 600
         }
 
         add_visible_nums.setOnClickListener {
@@ -108,7 +115,7 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
                     InfinitePlayGameFragmentDirections.actionInfinitePlayGameFragmentToGameScreenFragment(
                         gridSize = gridSize,
                         visibleNums = visibleNum.toInt(),
-                        time = 0, level = "",isEndless = true
+                        time = 0, level = "",isEndless = true,coins = coins
                     )
                 navController.navigate(action)
             }

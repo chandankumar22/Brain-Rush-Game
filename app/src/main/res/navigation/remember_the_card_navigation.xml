@@ -44,5 +44,8 @@
         <action
             android:id="@+id/action_playRememberTheCardGameFragment_self"
             app:destination="@id/playRememberTheCardGameFragment" />
+        <action
+            android:id="@+id/action_playRememberTheCardGameFragment_to_rememberTheCardGameLevelsFragment"
+            app:destination="@id/rememberTheCardGameLevelsFragment" />
     </fragment>
 </navigation>

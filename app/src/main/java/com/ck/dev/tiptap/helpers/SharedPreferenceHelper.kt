@@ -12,7 +12,7 @@ object SharedPreferenceHelper {
     private val PROFILE_PIC = Pair("profilePic", null)
     private val IS_LOGGED_IN = Pair("isLoggedIn", false)
     private val COINS_LEFT = Pair("coins", 0)
-    private val CURRENT_USER_RATING = Pair("coins", 0.5f)
+    private val CURRENT_USER_RATING = Pair("coins", 0)
     fun init(context: Context) {
         userDetailsPreferences = context.getSharedPreferences(
             USER_SP_NAME,
@@ -51,12 +51,12 @@ object SharedPreferenceHelper {
             it.putInt(COINS_LEFT.first, value)
         }
 
-    var currentUserRating: Float
-        get() = userDetailsPreferences.getFloat(
+    var currentUserRating: Int
+        get() = userDetailsPreferences.getInt(
             CURRENT_USER_RATING.first, CURRENT_USER_RATING.second
         )
         set(value) = userDetailsPreferences.edit {
-            it.putFloat(CURRENT_USER_RATING.first, value)
+            it.putInt(CURRENT_USER_RATING.first, value)
         }
 
 

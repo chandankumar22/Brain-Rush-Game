@@ -10,6 +10,7 @@ import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.helpers.GameConstants.REMEMBER_THE_CARD_NAME_GAME_ENDLESS
 import com.ck.dev.tiptap.helpers.GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND
 import com.ck.dev.tiptap.helpers.roundTo2Digit
+import com.ck.dev.tiptap.ui.GameApp
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_remember_the_card_game.*
 import timber.log.Timber
@@ -64,24 +65,16 @@ class RememberTheCardGameFragment : BaseFragment(R.layout.fragment_remember_the_
             val intent = Intent(requireContext(), RememberTheCardActivity::class.java)
             intent.putExtra("gameMode",REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND)
             startActivity(intent)
-            /*(requireActivity() as RememberTheCardActivity).apply {
-                val action =
-                        RememberTheCardMenuFragmentDirections.actionRememberTheCardMenuFragmentToRememberTheCardGameLevelsFragment(
-                                GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND
-                        )
-                navController.navigate(action)
-            }*/
         }
         rem_the_card_infinite_game_play.setOnClickListener {
             Timber.i("rem_the_card_infinite_game_play.onclick called")
             val intent = Intent(requireContext(), RememberTheCardActivity::class.java)
             intent.putExtra("gameMode",REMEMBER_THE_CARD_NAME_GAME_ENDLESS)
             startActivity(intent)
-           /* val action =
-                    RememberTheCardMenuFragmentDirections.actionRememberTheCardMenuFragmentToRememberTheCardGameLevelsFragment(
-                            GameConstants.    intent.putExtra("gameMode",REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND)
-                    )
-            navController.navigate(action)*/
         }
+
+        GameApp.hasGame1Played.observe(viewLifecycleOwner, {
+            getAndDisplayHighScore()
+        })
     }
 }

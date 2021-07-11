@@ -22,19 +22,45 @@
         android:text="The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here."
         app:layout_constraintTop_toBottomOf="@id/dialog_title_tv"
         app:layout_constraintStart_toStartOf="parent"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/username_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_14sdp"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/primaryTextColor"
+        app:boxBackgroundColor="@color/primaryLightColor"
+        app:boxStrokeColor="@drawable/selector_et"
+        app:errorEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:hintTextColor="@color/primaryTextColor">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/app_text_size_small" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.ck.dev.tiptap.ui.custom.CustomButtonView
         android:id="@+id/dialog_positive_button"
         style="@style/CustomButtonStyle"
         tools:text="CONFIRM"
-        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintTop_toBottomOf="@id/username_til"
         app:layout_constraintEnd_toStartOf="@id/dialog_negative_button" />
 
     <com.ck.dev.tiptap.ui.custom.CustomButtonView
         android:id="@+id/dialog_negative_button"
         style="@style/CustomButtonStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintTop_toBottomOf="@id/username_til"
         tools:text="CANCEL"/>
 
 

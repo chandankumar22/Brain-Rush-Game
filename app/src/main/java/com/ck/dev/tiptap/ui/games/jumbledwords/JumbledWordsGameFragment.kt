@@ -7,10 +7,10 @@ import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.GameConstants
-import com.ck.dev.tiptap.helpers.GameConstants.EASY_MODE
-import com.ck.dev.tiptap.helpers.GameConstants.HARD_MODE
-import com.ck.dev.tiptap.helpers.GameConstants.MEDIUM_MODE
+import com.ck.dev.tiptap.helpers.GameConstants.ENDLESS
+import com.ck.dev.tiptap.helpers.GameConstants.TIME_BOUND
 import com.ck.dev.tiptap.helpers.roundTo2Digit
+import com.ck.dev.tiptap.ui.GameApp
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_jumbled_words_game.*
 import timber.log.Timber
@@ -33,34 +33,30 @@ class JumbledWordsGameFragment : BaseFragment(R.layout.fragment_jumbled_words_ga
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             requireActivity().finish()
         }
-        easy_play.setOnClickListener {
+        jum_endless_play.setOnClickListener {
             Timber.i("easy_play.onclick called")
             val intent = Intent(requireContext(), JumbledWordsActivity::class.java)
-            intent.putExtra("gameMode", EASY_MODE)
+            intent.putExtra("gameMode", ENDLESS)
             startActivity(intent)
         }
-        medium_play.setOnClickListener {
+        jum_time_bound_play.setOnClickListener {
             Timber.i("medium_play.onclick called")
             val intent = Intent(requireContext(), JumbledWordsActivity::class.java)
-            intent.putExtra("gameMode", MEDIUM_MODE)
+            intent.putExtra("gameMode", TIME_BOUND)
             startActivity(intent)
         }
-        hard_play.setOnClickListener {
-            Timber.i("hard_play.onclick called")
-            val intent = Intent(requireContext(), JumbledWordsActivity::class.java)
-            intent.putExtra("gameMode", HARD_MODE)
-            startActivity(intent)
-        }
+        GameApp.hasGame3Played.observe(viewLifecycleOwner, {
+            getAndDisplayHighScore()
+        })
     }
 
 
     private fun getAndDisplayHighScore() {
         Timber.i("getAndDisplayHighScore called")
         lifecycleScope.launchWhenCreated {
-            val easy = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_EASY)
-            val medium = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_MED)
-            val hard = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_HARD)
-            if (easy == null && medium == null && hard == null) {
+            val easy = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_ENDLESS)
+            val medium = viewModel.getGameDataByName(GameConstants.JUMBLED_NUMBER_GAME_NAME_TIME_BOUND)
+            if (easy == null && medium == null) {
                 jum_best_score_tv.text = ""
                 jum_best_time_tv.text = ""
             } else {
@@ -73,10 +69,6 @@ class JumbledWordsGameFragment : BaseFragment(R.layout.fragment_jumbled_words_ga
                 if (medium != null) {
                     totalPlayed += medium.totalGamesPlayed
                     totalTime += medium.totalTime
-                }
-                if (hard != null) {
-                    totalPlayed += hard.totalGamesPlayed
-                    totalTime += hard.totalTime
                 }
                 jum_best_score_tv.text =
                         getString(R.string.total_games_text, totalPlayed.toString())

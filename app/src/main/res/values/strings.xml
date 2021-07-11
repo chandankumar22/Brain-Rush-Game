@@ -29,7 +29,8 @@
     <string name="game_complete_infinite_title">Game Over</string>
     <string name="game_complete_content">Congo!!, You have completed this level. You scored %s in %s seconds</string>
     <string name="rem_the_card_game_complete_content">Congo!!, You have completed this level in %s moves.</string>
-    <string name="jumbled_game_complete_content">Congo!!, You have completed this level. You earned %s stars in %s seconds</string>
+    <string name="jumbled_game_endless_complete_content">Congo!!, You have completed this level in %s seconds</string>
+    <string name="jumbled_game_time_bound_complete_content">Congo!!, You have formed %s words in %s seconds</string>
     <string name="game_complete_infinite_content">Congo!!, You have played %s seconds and scored %s points</string>
     <string name="game_complete_negative_btn_txt">Exit</string>
     <string name="game_complete_positive_btn_txt">Next</string>
@@ -48,4 +49,5 @@
     <string name="total_games">"Total games : %s "</string>
     <string name="current_level_on">Current Level : %s</string>
     <string name="never_played">Never played</string>
+    <string name="all_level_complete_msg">Wooaaaa!!!, Game finished..You can try improving scores of previous levels to get on top of leader board or wait for new updates with new levels and games</string>
 </resources>

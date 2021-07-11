@@ -2,6 +2,7 @@ package com.ck.dev.tiptap.ui.games.rememberthecard
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
@@ -19,7 +20,6 @@ import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.RememberTheCardGameRule
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsLevelsFragmentArgs
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_game_levels.*
 import kotlinx.coroutines.Dispatchers
@@ -42,11 +42,14 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
         gameName = gameArgs.gameName
         gameData = Games(gameName)
         navController =
-            Navigation.findNavController(requireActivity(), R.id.rem_the_card_nav_host_fragment)
+                Navigation.findNavController(requireActivity(), R.id.rem_the_card_nav_host_fragment)
         setLevelsRecyclerView()
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
         (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
         requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
     }
 
     private fun setLevelsRecyclerView() {
@@ -59,24 +62,24 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
                     it.currentLevel.toInt()
                 }
                 gameData = Games(
-                    sortedLevels[0].gameName,
-                    sortedLevels[0].currentLevel
+                        sortedLevels[0].gameName,
+                        sortedLevels[0].currentLevel
                 )
             }
             withContext(Dispatchers.Main) {
                 val rulesJson = (requireActivity() as AppCompatActivity).readJsonFromAsset(REMEMBER_CARDS_GAME_RULE_FILE_NAME)
 
                 val json = JSONObject(rulesJson)
-                val jumbledRules  =if(gameName==GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND){
+                val jumbledRules = if (gameName == GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND) {
                     Gson().fromJson(json.getJSONArray("time-bound").toString(), Array<RememberTheCardGameRule>::class.java)
-                }else{
+                } else {
                     Gson().fromJson(json.getJSONArray("endless").toString(), Array<RememberTheCardGameRule>::class.java)
                 }
                 val getLevels = viewModel.getRememberTheCardGameRules(gameData, jumbledRules)
                 game_levels_tv.text = "${gameData?.currentLevel}/${getLevels.size}"
                 val gridLayoutManager = GridLayoutManager(requireContext(), 5)
                 levels_rv.layoutManager = gridLayoutManager
-                levels_rv.adapter = RememberTheCardLevelsAdapter(getLevels, navController,gameName)
+                levels_rv.adapter = RememberTheCardLevelsAdapter(getLevels, navController, gameName)
             }
         }
     }

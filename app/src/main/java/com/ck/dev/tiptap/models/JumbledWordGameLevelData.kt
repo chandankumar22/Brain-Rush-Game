@@ -4,7 +4,9 @@ data class JumbledWordGameLevelData(
         val level: String,
         val unJumbledWords: Array<UnJumbledWord>,
         val word: String,
-        val timeLimit:Array<Int>
+        val timeLimit:Int=0,
+        val rowSize:Int,
+        val colSize:Int
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

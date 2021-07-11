@@ -6,15 +6,14 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import com.ck.dev.tiptap.R
-import com.ck.dev.tiptap.helpers.GameConstants
-import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME
-import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_INFINITE_GAME_NAME
+import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND
+import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_ENDLESS
 import com.ck.dev.tiptap.helpers.roundTo2Digit
+import com.ck.dev.tiptap.ui.GameApp
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.infinite_game_play
 import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.time_bound_play
 import kotlinx.android.synthetic.main.fragment_find_the_number_menu_screen.*
-import kotlinx.android.synthetic.main.fragment_remeber_the_card_menu.*
 import timber.log.Timber
 
 class FindNumbersMainScreenFragment : BaseFragment(R.layout.fragment_find_numbers_game_main_screen) {
@@ -40,22 +39,25 @@ class FindNumbersMainScreenFragment : BaseFragment(R.layout.fragment_find_number
         time_bound_play.setOnClickListener {
             Timber.i("time_bound_play.onclick called")
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
-            intent.putExtra("gameMode", FIND_THE_NUMBER_GAME_NAME)
+            intent.putExtra("gameMode", FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
             startActivity(intent)
         }
         infinite_game_play.setOnClickListener {
             Timber.i("infinite_game_play.onclick called")
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
-            intent.putExtra("gameMode", FIND_THE_NUMBER_INFINITE_GAME_NAME)
+            intent.putExtra("gameMode", FIND_THE_NUMBER_GAME_NAME_ENDLESS)
             startActivity(intent)
         }
+        GameApp.hasGame2Played.observe(viewLifecycleOwner, {
+            getAndDisplayHighScore()
+        })
     }
 
     private fun getAndDisplayHighScore() {
         Timber.i("getAndDisplayHighScore called")
         lifecycleScope.launchWhenCreated {
-            val timeBound = viewModel.getGameDataByName(FIND_THE_NUMBER_GAME_NAME)
-            val endless = viewModel.getGameDataByName(FIND_THE_NUMBER_INFINITE_GAME_NAME)
+            val timeBound = viewModel.getGameDataByName(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
+            val endless = viewModel.getGameDataByName(FIND_THE_NUMBER_GAME_NAME_ENDLESS)
             if (timeBound == null && endless == null) {
                 best_score_tv.text = ""
                 best_time_tv.text = ""

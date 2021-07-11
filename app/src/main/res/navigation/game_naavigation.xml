@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_gameScreenFragment_to_gameLevelsFragment"
             app:destination="@id/gameLevelsFragment" />
+        <argument
+            android:name="coins"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import com.ck.dev.tiptap.models.FindTheNumberGameRule
+import com.ck.dev.tiptap.ui.GameApp
 import com.google.gson.Gson
 import timber.log.Timber
 import java.io.IOException
@@ -48,4 +49,13 @@ fun Context.assetToBitmap(fileName: String): Bitmap? {
         Timber.e(e)
         null
     }
+}
+
+fun updateCoins(coinsToAdd:Int){
+    Timber.i("updateCoins called")
+    SharedPreferenceHelper.coins = SharedPreferenceHelper.coins+coinsToAdd
+    val value = GameApp.hasCoinsUpdated.value
+    if(value == null) GameApp.hasCoinsUpdated.postValue(true)
+    else GameApp.hasCoinsUpdated.postValue(!value)
+
 }

@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.changeStatusBarColor
+import com.ck.dev.tiptap.extensions.handleGameAllLevelComplete
 import com.ck.dev.tiptap.helpers.AppConstants
 import com.ck.dev.tiptap.helpers.GameConstants.arrayOfImages
 import com.ck.dev.tiptap.helpers.assetToBitmap
@@ -27,6 +29,7 @@ import com.ck.dev.tiptap.models.RememberTheCardGameRule
 import com.ck.dev.tiptap.ui.custom.RememberCardView
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
+import com.ck.dev.tiptap.ui.games.jumbledwords.PlayJumbledWordsGameFragmentDirections
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
 import kotlinx.android.synthetic.main.fragment_play_jumbled_words_game.*
@@ -39,6 +42,8 @@ import kotlin.random.Random
 class PlayRememberTheCardGameFragment :
         BaseFragment(R.layout.fragment_play_remember_the_card_game) {
 
+    private lateinit var _gameCompletePopup: ConfirmationDialog
+    private var isGameCompletePopupToShow = false
     private lateinit var elementToAsk: RememberTheCardData
     private lateinit var gameName: String
     private var currentMoves: Int = 0
@@ -247,7 +252,7 @@ class PlayRememberTheCardGameFragment :
                 updateHighScoreIfApplicable(
                         gameName,
                         currentLevel,
-                        currentMoves
+                        currentMoves,isLowScoreToSave = true
                 )
                 updateGameLevel(
                         gameName,
@@ -256,32 +261,6 @@ class PlayRememberTheCardGameFragment :
                 updateTotalGamePlayed(gameName)
                 updateTotalTimePlayed(gameName, if (isEndless) timeSpentInEndless / 1000 else currentTimeLeft / 1000)
             }
-            /* if (isEndless) {
-                  viewModel.apply {
-                      updateHighScoreForInfinite(
-                          GameConstants.FIND_THE_NUMBER_INFINITE_GAME_NAME,
-                          gridSize,
-                          currentScore,
-                          timeSpentInEndless / 1000
-                      )
-                      updateTotalGamePlayed(GameConstants.FIND_THE_NUMBER_GAME_NAME)
-                      updateTotalTimePlayed(GameConstants.FIND_THE_NUMBER_GAME_NAME,timeSpentInEndless/1000)
-                  }
-             } else {
-                 viewModel.apply {
-                     updateHighScoreIfApplicable(
-                         gameName,
-                         currentLevel,
-                         currentMoves
-                     )
-                     updateGameLevel(
-                         gameName,
-                         (currentLevel.toInt() + 1).toString()
-                     )
-                     updateTotalGamePlayed(gameName)
-                     updateTotalTimePlayed(gameName, currentTimeLeft / 1000)
-                 }
-             }*/
         }
         val dialogData = if (isEndless) DialogData(
                 title = getString(R.string.rem_the_card_game_complete_title),
@@ -341,9 +320,13 @@ class PlayRememberTheCardGameFragment :
             )
         }
         timer.cancel()
-        val instance = ConfirmationDialog.newInstance(dialogData)
-        instance.isCancelable = false
-        instance.show(parentFragmentManager, AppConstants.GAME_COMPLETE_TAG)
+        _gameCompletePopup = ConfirmationDialog.newInstance(dialogData)
+        _gameCompletePopup.isCancelable = false
+        if(lifecycle.currentState == Lifecycle.State.RESUMED){
+            _gameCompletePopup.show(parentFragmentManager, AppConstants.GAME_COMPLETE_TAG)
+        }else{
+            isGameCompletePopupToShow = true
+        }
     }
 
     private fun retryGame() {
@@ -399,9 +382,7 @@ class PlayRememberTheCardGameFragment :
         }
         timer.cancel()
         if (currentLevel.toInt() == obj.size) {
-            Toast.makeText(requireContext(),
-                    "Wooaaaa!!!, Game finished..You can try improving scores of previous levels to get on top of leader board " +
-                            "or wait for new updates with new levels and games", Toast.LENGTH_LONG).show()
+            requireContext().handleGameAllLevelComplete()
             exitGame()
         } else {
             val gameRule = obj[currentLevel.toInt()]
@@ -421,8 +402,9 @@ class PlayRememberTheCardGameFragment :
 
     private fun exitGame(it: DialogFragment? = null) {
         Timber.i("exitGame called")
-        requireActivity().finish()
         it?.dismiss()
+        val action = PlayRememberTheCardGameFragmentDirections.actionPlayRememberTheCardGameFragmentToRememberTheCardGameLevelsFragment(gameName)
+        navController.navigate(action)
     }
 
     private fun getTheRandomImagesList(): ArrayList<Bitmap> {
@@ -437,5 +419,13 @@ class PlayRememberTheCardGameFragment :
             }
         }
         return listOfDrawables.shuffled() as ArrayList<Bitmap>
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(isGameCompletePopupToShow){
+            isGameCompletePopupToShow=false
+            _gameCompletePopup.show(parentFragmentManager, AppConstants.GAME_COMPLETE_TAG)
+        }
     }
 }

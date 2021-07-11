@@ -8,6 +8,8 @@ import android.graphics.drawable.LayerDrawable
 import android.util.Base64
 import android.view.View
 import android.view.WindowManager
+import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -17,9 +19,6 @@ import com.bumptech.glide.Glide
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.SharedPreferenceHelper
 import com.ck.dev.tiptap.models.DialogData
-import kotlinx.android.synthetic.main.activity_game_main_screen.*
-import kotlinx.android.synthetic.main.layout_header.*
-import kotlinx.android.synthetic.main.layout_header.user_name
 import kotlinx.android.synthetic.main.layout_header.view.*
 import kotlinx.android.synthetic.main.profile_image.view.*
 import timber.log.Timber
@@ -53,12 +52,12 @@ fun Context.setLayerListFrontBg(@DrawableRes drawable: Int, @ColorRes color: Int
 fun Context.getGameExitPopup(pos: () -> Unit, neg: () -> Unit): DialogData {
     Timber.i("setBackButtonHandling called")
     return DialogData(
-        title = getString(R.string.game_exit_title),
-        content = getString(R.string.game_exit_content),
-        posBtnText = getString(R.string.game_exit_positive_btn_txt),
-        negBtnText = getString(R.string.game_exit_negative_btn_txt),
-        posListener = { pos() },
-        megListener = { neg() }
+            title = getString(R.string.game_exit_title),
+            content = getString(R.string.game_exit_content),
+            posBtnText = getString(R.string.game_exit_positive_btn_txt),
+            negBtnText = getString(R.string.game_exit_negative_btn_txt),
+            posListener = { pos() },
+            megListener = { neg() }
     )
 }
 
@@ -68,9 +67,11 @@ fun AppCompatActivity.setHeaderBgColor(@ColorRes color: Int) {
         val image = Base64.decode(SharedPreferenceHelper.profilePic, Base64.DEFAULT)
         Glide.with(this).load(image).into(profile_img.profile_pic_iv)
         header_coins.text = SharedPreferenceHelper.coins.toString()
-        user_game_rating.rating = SharedPreferenceHelper.currentUserRating
+        user_game_rating.rating = SharedPreferenceHelper.currentUserRating.toFloat()
         setBackgroundColor(fetchColor(color))
+        findViewById<RelativeLayout>(R.id.profile_img).setBackgroundColor(if (color == R.color.primaryDarkColor) fetchColor(R.color.primaryLightColor) else fetchColor(R.color.primaryDarkColor))
     }
+
 }
 
 fun AppCompatActivity.changeStatusBarColor(@ColorRes color: Int) {
@@ -78,4 +79,9 @@ fun AppCompatActivity.changeStatusBarColor(@ColorRes color: Int) {
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 //    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     window.statusBarColor = fetchColor(color)
+}
+
+fun Context.handleGameAllLevelComplete() {
+    Toast.makeText(this,
+            getString(R.string.all_level_complete_msg), Toast.LENGTH_LONG).show()
 }
