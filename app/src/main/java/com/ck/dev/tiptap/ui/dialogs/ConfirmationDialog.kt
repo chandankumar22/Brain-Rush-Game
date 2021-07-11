@@ -51,14 +51,14 @@ class ConfirmationDialog : DialogFragment() {
             dialog_title_tv.text = it.title
             dialog_content_tv.text = it.content
             dialog_positive_button.apply {
-                set(it.posBtnText)
+                setBtnText(it.posBtnText)
                 setOnClickListener { view ->
                     it.posListener()
                     dismiss()
                 }
             }
             dialog_negative_button.apply {
-                set(it.negBtnText)
+                setBtnText(it.negBtnText)
                 setOnClickListener { view ->
                     it.megListener()
                     dismiss()

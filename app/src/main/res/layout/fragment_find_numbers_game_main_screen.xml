@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryLightColor"
+    android:background="@drawable/layer_list_card"
     tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -27,6 +28,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/best_score_tv"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_mg"
@@ -40,6 +42,7 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/best_time_tv"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_mg"
         android:text="Best Time : 45 selects in 15 sec"

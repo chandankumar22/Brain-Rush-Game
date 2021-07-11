@@ -27,9 +27,11 @@
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/time_left_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="center"
                 android:text="Time left"
@@ -178,6 +180,19 @@
         />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/finish_block"
+        style="@style/CustomCardViewStyle"
+        app:drawableTopCompat="@drawable/ic_finish"
+        android:visibility="gone"
+        android:text="Finish Game"
+        android:background="@drawable/layer_list_card"
+        app:layout_constraintTop_toTopOf="@id/live_timer_container"
+        app:layout_constraintBottom_toBottomOf="@id/live_score_container"
+        app:layout_constraintStart_toEndOf="@id/live_timer_container"
+        app:layout_constraintEnd_toStartOf="@id/live_score_container"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/level_tv"
         style="@style/CustomCardViewStyle"
         android:text="@string/current_level"
@@ -185,4 +200,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/longest_played_tv"
+        style="@style/CustomCardViewStyle"
+        android:text="@string/longest_played"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/screen_mg"
+        android:layout_marginTop="@dimen/screen_mg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/live_timer_container" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/best_score_tv"
+        style="@style/CustomCardViewStyle"
+        android:visibility="gone"
+        android:text="@string/best_score"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/screen_mg"
+        android:layout_marginTop="@dimen/screen_mg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/live_score_container" />
 </androidx.constraintlayout.widget.ConstraintLayout>

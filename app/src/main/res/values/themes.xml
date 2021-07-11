@@ -28,6 +28,10 @@
         <item name="android:layout_margin">@dimen/_12sdp</item>
     </style>
 
+    <style name="CustomButtonStyleWidth" parent="CustomButtonStyle">
+        <item name="android:layout_width">@dimen/_64sdp</item>
+    </style>
+
     <style name="MenuButtonStyle" parent="CustomButtonStyle">
         <item name="android:layout_width">match_parent</item>
     </style>

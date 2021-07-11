@@ -142,4 +142,58 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
             list
         }
     }
+
+    suspend fun getHighScoreForInfinite(gameName: String,gridSize:Int): BestScores {
+        Timber.i("getHighScoreForInfinite called")
+        return withContext(Dispatchers.IO) {
+            database.getHighScoreForInfinite(gameName,gridSize)
+        }
+    }
+
+    suspend fun updateHighScoreForInfinite(gameName: String,gridSize: Int,highScore:Int,longestPlayed: Long){
+        Timber.i("updateHighScoreForInfinite called")
+        val existingData = getHighScoreForInfinite(gameName,gridSize)
+        if (existingData == null) {
+            database.executeDbQuery {
+                viewModelScope.launch {
+                    database.insertBestScore(BestScores(gameName,"0",highScore,gridSize,longestPlayed))
+                }
+            }
+        }else{
+            if(existingData.bestScores==null || existingData.bestScores<highScore){
+                database.executeDbQuery {
+                    viewModelScope.launch {
+                        database.updateBestScoreForInfiniteGame(gameName,gridSize,highScore)
+
+                    }
+                }
+            }
+            if(existingData.longestPlayed==null || existingData.longestPlayed<longestPlayed){
+                database.executeDbQuery {
+                    viewModelScope.launch {
+                        database.updateLongestPlayedForInfiniteGame(gameName,gridSize,longestPlayed)
+
+                    }
+                }
+            }
+        }
+    }
+
+    suspend fun updateTotalGamePlayed(gameName: String) {
+        Timber.i("updateTotalGamePlayed called")
+        database.executeDbQuery {
+            viewModelScope.launch {
+                database.updateTotalGamePlayed(gameName)
+            }
+        }
+    }
+
+    suspend fun updateTotalTimePlayed(gameName: String,totalTime:Long) {
+        Timber.i("updateTotalTimePlayed called")
+        database.executeDbQuery {
+            viewModelScope.launch {
+                database.updateTotalTimePlayed(gameName,totalTime)
+            }
+        }
+    }
 }

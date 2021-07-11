@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_findNumbersMainScreenFragment_to_gameLevelsFragment"
             app:destination="@id/gameLevelsFragment" />
+        <action
+            android:id="@+id/action_findNumbersMainScreenFragment_to_infinitePlayGameFragment"
+            app:destination="@id/infinitePlayGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameScreenFragment"
@@ -40,6 +43,10 @@
         <action
             android:id="@+id/action_gameScreenFragment_self"
             app:destination="@id/gameScreenFragment" />
+        <argument
+            android:name="isEndless"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"
@@ -48,6 +55,15 @@
         tools:layout="@layout/fragment_game_levels" >
         <action
             android:id="@+id/action_gameLevelsFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infinitePlayGameFragment"
+        android:name="com.ck.dev.tiptap.ui.games.findthenumber.InfinitePlayGameFragment"
+        android:label="fragment_infinite_play_game"
+        tools:layout="@layout/fragment_infinite_play_game" >
+        <action
+            android:id="@+id/action_infinitePlayGameFragment_to_gameScreenFragment"
             app:destination="@id/gameScreenFragment" />
     </fragment>
 </navigation>

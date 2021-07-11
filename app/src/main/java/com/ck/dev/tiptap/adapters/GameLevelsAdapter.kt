@@ -37,7 +37,7 @@ class GameLevelsAdapter(
                             GameLevelsFragmentDirections.actionGameLevelsFragmentToGameScreenFragment(
                                 gridSize = gridSize,
                                 visibleNums = visibleNumSize,
-                                time = time, level = level
+                                time = time, level = level,isEndless = false
                             )
                         /*val action = GameLevelsFragmentDirections.actionGameLevelsFragmentToGameScreenFragment(name)
                         v.findNavController().navigate(action)*/

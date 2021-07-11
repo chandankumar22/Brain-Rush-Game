@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layer_list_card"
-    tools:context=".ui.games.RememberTheCardGameFragment">
+    tools:context=".ui.games.TheQuizGameFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Remember the card game" />
+        android:text="The quiz" />
 
 </FrameLayout>

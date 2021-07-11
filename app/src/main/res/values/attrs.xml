@@ -4,6 +4,7 @@
         <attr name="rightIcon" format="reference" />
         <attr name="leftIcon" format="reference" />
         <attr name="android:text" format="string"/>
+        <attr name="android:textSize" format="dimension"/>
         <attr name="android:background" format="reference"/>
     </declare-styleable>
 </resources>

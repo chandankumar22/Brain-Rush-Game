@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryLightColor"
+            tools:context=".ui.games.findthenumber.InfinitePlayGameFragment">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/play_endless_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:text="@string/play_endlessly"
+                android:textSize="@dimen/app_text_size_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/play_with_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/play_endless_tv"
+                android:layout_marginStart="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:text="I want tp play with "
+                android:textSize="@dimen/app_text_size_small" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/box_size_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/play_with_tv"
+                android:layout_marginStart="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:text="BOX SIZE"
+                android:textSize="@dimen/app_text_size_medium" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/box_size_input_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/box_size_tv"
+                android:paddingStart="@dimen/screen_mg"
+                android:paddingEnd="@dimen/screen_mg"
+                android:paddingBottom="@dimen/screen_mg">
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_2_by_2"
+                    style="@style/CustomButtonStyleWidth"
+                    android:text="2x2"
+                    app:layout_constraintEnd_toStartOf="@id/box_size_3_by_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_3_by_3"
+                    style="@style/CustomButtonStyleWidth"
+                    android:layout_width="@dimen/_64sdp"
+                    android:text="3x3"
+                    app:layout_constraintEnd_toStartOf="@id/box_size_4_by_4"
+                    app:layout_constraintStart_toEndOf="@id/box_size_2_by_2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_4_by_4"
+                    style="@style/CustomButtonStyleWidth"
+                    android:text="4x4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/box_size_3_by_3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_5_by_5"
+                    style="@style/CustomButtonStyleWidth"
+                    android:text="5x5"
+                    app:layout_constraintEnd_toStartOf="@id/box_size_3_by_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/box_size_2_by_2" />
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_6_by_6"
+                    style="@style/CustomButtonStyleWidth"
+                    android:layout_width="@dimen/_64sdp"
+                    android:text="6x6"
+                    app:layout_constraintEnd_toStartOf="@id/box_size_7_by_7"
+                    app:layout_constraintStart_toEndOf="@id/box_size_5_by_5"
+                    app:layout_constraintTop_toBottomOf="@id/box_size_3_by_3" />
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/box_size_7_by_7"
+                    style="@style/CustomButtonStyleWidth"
+                    android:text="7x7"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/box_size_3_by_3"
+                    app:layout_constraintTop_toBottomOf="@id/box_size_4_by_4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/visible_nums_show_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/box_size_input_container"
+                android:layout_marginStart="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:text="Numbers to display"
+                android:textSize="@dimen/app_text_size_medium" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/visible_num_ip_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/visible_nums_show_tv"
+                android:layout_margin="@dimen/screen_mg">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/minus_visible_nums"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_minus"
+                    app:layout_constraintBottom_toBottomOf="@id/visible_num_ip_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/visible_num_ip_tv" />
+
+
+                <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                    android:id="@+id/visible_num_ip_tv"
+                    style="@style/CustomButtonStyleWidth"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:text="5"
+                    app:layout_constraintEnd_toStartOf="@id/add_visible_nums"
+                    app:layout_constraintStart_toEndOf="@id/minus_visible_nums"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/add_visible_nums"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    app:layout_constraintBottom_toBottomOf="@id/visible_num_ip_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/visible_num_ip_tv"
+                    app:layout_constraintTop_toTopOf="@id/visible_num_ip_tv" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/visible_num_ip_container"
+                android:layout_marginStart="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:text="Preview"
+                android:textSize="@dimen/app_text_size_medium" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/input_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/visible_num_ip_container"
+                android:layout_marginStart="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/screen_mg"
+                android:gravity="center"
+                android:text="Your game will be created with box size of 7x7 and 5 number visible which you can tap"
+                android:textSize="@dimen/app_text_size_medium"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/unedit_visible_nums_rv_cont"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/preview"
+                android:gravity="center"
+                android:layout_margin="@dimen/screen_mg">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/unedit_visible_nums_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@color/primaryDarkColor" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@id/unedit_visible_nums_rv_cont"
+                android:layout_margin="@dimen/screen_mg"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/unedit_grid_num_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/primaryDarkColor" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/create_game_button"
+        style="@style/CustomButtonStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/screen_mg"
+        android:text="@string/create_game" />
+</RelativeLayout>

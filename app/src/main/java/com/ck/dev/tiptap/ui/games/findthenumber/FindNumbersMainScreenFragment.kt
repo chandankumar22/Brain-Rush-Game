@@ -3,6 +3,7 @@ package com.ck.dev.tiptap.ui.games.findthenumber
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.addCallback
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.*
@@ -25,6 +26,9 @@ class FindNumbersMainScreenFragment :
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
             startActivity(intent)
         }
-
+        Timber.i("setBackButtonHandling called")
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
     }
 }
