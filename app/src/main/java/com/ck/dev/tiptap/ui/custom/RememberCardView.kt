@@ -1,16 +1,20 @@
 package com.ck.dev.tiptap.ui.custom
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.ViewTarget
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.GameConstants.HINT_COINS_DEDUCT_VALUE
 import com.ck.dev.tiptap.helpers.updateCoins
@@ -33,10 +37,10 @@ class RememberCardView : LinearLayout, OnItemClick {
     private var isEndless: Boolean = false
 
     constructor(
-            context: Context,
-            model: ArrayList<RememberTheCardData>,
-            col: Int,
-            gameFr: PlayRememberTheCardGameFragment
+        context: Context,
+        model: ArrayList<RememberTheCardData>,
+        col: Int,
+        gameFr: PlayRememberTheCardGameFragment
     ) : super(context) {
         this.col = col
         this.model = model
@@ -63,7 +67,7 @@ class RememberCardView : LinearLayout, OnItemClick {
     private fun setRecyclerView() {
         adapter = RememberCardAdapter(model, this, isEndless)
         val gridLayoutManager =
-                GridLayoutManager(context, col/*, LinearLayoutManager.HORIZONTAL, false*/)
+            GridLayoutManager(context, col/*, LinearLayoutManager.HORIZONTAL, false*/)
         rem_card_rv.layoutManager = gridLayoutManager
         rem_card_rv.adapter = adapter
     }
@@ -80,6 +84,7 @@ class RememberCardView : LinearLayout, OnItemClick {
                 Timber.i("card matched")
                 adapter.setRevealImage(position, true)
                 gameFragment.updateTime()
+                adapter.setSelectedCount(2)
             } else {
                 gameFragment.checkIfMatchedTb(false)
                 Timber.i("card do not matched")
@@ -87,9 +92,11 @@ class RememberCardView : LinearLayout, OnItemClick {
                 Handler(Looper.myLooper()!!).postDelayed({
                     adapter.setRevealImage(position, false)
                     adapter.setRevealImage(prevIdSelPos, false)
+                    adapter.setSelectedCount(0)
                 }, 500)
             }
         } else {
+            adapter.setSelectedCount(1)
             currentIdSel = rememberTheCardData.id
             prevIdSelPos = position
             Timber.i("1st image for pair with id $currentIdSel at position=$position")
@@ -137,18 +144,21 @@ interface OnItemClick {
 }
 
 class RememberCardAdapter(
-        private val model: List<RememberTheCardData>,
-        private val onItemClick: OnItemClick,
-        private val isEndless: Boolean
+    private val model: List<RememberTheCardData>,
+    private val onItemClick: OnItemClick,
+    private val isEndless: Boolean
 ) :
-        RecyclerView.Adapter<RememberCardAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RememberCardAdapter.ViewHolder>() {
+
+    private var selectedCount = 0
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(
-                    LayoutInflater.from(parent.context)
-                            .inflate(R.layout.list_item_remember_card, parent, false)
-            )
+        ViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.list_item_remember_card, parent, false)
+        )
 
     fun setAllRevealFalse() {
         Timber.i("setAllRevealFalse called")
@@ -175,11 +185,28 @@ class RememberCardAdapter(
         //notifyDataSetChanged()
     }
 
+    fun setSelectedCount(count:Int){
+        selectedCount = count
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Timber.i("onBindViewHolder called")
         holder.itemView.apply {
             with(model[position]) {
-                Glide.with(context).load(drawableRes).into(img_tv)
+                //Glide.with(context).load(drawableRes).into(img_tv)
+
+                Glide.with(context).load(drawableRes).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(object : ViewTarget<ImageView, Drawable>(img_tv) {
+
+                        override fun onResourceReady(
+                            resource: Drawable,
+                            transition: com.bumptech.glide.request.transition.Transition<in Drawable>?
+                        ) {
+                            img_tv.setImageDrawable(resource)
+                        }
+                    }
+                        .waitForLayout());
+
                 if (isRevealed) {
                     img_tv.visibility = View.VISIBLE
                 } else {
@@ -189,7 +216,11 @@ class RememberCardAdapter(
                     Timber.i("card.onclick called for $position with $isLocked")
                     Timber.i("=====================before=====================")
                     //printAll()
-                    if (!isLocked) {
+                    if (!isLocked && selectedCount<2) {
+                        selectedCount++
+                        if(selectedCount==2){
+                            selectedCount=0
+                        }
                         isLocked = true
                         if (isEndless) {
                             onItemClick.onPicSelectedEndless(this, position)

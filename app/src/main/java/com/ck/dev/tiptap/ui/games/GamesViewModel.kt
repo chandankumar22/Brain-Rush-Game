@@ -410,6 +410,7 @@ class GamesViewModel(private val database: AppDatabaseHelperImpl) : ViewModel() 
                     }
                 }
             }
+            if(highScore==0 && level.isEmpty()) Array(0){}
             arrayOf(highScore.toString(), level)
         }
     }

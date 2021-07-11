@@ -17,7 +17,7 @@ class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mCon
         private val TAB_TITLES = intArrayOf(
             R.string.game_1,
             R.string.game_2,
-            R.string.game_3,
+          /*  R.string.game_3,*/
             R.string.game_4
         )
     }
@@ -30,8 +30,8 @@ class GameChangerAdapter(mContext: FragmentActivity) : FragmentStateAdapter(mCon
         return when (position) {
             0 -> RememberTheCardGameFragment.newInstance()
             1 -> FindNumbersMainScreenFragment.newInstance()
-            2 -> JumbledWordsGameFragment.newInstance()
-            3 -> LastScreenFragment.newInstance()
+            /*2 -> JumbledWordsGameFragment.newInstance()*/
+            2 -> LastScreenFragment.newInstance()
             else -> null!!
         }
     }

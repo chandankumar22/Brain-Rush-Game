@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -53,6 +54,9 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
         unedit_grid_num_rv.layoutManager = GridLayoutManager(requireContext(), size)
         unedit_grid_num_rv.adapter = adapter
         gridSize = size
+        visible_num_ip_tv.setBtnText("1")
+        visibleNum = "1"
+        setVisibleNumPreview()
     }
 
     private fun setVisibleNumPreview() {
@@ -99,6 +103,14 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
         }
 
         add_visible_nums.setOnClickListener {
+            if(gridSize==3){
+                if (visibleNum.toInt() < 3) {
+                    visibleNum = (visibleNum.toInt() + 1).toString()
+                    visible_num_ip_tv.setBtnText(visibleNum)
+                    setVisibleNumPreview()
+                }
+                return@setOnClickListener
+            }
             if (visibleNum.toInt() < 5) {
                 visibleNum = (visibleNum.toInt() + 1).toString()
                 visible_num_ip_tv.setBtnText(visibleNum)
@@ -106,6 +118,14 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
             }
         }
         minus_visible_nums.setOnClickListener {
+            if(gridSize==3){
+                if (visibleNum.toInt() > 1) {
+                    visibleNum = (visibleNum.toInt() - 1).toString()
+                    visible_num_ip_tv.setBtnText(visibleNum)
+                    setVisibleNumPreview()
+                }
+                return@setOnClickListener
+            }
             if (visibleNum.toInt() > 1) {
                 visibleNum = (visibleNum.toInt() - 1).toString()
                 visible_num_ip_tv.setBtnText(visibleNum)
@@ -122,6 +142,8 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
                         time = 0, level = "",isEndless = true,coins = coins
                     )
                 navController.navigate(action)
+            }else{
+                Toast.makeText(requireContext(), "Please select the grid size", Toast.LENGTH_SHORT).show()
             }
         }
     }

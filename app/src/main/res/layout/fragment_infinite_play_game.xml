@@ -66,6 +66,7 @@
                     android:id="@+id/box_size_2_by_2"
                     style="@style/CustomButtonStyleWidth"
                     android:text="2x2"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@id/box_size_3_by_3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -76,14 +77,14 @@
                     android:layout_width="@dimen/_64sdp"
                     android:text="3x3"
                     app:layout_constraintEnd_toStartOf="@id/box_size_4_by_4"
-                    app:layout_constraintStart_toEndOf="@id/box_size_2_by_2"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.ck.dev.tiptap.ui.custom.CustomButtonView
                     android:id="@+id/box_size_4_by_4"
                     style="@style/CustomButtonStyleWidth"
                     android:text="4x4"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/box_size_5_by_5"
                     app:layout_constraintStart_toEndOf="@id/box_size_3_by_3"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,8 +93,8 @@
                     android:id="@+id/box_size_5_by_5"
                     style="@style/CustomButtonStyleWidth"
                     android:text="5x5"
-                    app:layout_constraintEnd_toStartOf="@id/box_size_3_by_3"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/box_size_4_by_4"
                     app:layout_constraintTop_toBottomOf="@id/box_size_2_by_2" />
 
                 <com.ck.dev.tiptap.ui.custom.CustomButtonView
@@ -102,7 +103,7 @@
                     android:layout_width="@dimen/_64sdp"
                     android:text="6x6"
                     app:layout_constraintEnd_toStartOf="@id/box_size_7_by_7"
-                    app:layout_constraintStart_toEndOf="@id/box_size_5_by_5"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/box_size_3_by_3" />
 
                 <com.ck.dev.tiptap.ui.custom.CustomButtonView
@@ -110,7 +111,7 @@
                     style="@style/CustomButtonStyleWidth"
                     android:text="7x7"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/box_size_3_by_3"
+                    app:layout_constraintStart_toEndOf="@id/box_size_6_by_6"
                     app:layout_constraintTop_toBottomOf="@id/box_size_4_by_4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

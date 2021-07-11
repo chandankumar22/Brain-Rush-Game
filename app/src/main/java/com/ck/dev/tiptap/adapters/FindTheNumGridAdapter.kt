@@ -13,6 +13,7 @@ import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.models.GridNumberElement
 import com.ck.dev.tiptap.models.VisibleNumberElement
 import kotlinx.android.synthetic.main.list_item_number.view.*
+import timber.log.Timber
 
 
 class FindTheNumGridAdapter(
@@ -47,9 +48,13 @@ class FindTheNumGridAdapter(
                 if (nums.isNotEmpty()) {
                     // list[position].isSelected = true
                     var number:Int
+                    Timber.i("current num $currentNum")
                     while (true){
+                            Timber.i("finding next num ${list.size}")
                         number = java.util.Random().nextInt(list.size) + 1
+                        Timber.i("number is $number")
                         if(number!=currentNum){
+                            Timber.i("number is $number")
                             break
                         }
                     }

@@ -45,7 +45,7 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
             )
             withContext(Dispatchers.Main) {
                 with(remCardDataTimeBound) {
-                    if (this == null) {
+                    if (this == null || highScoreEndless.isEmpty()) {
                         getString(R.string.never_played).apply {
                             rem_card_best_score_time_bound.text = this
                             rem_card_total_time_bound.visibility = View.GONE
@@ -116,7 +116,7 @@ class GameStatisticsFragment : BaseFragment(R.layout.fragment_game_statistics) {
                 viewModel.getHighScoreAndLevel(GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
             withContext(Dispatchers.Main) {
                 with(dataTimeBound) {
-                    if (this == null) {
+                    if (this == null|| highScoreEndless.isEmpty()) {
                         getString(R.string.never_played).apply {
                             find_the_num_best_score_time_bound.text = this
                             find_the_num_total_time_bound.visibility = View.GONE

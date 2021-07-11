@@ -28,10 +28,11 @@ class CrosswordPuzzleView : LinearLayout {
 
 
     constructor(context: Context, model: ArrayList<JumbledWordData>, rowSize: Int,colSize:Int) : super(context) {
+        Timber.i("row=$rowSize col=$colSize")
         this.model = model
         this.rowSize = rowSize
         this.colSize = colSize
-        array = Array(rowSize){ i->Array(rowSize){ j->SquareView(context)} }
+        array = Array(rowSize){ Array(colSize){ SquareView(context)} }
         model.forEach {
            if(it.isIncluded) numOfBoxes++
         }
@@ -59,9 +60,9 @@ class CrosswordPuzzleView : LinearLayout {
 
     private fun setConstraints() {
 
-        val MAX_COLUMN: Int = rowSize //5
+        val MAX_COLUMN: Int = colSize //5
 
-        val MAX_ROW: Int = colSize //7
+        val MAX_ROW: Int = rowSize //7
 
         //grid_view.setColumnCount(MAX_COLUMN);
         //grid_view.setRowCount(MAX_ROW);

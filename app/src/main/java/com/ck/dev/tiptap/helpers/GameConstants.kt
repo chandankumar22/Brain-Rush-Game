@@ -22,8 +22,8 @@ object GameConstants {
     const val RTC_TB_LEVEL_COUNT = 12
     const val RTC_ENDLESS_LEVEL_COUNT = 6
     const val FTN_TB_LEVEL_COUNT = 31
-    const val JW_TB_LEVEL_COUNT = 3
-    const val JW_ENDLESS_LEVEL_COUNT = 5
+    const val JW_TB_LEVEL_COUNT = 0
+    const val JW_ENDLESS_LEVEL_COUNT = 0
 
     val arrayOfImages = arrayListOf(
         "air_balloon",
@@ -50,6 +50,24 @@ object GameConstants {
         "pigeon",
         "scissors",
         "sim_card",
-        "wallet"
+        "wallet",
+        "battery",
+        "biscuit",
+        "building",
+        "bulb",
+        "candy",
+        "champagne",
+        "cheese",
+        "cup",
+        "ginger",
+        "ham",
+        "mouse",
+        "speaker",
+        "spoon",
+        "tablet",
+        "turntable",
+        "usb",
+        "webcam",
+        "xbox"
     )
 }

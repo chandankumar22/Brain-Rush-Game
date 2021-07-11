@@ -4,24 +4,24 @@
       "level": "1",
       "row": 2,
       "col": 2,
-      "cardVisibleTime": 6,
-      "timeLimit": 5,
+      "cardVisibleTime": 4,
+      "timeLimit": 4,
       "coins": 10
     },
     {
       "level": "2",
       "row": 2,
       "col": 2,
-      "cardVisibleTime": 3,
-      "timeLimit": 15,
+      "cardVisibleTime": 2,
+      "timeLimit": 2,
       "coins": 10
     },
     {
       "level": "3",
       "row": 2,
       "col": 3,
-      "cardVisibleTime": 8,
-      "timeLimit": 10,
+      "cardVisibleTime": 5,
+      "timeLimit": 5,
       "coins": 10
     },
     {
@@ -29,43 +29,99 @@
       "row": 2,
       "col": 3,
       "cardVisibleTime": 4,
-      "timeLimit": 15,
+      "timeLimit": 4,
       "coins": 10
     },
     {
       "level": "5",
-      "row": 3,
-      "col": 2,
-      "cardVisibleTime": 6,
-      "timeLimit": 10,
+      "row": 2,
+      "col": 3,
+      "cardVisibleTime": 2,
+      "timeLimit": 2,
       "coins": 10
     },
     {
       "level": "6",
-      "row": 3,
-      "col": 2,
-      "cardVisibleTime": 3,
-      "timeLimit": 15,
+      "row": 2,
+      "col": 4,
+      "cardVisibleTime": 6,
+      "timeLimit": 6,
       "coins": 10
     },
     {
       "level": "7",
-      "row": 3,
+      "row": 2,
       "col": 4,
-      "cardVisibleTime": 8,
-      "timeLimit": 10,
+      "cardVisibleTime": 3,
+      "timeLimit": 6,
       "coins": 10
     },
     {
       "level": "8",
-      "row": 3,
+      "row": 2,
       "col": 4,
-      "cardVisibleTime": 4,
-      "timeLimit": 15,
+      "cardVisibleTime": 3,
+      "timeLimit": 3,
       "coins": 10
     },
     {
       "level": "9",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 8,
+      "timeLimit": 8,
+      "coins": 10
+    },
+    {
+      "level": "10",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 5,
+      "timeLimit": 6,
+      "coins": 10
+    },
+    {
+      "level": "11",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 3,
+      "timeLimit": 5,
+      "coins": 10
+    },
+    {
+      "level": "12",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "13",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 8,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "14",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 5,
+      "timeLimit": 8,
+      "coins": 10
+    },
+    {
+      "level": "15",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "16",
       "row": 4,
       "col": 3,
       "cardVisibleTime": 8,
@@ -73,27 +129,75 @@
       "coins": 10
     },
     {
-      "level": "10",
+      "level": "17",
       "row": 4,
       "col": 3,
-      "cardVisibleTime": 4,
-      "timeLimit": 15,
+      "cardVisibleTime": 5,
+      "timeLimit": 8,
       "coins": 10
     },
     {
-      "level": "11",
+      "level": "18",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 5,
+      "timeLimit": 5,
+      "coins": 10
+    },
+    {
+      "level": "19",
       "row": 4,
       "col": 4,
-      "cardVisibleTime": 8,
-      "timeLimit": 15,
+      "cardVisibleTime": 12,
+      "timeLimit": 10,
       "coins": 10
     },
     {
-      "level": "12",
+      "level": "20",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "21",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 7,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "22",
       "row": 4,
       "col": 4,
       "cardVisibleTime": 5,
-      "timeLimit": 20,
+      "timeLimit": 15,
+      "coins": 10
+    },
+    {
+      "level": "23",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 5,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "24",
+      "row": 4,
+      "col": 5,
+      "cardVisibleTime": 12,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "25",
+      "row": 4,
+      "col": 5,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
       "coins": 10
     }
   ],
@@ -102,24 +206,24 @@
       "level": "1",
       "row": 2,
       "col": 2,
-      "cardVisibleTime": 6,
-      "timeLimit": 5,
+      "cardVisibleTime": 4,
+      "timeLimit": 4,
       "coins": 10
     },
     {
       "level": "2",
       "row": 2,
       "col": 2,
-      "cardVisibleTime": 3,
-      "timeLimit": 15,
+      "cardVisibleTime": 2,
+      "timeLimit": 2,
       "coins": 10
     },
     {
       "level": "3",
       "row": 2,
       "col": 3,
-      "cardVisibleTime": 8,
-      "timeLimit": 10,
+      "cardVisibleTime": 5,
+      "timeLimit": 5,
       "coins": 10
     },
     {
@@ -127,23 +231,175 @@
       "row": 2,
       "col": 3,
       "cardVisibleTime": 4,
-      "timeLimit": 15,
+      "timeLimit": 4,
       "coins": 10
     },
     {
       "level": "5",
-      "row": 3,
-      "col": 2,
-      "cardVisibleTime": 6,
-      "timeLimit": 10,
+      "row": 2,
+      "col": 3,
+      "cardVisibleTime": 2,
+      "timeLimit": 2,
       "coins": 10
     },
     {
       "level": "6",
-      "row": 3,
-      "col": 2,
+      "row": 2,
+      "col": 4,
+      "cardVisibleTime": 6,
+      "timeLimit": 6,
+      "coins": 10
+    },
+    {
+      "level": "7",
+      "row": 2,
+      "col": 4,
       "cardVisibleTime": 3,
+      "timeLimit": 6,
+      "coins": 10
+    },
+    {
+      "level": "8",
+      "row": 2,
+      "col": 4,
+      "cardVisibleTime": 3,
+      "timeLimit": 3,
+      "coins": 10
+    },
+    {
+      "level": "9",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 8,
+      "timeLimit": 8,
+      "coins": 10
+    },
+    {
+      "level": "10",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 5,
+      "timeLimit": 6,
+      "coins": 10
+    },
+    {
+      "level": "11",
+      "row": 3,
+      "col": 3,
+      "cardVisibleTime": 3,
+      "timeLimit": 5,
+      "coins": 10
+    },
+    {
+      "level": "12",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "13",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 8,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "14",
+      "row": 3,
+      "col": 4,
+      "cardVisibleTime": 5,
+      "timeLimit": 8,
+      "coins": 10
+    },
+    {
+      "level": "15",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "16",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 8,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "17",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 5,
+      "timeLimit": 8,
+      "coins": 10
+    },
+    {
+      "level": "18",
+      "row": 4,
+      "col": 3,
+      "cardVisibleTime": 5,
+      "timeLimit": 5,
+      "coins": 10
+    },
+    {
+      "level": "19",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 12,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "20",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "21",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 7,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "22",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 5,
       "timeLimit": 15,
+      "coins": 10
+    },
+    {
+      "level": "23",
+      "row": 4,
+      "col": 4,
+      "cardVisibleTime": 5,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "24",
+      "row": 4,
+      "col": 5,
+      "cardVisibleTime": 12,
+      "timeLimit": 10,
+      "coins": 10
+    },
+    {
+      "level": "25",
+      "row": 4,
+      "col": 5,
+      "cardVisibleTime": 10,
+      "timeLimit": 10,
       "coins": 10
     }
   ]

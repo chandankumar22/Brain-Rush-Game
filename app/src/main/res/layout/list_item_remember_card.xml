@@ -2,8 +2,7 @@
 
 <com.ck.dev.tiptap.ui.custom.SquareView android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/_8sdp"
-    android:layout_height="0dp"
+    android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
     android:layout_margin="@dimen/_3sdp"
     android:gravity="center"
@@ -14,5 +13,6 @@
         tools:src="@drawable/ic_avtar_boy_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
         />
 </com.ck.dev.tiptap.ui.custom.SquareView>

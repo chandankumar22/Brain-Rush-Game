@@ -39,4 +39,5 @@
  <color name="primaryLightColorDepth">#10484848</color>
  <color name="buttonShadowColor">#FC202020</color>
  <color name="primaryDarkColorDepth">#000000</color>
+ <color name="badgeColor">#f20000</color>
 </resources>

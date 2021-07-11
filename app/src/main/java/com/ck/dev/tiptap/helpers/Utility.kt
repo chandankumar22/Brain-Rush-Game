@@ -4,14 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
-import com.ck.dev.tiptap.models.FindTheNumberGameRule
 import com.ck.dev.tiptap.ui.GameApp
-import com.google.gson.Gson
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
 import java.math.RoundingMode
 import java.text.DecimalFormat
+import kotlin.random.Random
 
 fun AppCompatActivity.readJsonFromAsset(fileName: String): String {
     Timber.i("readJsonFromAsset called")
@@ -51,12 +50,23 @@ fun Context.assetToBitmap(fileName: String): Bitmap? {
     }
 }
 
-fun updateCoins(coinsToAdd:Int){
+fun updateCoins(coinsToAdd: Int){
     Timber.i("updateCoins called")
     val coins = SharedPreferenceHelper.coins+coinsToAdd
     SharedPreferenceHelper.coins = if(coins<0)0 else coins
     val value = GameApp.hasCoinsUpdated.value
     if(value == null) GameApp.hasCoinsUpdated.postValue(true)
     else GameApp.hasCoinsUpdated.postValue(!value)
+}
 
+fun getRandomWithExclusion( start: Int, end: Int, exclude: List<Int>): Int {
+    //Timber.i("getRandomWithExclusion called")
+    var random: Int = start + Random.nextInt(end - start + 1 - exclude.size)
+    for (ex in exclude) {
+        if (random < ex) {
+            break
+        }
+        random++
+    }
+    return random
 }

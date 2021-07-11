@@ -46,9 +46,6 @@ class GameMainScreen : BaseActivity() {
                 page.scaleY = 0.50f + r * 0.35f
             }
         }
-        lifecycleScope.launchWhenCreated {
-           // playGameBgSound()
-        }
 
         view_pager.apply {
             adapter = GameChangerAdapter(this@GameMainScreen)
