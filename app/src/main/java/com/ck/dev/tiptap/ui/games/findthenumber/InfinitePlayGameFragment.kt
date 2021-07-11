@@ -21,11 +21,6 @@ import timber.log.Timber
 
 class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_game) {
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = InfinitePlayGameFragment()
-    }
-
     private var visibleNum: String = "1"
     private var gridSize = 0
     private lateinit var navController: NavController

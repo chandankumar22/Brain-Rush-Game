@@ -3,6 +3,7 @@ package com.ck.dev.tiptap.ui.games.rememberthecard
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -43,6 +44,7 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
             Navigation.findNavController(requireActivity(), R.id.rem_the_card_nav_host_fragment)
         setLevelsRecyclerView()
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
+        requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
     }
 
     private fun setLevelsRecyclerView() {

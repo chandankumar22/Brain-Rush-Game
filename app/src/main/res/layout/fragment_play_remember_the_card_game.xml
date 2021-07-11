@@ -16,9 +16,9 @@
         android:backgroundTint="@color/primaryLightColor"
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_minus12sdp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rem_card_level_tv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/level_tv">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,10 +30,10 @@
                 android:id="@+id/time_left_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:gravity="center"
                 android:text="Time left"
                 android:textSize="@dimen/app_text_size_medium" />
@@ -41,14 +41,14 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/rem_card_timer_tv"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:gravity="center"
-                tools:text="@string/time_left"
-                android:textSize="@dimen/app_text_size_medium" />
+                android:textSize="@dimen/app_text_size_medium"
+                tools:text="@string/time_left" />
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -57,9 +57,9 @@
         android:id="@+id/rem_card_level_tv"
         style="@style/CustomCardViewStyle"
         android:text="@string/current_level"
-        app:layout_constraintStart_toEndOf="@id/live_timer_container"
-        app:layout_constraintEnd_toStartOf="@id/live_score_container"
         app:layout_constraintBottom_toBottomOf="@id/live_timer_container"
+        app:layout_constraintEnd_toStartOf="@id/live_score_container"
+        app:layout_constraintStart_toEndOf="@id/live_timer_container"
         app:layout_constraintTop_toTopOf="@id/live_timer_container" />
 
     <com.google.android.material.card.MaterialCardView
@@ -71,8 +71,8 @@
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_minus12sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/live_timer_container"
-        app:layout_constraintStart_toEndOf="@id/rem_card_level_tv">
+        app:layout_constraintStart_toEndOf="@id/rem_card_level_tv"
+        app:layout_constraintTop_toTopOf="@id/live_timer_container">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -84,8 +84,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:gravity="center"
                 android:text="Moves"
                 android:textSize="@dimen/app_text_size_medium" />
@@ -106,13 +106,14 @@
 
     <LinearLayout
         android:id="@+id/game_container"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/where_card_cont"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/msg_tv"
-        app:layout_constraintTop_toBottomOf="@id/live_timer_container"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/live_timer_container" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/msg_tv"
@@ -121,27 +122,28 @@
         android:background="@color/primaryDarkColor"
         android:gravity="center"
         android:text="@string/you_have_s_seconds_to_remember_the_cards"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.ck.dev.tiptap.ui.custom.SquareView
         android:id="@+id/where_card_cont"
-        android:layout_width="@dimen/_72sdp"
+        android:layout_width="@dimen/_62sdp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:background="@color/primaryLightColor"
         android:layout_marginBottom="@dimen/screen_mg"
+        android:background="@color/primaryLightColor"
         android:gravity="center"
         android:text="@string/you_have_s_seconds_to_remember_the_cards"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/where_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:src="@drawable/ic_avtar_boy_1"/>
+            tools:src="@drawable/ic_avtar_boy_1" />
 
     </com.ck.dev.tiptap.ui.custom.SquareView>
 

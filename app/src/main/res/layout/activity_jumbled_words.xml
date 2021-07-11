@@ -19,6 +19,5 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/jumbled_words_navigation" />
+        app:defaultNavHost="true"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

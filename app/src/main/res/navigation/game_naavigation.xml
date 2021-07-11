@@ -2,28 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/game_naavigation"
-    app:startDestination="@id/findNumbersMainScreenFragment">
-    <fragment
-        android:id="@+id/findNumbersMainScreenFragment"
-        android:name="com.ck.dev.tiptap.ui.games.findthenumber.FindTheNumberMenuScreen"
-        android:label="fragment_find_the_number_menu_screen"
-        tools:layout="@layout/fragment_find_the_number_menu_screen" >
-        <action
-            android:id="@+id/action_findNumbersMainScreenFragment_to_gameLevelsFragment"
-            app:destination="@id/gameLevelsFragment" />
-        <action
-            android:id="@+id/action_findNumbersMainScreenFragment_to_infinitePlayGameFragment"
-            app:destination="@id/infinitePlayGameFragment" />
-    </fragment>
+    android:id="@+id/game_naavigation">
     <fragment
         android:id="@+id/gameScreenFragment"
         android:name="com.ck.dev.tiptap.ui.games.findthenumber.PlayGameScreenFragment"
         android:label="fragment_find_the_num_game_screen"
         tools:layout="@layout/fragment_find_the_num_game_play_screen" >
-        <action
-            android:id="@+id/action_gameScreenFragment_to_findNumbersMainScreenFragment"
-            app:destination="@id/findNumbersMainScreenFragment" />
         <argument
             android:name="gridSize"
             app:argType="integer"
@@ -47,6 +31,9 @@
             android:name="isEndless"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_gameLevelsFragment"
+            app:destination="@id/gameLevelsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"

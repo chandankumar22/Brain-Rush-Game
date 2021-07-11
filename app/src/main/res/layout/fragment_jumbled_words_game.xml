@@ -7,24 +7,71 @@
     android:background="@drawable/layer_list_card">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/jumbled_words_game_name_tv"
+        android:id="@+id/jumbled_words_name_tv"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_mg"
-        android:text="@string/game_3"
-        android:textSize="@dimen/app_text_size_xlarge"
-        />
-
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/go_to_jumbled_words"
-        style="@style/CustomButtonStyle"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Go to game"
-        android:layout_alignParentBottom="true"
+        android:text="@string/jumbled_words_game_name"
+        android:textSize="@dimen/app_text_size_large"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/screen_mg"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/jum_score_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jumbled_words_name_tv">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/jum_best_score_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_games_text"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/jum_best_time_tv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/jum_best_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_time_played"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/jum_best_score_tv"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/easy_play"
+            style="@style/MenuButtonStyle"
+            android:text="Easy"
+            app:leftIcon="@drawable/ic_timer" />
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/medium_play"
+            style="@style/MenuButtonStyle"
+            android:text="Medium"
+            app:leftIcon="@drawable/ic_infinite" />
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/hard_play"
+            style="@style/MenuButtonStyle"
+            android:text="Hard"
+            app:leftIcon="@drawable/ic_infinite" />
+    </LinearLayout>
 </RelativeLayout>

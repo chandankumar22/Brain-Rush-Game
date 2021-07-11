@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -92,6 +93,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         }
         jumbled_level_tv.text = getString(R.string.current_level, level)
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
+        requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.GONE
     }
 
     private fun setListeners() {
@@ -323,7 +325,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
 
     private fun exitGame(it: DialogFragment? = null) {
         Timber.i("exitGame called")
-        navController.navigate(R.id.action_playJumbledWordsGameFragment_to_jumbledWordsMenuScreenFragment)
+        requireActivity().finish()
         it?.dismiss()
     }
 

@@ -62,10 +62,16 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
                 highScore
             }
         } else {
-            if (highScore < score) {
-                highScore
-            } else {
-                score
+            when {
+                highScore ==0 -> {
+                    score
+                }
+                highScore < score -> {
+                    highScore
+                }
+                else -> {
+                    score
+                }
             }
         }
         database.executeDbQuery(

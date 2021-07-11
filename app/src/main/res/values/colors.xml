@@ -28,11 +28,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primaryColor">#212121</color>
-    <color name="primaryLightColor">#484848</color>
-    <color name="primaryDarkColor">#000000</color>
+    <color name="primaryColor">#8b4513</color>
+    <color name="primaryLightColor">#c0713e</color>
+    <color name="primaryDarkColor">#591b00</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="golden">#FFDF00</color>
+
     <color name="blackShadowColor">#6E6E6E</color>
     <color name="greyShadowColor">#AECDC0C0</color>
     <color name="primaryLightColorDepth">#10484848</color>

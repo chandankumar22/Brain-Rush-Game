@@ -97,12 +97,6 @@
                         android:text="Endless"
                         app:leftIcon="@drawable/ic_infinite" />
 
-                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-                        android:id="@+id/rem_the_card_va_comp"
-                        style="@style/MenuButtonStyle"
-                        android:text="TOO HARD"
-                        app:leftIcon="@drawable/ic_infinite" />
-
                 </LinearLayout>
 
 

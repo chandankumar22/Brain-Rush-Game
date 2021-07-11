@@ -3,6 +3,7 @@ package com.ck.dev.tiptap.ui.games.findthenumber
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -36,6 +37,7 @@ class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         setLevelsRecyclerView()
+        requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.VISIBLE
     }
 
     private fun setLevelsRecyclerView() {

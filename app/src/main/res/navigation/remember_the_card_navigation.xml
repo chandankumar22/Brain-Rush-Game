@@ -2,17 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/remember_the_card_navigation"
-    app:startDestination="@id/rememberTheCardMenuFragment">
+    android:id="@+id/remember_the_card_navigation">
 
-    <fragment
-        android:id="@+id/rememberTheCardMenuFragment"
-        android:name="com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardMenuFragment"
-        android:label="RememberTheCardMenuFragment" >
-        <action
-            android:id="@+id/action_rememberTheCardMenuFragment_to_rememberTheCardGameLevelsFragment"
-            app:destination="@id/rememberTheCardGameLevelsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/rememberTheCardGameLevelsFragment"
         android:name="com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameLevelsFragment"
@@ -53,8 +44,5 @@
         <action
             android:id="@+id/action_playRememberTheCardGameFragment_self"
             app:destination="@id/playRememberTheCardGameFragment" />
-        <action
-            android:id="@+id/action_playRememberTheCardGameFragment_to_rememberTheCardMenuFragment"
-            app:destination="@id/rememberTheCardMenuFragment" />
     </fragment>
 </navigation>

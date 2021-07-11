@@ -7,59 +7,72 @@
     android:background="@drawable/layer_list_card"
     tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
 
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/find_the_num_game_name_tv"
         android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_mg"
-        android:text="@string/find_the_number"
-        android:textSize="@dimen/app_text_size_xlarge"
-        />
+        android:text="@string/find_the_number_game_name"
+        android:textSize="@dimen/app_text_size_large"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/score_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/screen_mg">
+        android:layout_below="@id/find_the_num_game_name_tv">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/best_score_tv"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/screen_mg"
-        android:text="Best Score : 12"
-        android:textSize="@dimen/app_text_size_small"
-        app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_score_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_games_text"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/best_time_tv"
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/screen_mg"
-        android:text="Best Time : 45 selects in 15 sec"
-        android:textSize="@dimen/app_text_size_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/best_score_tv"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="@string/total_time_played"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/best_score_tv"
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/go_to_game_menu"
-        style="@style/CustomButtonStyle"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Go to game"
+        android:layout_margin="@dimen/screen_mg"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/screen_mg"/>
+        android:padding="@dimen/_6sdp">
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/time_bound_play"
+            style="@style/MenuButtonStyle"
+            android:text="Time Bound"
+            app:leftIcon="@drawable/ic_timer" />
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/infinite_game_play"
+            style="@style/MenuButtonStyle"
+            android:text="Endless"
+            app:leftIcon="@drawable/ic_infinite" />
+
+    </LinearLayout>
 
 </RelativeLayout>

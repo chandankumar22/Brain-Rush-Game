@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -34,7 +34,6 @@ import com.ck.dev.tiptap.models.GridNumberElement
 import com.ck.dev.tiptap.models.VisibleNumberElement
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import com.ck.dev.tiptap.viewmodelfactories.FindTheNumberVmFactory
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
 import kotlinx.android.synthetic.main.list_item_visible_number.view.*
@@ -44,7 +43,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_play_screen),
-    GridNumSelectCallback {
+        GridNumSelectCallback {
 
     private var isPaused: Boolean = false
     private lateinit var timer: CountDownTimer
@@ -77,10 +76,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         setGrid()
         setMovingListNumbers()
         find_the_num_root.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.primaryDarkColor
-            )
+                ContextCompat.getColor(
+                        requireContext(),
+                        R.color.primaryDarkColor
+                )
         )
         //  requireActivity().findViewById<>()
         if (!isEndless) startTimer(gameTimeLimit)
@@ -90,7 +89,8 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         }
         setBackButtonHandling()
         if (!isEndless) handlePlayPauseGame()
-(requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
+        (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryDarkColor)
+        requireActivity().findViewById<ConstraintLayout>(R.id.header).visibility = View.GONE
     }
 
     private fun initGameParameters() {
@@ -109,18 +109,18 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private fun setEndlessGameParameters() {
         lifecycleScope.launchWhenCreated {
             val existData =
-                viewModel.getHighScoreForInfinite(FIND_THE_NUMBER_INFINITE_GAME_NAME, gridSize)
+                    viewModel.getHighScoreForInfinite(FIND_THE_NUMBER_INFINITE_GAME_NAME, gridSize)
             withContext(Dispatchers.Main) {
                 if (existData != null) {
                     if (existData.longestPlayed != null) {
                         longest_played_tv.text =
-                            getString(R.string.longest_played, existData.longestPlayed.toString())
+                                getString(R.string.longest_played, existData.longestPlayed.toString())
                     } else {
                         longest_played_tv.text = getString(R.string.longest_played, "0")
                     }
                     if (existData.bestScores != null) {
                         best_score_tv.text =
-                            getString(R.string.best_score, existData.bestScores.toString())
+                                getString(R.string.best_score, existData.bestScores.toString())
                     } else {
                         best_score_tv.text = getString(R.string.best_score, "0")
                     }
@@ -152,10 +152,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 pause_play_block.apply {
                     text = "Resume"
                     setCompoundDrawablesWithIntrinsicBounds(
-                        null,
-                        requireContext().fetchDrawable(R.drawable.ic_resume_game),
-                        null,
-                        null
+                            null,
+                            requireContext().fetchDrawable(R.drawable.ic_resume_game),
+                            null,
+                            null
                     )
                 }
                 timer.cancel()
@@ -164,10 +164,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 pause_play_block.apply {
                     text = "Pause"
                     setCompoundDrawablesWithIntrinsicBounds(
-                        null,
-                        requireContext().fetchDrawable(R.drawable.ic_pause_game),
-                        null,
-                        null
+                            null,
+                            requireContext().fetchDrawable(R.drawable.ic_pause_game),
+                            null,
+                            null
                     )
                 }
                 startTimer(currentTimeSpentInGame)
@@ -180,21 +180,21 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         Timber.i("setBackButtonHandling called")
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             val dialogData = DialogData(
-                title = getString(R.string.game_exit_title),
-                content = getString(R.string.game_exit_content),
-                posBtnText = getString(R.string.game_exit_positive_btn_txt),
-                negBtnText = getString(R.string.game_exit_negative_btn_txt),
-                posListener = {
-                    if (::navController.isInitialized) {
-                        isExit = true
-                        exitGame()
-                    }
+                    title = getString(R.string.game_exit_title),
+                    content = getString(R.string.game_exit_content),
+                    posBtnText = getString(R.string.game_exit_positive_btn_txt),
+                    negBtnText = getString(R.string.game_exit_negative_btn_txt),
+                    posListener = {
+                        if (::navController.isInitialized) {
+                            isExit = true
+                            exitGame()
+                        }
 
-                },
-                megListener = {
-                    if (isEndless) startTimer(infTime-timeSpentInEndless)
-                    else startTimer(currentTimeSpentInGame)
-                }
+                    },
+                    megListener = {
+                        if (isEndless) startTimer(infTime - timeSpentInEndless)
+                        else startTimer(currentTimeSpentInGame)
+                    }
             )
             timer.cancel()
             val instance = ConfirmationDialog.newInstance(dialogData)
@@ -211,11 +211,11 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                     if (isEndless) {
                         timeSpentInEndless = infTime - millisUntilFinished
                         timer_tv.text =
-                            getString(R.string.time_left, (timeSpentInEndless / 1000).toString())
+                                getString(R.string.time_left, (timeSpentInEndless / 1000).toString())
                     } else {
                         currentTimeSpentInGame = millisUntilFinished
                         timer_tv.text =
-                            getString(R.string.time_left, (millisUntilFinished / 1000).toString())
+                                getString(R.string.time_left, (millisUntilFinished / 1000).toString())
                     }
                 }
             }
@@ -249,7 +249,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         gridNums = ArrayList(list)
         gridAdapter = FindTheNumGridAdapter(gridNums, this)
         val gridLayoutManager =
-            GridLayoutManager(requireContext(), gridSize/*, LinearLayoutManager.HORIZONTAL, false*/)
+                GridLayoutManager(requireContext(), gridSize/*, LinearLayoutManager.HORIZONTAL, false*/)
         grid_num_list.layoutManager = gridLayoutManager
         /// StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
@@ -289,7 +289,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 listOfNums.remove(element)
                 var isNumAlreadyExists: Boolean
                 var newElement: GridNumberElement =
-                    currentGrid[java.util.Random().nextInt(currentGrid.size - 1)]
+                        currentGrid[java.util.Random().nextInt(currentGrid.size - 1)]
                 isNumAlreadyExists = listOfNums.indexOfFirst {
                     it.number == newElement.number
                 } != -1
@@ -318,7 +318,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
     private fun createTextView(element: VisibleNumberElement) {
         val view = LayoutInflater.from(requireContext())
-            .inflate(R.layout.list_item_visible_number, moving_num_list, false)
+                .inflate(R.layout.list_item_visible_number, moving_num_list, false)
         view.id = View.generateViewId()
         view.background = requireContext().fetchDrawable(R.drawable.layer_list_number)
         val set = ConstraintSet()
@@ -397,19 +397,19 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private fun showGamePausePopup() {
         Timber.i("showGamePausePopup called")
         val dialogData = DialogData(
-            title = getString(R.string.game_pause_title),
-            content = getString(R.string.game_pause_content),
-            posBtnText = getString(R.string.game_pause_positive_btn_txt),
-            negBtnText = getString(R.string.game_pause_negative_btn_txt),
-            posListener = {
-                isPausePopUpShown = false
-                startTimer(currentTimeSpentInGame)
+                title = getString(R.string.game_pause_title),
+                content = getString(R.string.game_pause_content),
+                posBtnText = getString(R.string.game_pause_positive_btn_txt),
+                negBtnText = getString(R.string.game_pause_negative_btn_txt),
+                posListener = {
+                    isPausePopUpShown = false
+                    startTimer(currentTimeSpentInGame)
 
-            },
-            megListener = {
-                exitGame()
-                isPausePopUpShown = false
-            }
+                },
+                megListener = {
+                    exitGame()
+                    isPausePopUpShown = false
+                }
         )
         val instance = ConfirmationDialog.newInstance(dialogData)
         instance.isCancelable = false
@@ -418,7 +418,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
     private fun exitGame(it: DialogFragment? = null) {
         Timber.i("exitGame called")
-        navController.navigate(R.id.action_gameScreenFragment_to_findNumbersMainScreenFragment)
+        requireActivity().finish()
         it?.dismiss()
     }
 
@@ -429,73 +429,71 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 timer.cancel()
                 viewModel.apply {
                     updateHighScoreForInfinite(
-                        FIND_THE_NUMBER_INFINITE_GAME_NAME,
-                        gridSize,
-                        currentScore,
-                        timeSpentInEndless / 1000
+                            FIND_THE_NUMBER_INFINITE_GAME_NAME,
+                            gridSize,
+                            currentScore,
+                            timeSpentInEndless / 1000
                     )
                     updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
-                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,timeSpentInEndless/1000)
+                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME, timeSpentInEndless / 1000)
                 }
             } else {
                 viewModel.apply {
                     updateHighScoreIfApplicable(
-                        FIND_THE_NUMBER_GAME_NAME,
-                        currentLevel,
-                        currentScore
+                            FIND_THE_NUMBER_GAME_NAME,
+                            currentLevel,
+                            currentScore
                     )
                     updateGameLevel(
-                        FIND_THE_NUMBER_GAME_NAME,
-                        (currentLevel.toInt() + 1).toString()
+                            FIND_THE_NUMBER_GAME_NAME,
+                            (currentLevel.toInt() + 1).toString()
                     )
                     updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME)
-                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME,gameTimeLimit/1000)
+                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME, gameTimeLimit / 1000)
                 }
             }
         }
         val dialogData = if (isEndless) DialogData(
-            title = getString(R.string.game_complete_infinite_title),
-            content = getString(
-                R.string.game_complete_infinite_content,
-                currentScore.toString(),
-                (timeSpentInEndless / 1000).toString()
-            ),
-            posBtnText = getString(R.string.game_exit_positive_btn_txt),
-            negBtnText = getString(R.string.game_retry_btn_txt),
-            posListener = {
-                if (::navController.isInitialized) {
-                    navController.navigate(R.id.action_gameScreenFragment_to_findNumbersMainScreenFragment)
+                title = getString(R.string.game_complete_infinite_title),
+                content = getString(
+                        R.string.game_complete_infinite_content,
+                        currentScore.toString(),
+                        (timeSpentInEndless / 1000).toString()
+                ),
+                posBtnText = getString(R.string.game_exit_positive_btn_txt),
+                negBtnText = getString(R.string.game_retry_btn_txt),
+                posListener = {
+                    exitGame()
+                },
+                megListener = {
+                    val action =
+                            PlayGameScreenFragmentDirections.actionGameScreenFragmentSelf(
+                                    gridSize = gridSize,
+                                    visibleNums = visibleNumListSize,
+                                    time = 0, level = "", isEndless = true
+                            )
+                    navController.navigate(action)
+                    isPausePopUpShown = false
                 }
-            },
-            megListener = {
-                val action =
-                    PlayGameScreenFragmentDirections.actionGameScreenFragmentSelf(
-                        gridSize = gridSize,
-                        visibleNums = visibleNumListSize,
-                        time = 0, level = "", isEndless = true
-                    )
-                navController.navigate(action)
-                isPausePopUpShown = false
-            }
         ) else DialogData(
-            title = getString(R.string.game_complete_title),
-            content = getString(
-                R.string.game_complete_content,
-                currentScore.toString(),
-                (gameTimeLimit / 1000).toString()
-            ),
-            posBtnText = getString(R.string.game_complete_positive_btn_txt),
-            negBtnText = getString(R.string.game_complete_negative_btn_txt),
-            posListener = {
-                if (::navController.isInitialized) {
-                    navController.navigate(R.id.action_gameScreenFragment_self)
-                    setNextLevel()
+                title = getString(R.string.game_complete_title),
+                content = getString(
+                        R.string.game_complete_content,
+                        currentScore.toString(),
+                        (gameTimeLimit / 1000).toString()
+                ),
+                posBtnText = getString(R.string.game_complete_positive_btn_txt),
+                negBtnText = getString(R.string.game_complete_negative_btn_txt),
+                posListener = {
+                    if (::navController.isInitialized) {
+                        navController.navigate(R.id.action_gameScreenFragment_self)
+                        setNextLevel()
+                    }
+                },
+                megListener = {
+                    exitGame()
+                    isPausePopUpShown = false
                 }
-            },
-            megListener = {
-                exitGame()
-                isPausePopUpShown = false
-            }
         )
         val instance = ConfirmationDialog.newInstance(dialogData)
         instance.isCancelable = false
@@ -505,18 +503,18 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private fun setNextLevel() {
         Timber.i("setNextLevel called")
         val rulesJson = (requireActivity() as AppCompatActivity).readJsonFromAsset(
-            FIND_THE_NUM_GAME_RULE_FILE_NAME
+                FIND_THE_NUM_GAME_RULE_FILE_NAME
         )
         val obj = Gson().fromJson(rulesJson, Array<FindTheNumberGameRule>::class.java)
         val gameRule = obj[currentLevel.toInt()]
         gameTimeLimit = 0L
         timer.cancel()
         val action =
-            PlayGameScreenFragmentDirections.actionGameScreenFragmentSelf(
-                gridSize = gameRule.gridSize,
-                visibleNums = gameRule.visibleNumSize,
-                time = gameRule.time, level = gameRule.level
-            )
+                PlayGameScreenFragmentDirections.actionGameScreenFragmentSelf(
+                        gridSize = gameRule.gridSize,
+                        visibleNums = gameRule.visibleNumSize,
+                        time = gameRule.time, level = gameRule.level
+                )
         /*val action = GameLevelsFragmentDirections.actionGameLevelsFragmentToGameScreenFragment(name)
         v.findNavController().navigate(action)*/
         navController.navigate(action)

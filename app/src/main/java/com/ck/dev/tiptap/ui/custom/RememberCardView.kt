@@ -64,7 +64,6 @@ class RememberCardView : LinearLayout, OnItemClick {
         val gridLayoutManager =
             GridLayoutManager(context, col/*, LinearLayoutManager.HORIZONTAL, false*/)
         rem_card_rv.layoutManager = gridLayoutManager
-
         rem_card_rv.adapter = adapter
     }
 
@@ -103,18 +102,21 @@ class RememberCardView : LinearLayout, OnItemClick {
     }
 
     override fun onPicSelectedEndless(rememberTheCardData: RememberTheCardData, position: Int) {
-        Timber.i("onPicSelected called at pos ${rememberTheCardData}}")
+        Timber.i("onPicSelectedEndless called at pos ${rememberTheCardData}}")
+        adapter.setRevealImage(position,true)
         gameFragment.checkIfMatched(rememberTheCardData,position)
     }
 
     fun hideCardAt(position: Int){
         Timber.i("hideCardAt called at pos ${position}}")
-        adapter.setRevealImage(position,false)
+        Handler(Looper.myLooper()!!).postDelayed({
+            adapter.setRevealImage(position,false)
+        },500)
     }
 
     fun showCardAt(position: Int){
         Timber.i("showCardAt called at pos ${position}}")
-        adapter.setRevealImage(position,true)
+        //adapter.setRevealImage(position,true)
     }
 
 }
@@ -160,9 +162,11 @@ class RememberCardAdapter(
         model[position].isRevealed = isRevealed
         model[position].isLocked = isRevealed
         notifyItemChanged(position)
+        //notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Timber.i("onBindViewHolder called")
         holder.itemView.apply {
             with(model[position]) {
                 Glide.with(context).load(drawableRes).into(img_tv)
@@ -174,7 +178,7 @@ class RememberCardAdapter(
                 this@apply.setOnClickListener {
                     Timber.i("card.onclick called for $position with $isLocked")
                     Timber.i("=====================before=====================")
-                    printAll()
+                    //printAll()
                     if (!isLocked) {
                         isLocked = true
                         if (isEndless) {
@@ -195,6 +199,9 @@ class RememberCardAdapter(
         }
     }
 
-    override fun getItemCount() = model.size
+    override fun getItemCount():Int {
+        Timber.i("getItemCount ${model.size}")
+        return model.size
+    }
 
 }

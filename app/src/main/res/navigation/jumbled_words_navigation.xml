@@ -2,17 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/jumbled_words_navigation"
-    app:startDestination="@id/jumbledWordsMenuScreenFragment">
+    android:id="@+id/jumbled_words_navigation">
 
-    <fragment
-        android:id="@+id/jumbledWordsMenuScreenFragment"
-        android:name="com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsMenuScreenFragment"
-        android:label="JumbledWordsMenuScreenFragment" >
-        <action
-            android:id="@+id/action_jumbledWordsMenuScreenFragment_to_jumbledWordsLevelsFragment"
-            app:destination="@id/jumbledWordsLevelsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/playJumbledWordsGameFragment"
         android:name="com.ck.dev.tiptap.ui.games.jumbledwords.PlayJumbledWordsGameFragment"
@@ -33,9 +24,6 @@
         <action
             android:id="@+id/action_playJumbledWordsGameFragment_self"
             app:destination="@id/playJumbledWordsGameFragment" />
-        <action
-            android:id="@+id/action_playJumbledWordsGameFragment_to_jumbledWordsMenuScreenFragment"
-            app:destination="@id/jumbledWordsMenuScreenFragment" />
         <argument
             android:name="gameMode"
             app:argType="string" />
