@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TipTap">
-        <activity android:name=".ui.lastscreen.LastScreenActivity"></activity>
+        <activity android:name=".ui.lastscreen.LastScreenActivity" android:configChanges="uiMode" android:launchMode="singleTop"/>
         <activity android:name=".ui.games.rememberthecard.RememberTheCardActivity" />
         <activity android:name=".ui.games.jumbledwords.JumbledWordsActivity" />
         <activity android:name=".ui.games.findthenumber.FindTheNumbersActivity" />

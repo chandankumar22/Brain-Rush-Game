@@ -16,9 +16,11 @@ import com.ck.dev.tiptap.data.entity.Games
 import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants.REMEMBER_CARDS_GAME_RULE_FILE_NAME
+import com.ck.dev.tiptap.helpers.ClickSound
 import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.RememberTheCardGameRule
+import com.ck.dev.tiptap.sounds.GameSound.playBtnClickSound
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_game_levels.*
@@ -28,7 +30,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
 
-class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
+class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_levels), ClickSound {
 
     private lateinit var navController: NavController
 
@@ -79,8 +81,14 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
                 game_levels_tv.text = "${gameData?.currentLevel}/${getLevels.size}"
                 val gridLayoutManager = GridLayoutManager(requireContext(), 5)
                 levels_rv.layoutManager = gridLayoutManager
-                levels_rv.adapter = RememberTheCardLevelsAdapter(getLevels, navController, gameName)
+                levels_rv.adapter = RememberTheCardLevelsAdapter(getLevels, navController, gameName,this@RememberTheCardGameLevelsFragment)
             }
+        }
+    }
+
+    override fun playSound() {
+        lifecycleScope.launch {
+            requireContext().playBtnClickSound()
         }
     }
 }

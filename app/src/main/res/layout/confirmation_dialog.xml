@@ -19,9 +19,45 @@
         android:id="@+id/dialog_content_tv"
         android:layout_width="match_parent"
         style="@style/AppTextStyle"
-        android:text="The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here."
+        tools:text="The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here."
         app:layout_constraintTop_toBottomOf="@id/dialog_title_tv"
         app:layout_constraintStart_toStartOf="parent"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/get_coins_tv"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        style="@style/AppTextStyle"
+        android:padding="0dp"
+        android:layout_marginStart="@dimen/screen_mg"
+        android:textSize="@dimen/app_text_size_xsmall"
+        android:text="Get extra time ? "
+        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <LinearLayout
+        android:id="@+id/coins_for_extra_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@id/get_coins_tv"
+        app:layout_constraintBottom_toBottomOf="@id/get_coins_tv"
+        app:layout_constraintTop_toTopOf="@id/get_coins_tv">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_xsmall"
+            android:layout_height="@dimen/icon_size_xsmall"
+            android:adjustViewBounds="true"
+            android:layout_margin="@dimen/_4sdp"
+            app:srcCompat="@drawable/ic_coins_1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coins_for_extra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1000000000"
+            android:textSize="@dimen/app_text_size_small" />
+    </LinearLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_til"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
@@ -36,7 +72,7 @@
         app:boxStrokeColor="@drawable/selector_et"
         app:errorEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintTop_toBottomOf="@id/get_coins_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:hintTextColor="@color/primaryTextColor">
 

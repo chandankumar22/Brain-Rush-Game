@@ -37,6 +37,9 @@
         <argument
             android:name="coins"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_infinitePlayGameFragment"
+            app:destination="@id/infinitePlayGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameLevelsFragment"

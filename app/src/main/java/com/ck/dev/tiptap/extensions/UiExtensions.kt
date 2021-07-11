@@ -67,9 +67,9 @@ fun AppCompatActivity.setHeaderBgColor(@ColorRes color: Int) {
         val image = Base64.decode(SharedPreferenceHelper.profilePic, Base64.DEFAULT)
         Glide.with(this).load(image).into(profile_img.profile_pic_iv)
         header_coins.text = SharedPreferenceHelper.coins.toString()
-        user_game_rating.rating = SharedPreferenceHelper.currentUserRating.toFloat()
+        user_game_rating.rating = SharedPreferenceHelper.currentUserRating
         setBackgroundColor(fetchColor(color))
-        findViewById<RelativeLayout>(R.id.profile_img).setBackgroundColor(if (color == R.color.primaryDarkColor) fetchColor(R.color.primaryLightColor) else fetchColor(R.color.primaryDarkColor))
+       // findViewById<RelativeLayout>(R.id.profile_img).setBackgroundColor(if (color == R.color.primaryDarkColor) fetchColor(R.color.primaryLightColor) else fetchColor(R.color.primaryDarkColor))
     }
 
 }

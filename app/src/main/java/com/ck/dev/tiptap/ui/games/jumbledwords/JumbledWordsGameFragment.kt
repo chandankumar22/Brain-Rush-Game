@@ -10,9 +10,11 @@ import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.helpers.GameConstants.ENDLESS
 import com.ck.dev.tiptap.helpers.GameConstants.TIME_BOUND
 import com.ck.dev.tiptap.helpers.roundTo2Digit
+import com.ck.dev.tiptap.sounds.GameSound.playBtnClickSound
 import com.ck.dev.tiptap.ui.GameApp
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_jumbled_words_game.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class JumbledWordsGameFragment : BaseFragment(R.layout.fragment_jumbled_words_game) {
@@ -35,12 +37,18 @@ class JumbledWordsGameFragment : BaseFragment(R.layout.fragment_jumbled_words_ga
         }
         jum_endless_play.setOnClickListener {
             Timber.i("easy_play.onclick called")
+            lifecycleScope.launch {
+                requireContext().playBtnClickSound()
+            }
             val intent = Intent(requireContext(), JumbledWordsActivity::class.java)
             intent.putExtra("gameMode", ENDLESS)
             startActivity(intent)
         }
         jum_time_bound_play.setOnClickListener {
             Timber.i("medium_play.onclick called")
+            lifecycleScope.launch {
+                requireContext().playBtnClickSound()
+            }
             val intent = Intent(requireContext(), JumbledWordsActivity::class.java)
             intent.putExtra("gameMode", TIME_BOUND)
             startActivity(intent)

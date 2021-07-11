@@ -45,7 +45,8 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/high_score_tv"
         android:gravity="center"
-        tools:text="10000"
+        tools:text="-1000 points"
+        android:textSize="@dimen/app_text_size_xsmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true" />

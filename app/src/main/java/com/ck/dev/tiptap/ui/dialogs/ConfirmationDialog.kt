@@ -5,9 +5,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.models.DialogData
+import com.ck.dev.tiptap.sounds.GameSound.playBtnClickSound
 import kotlinx.android.synthetic.main.confirmation_dialog.*
+import kotlinx.coroutines.launch
 import java.util.*
 
 class ConfirmationDialog : DialogFragment() {
@@ -54,6 +57,9 @@ class ConfirmationDialog : DialogFragment() {
                 if(it.posBtnText.trim().isEmpty()) dialog_positive_button.visibility = View.GONE
                 setBtnText(it.posBtnText)
                 setOnClickListener { view ->
+                    lifecycleScope.launch {
+                        requireContext().playBtnClickSound()
+                    }
                     it.posListener()
                     dismiss()
                 }
@@ -61,9 +67,22 @@ class ConfirmationDialog : DialogFragment() {
             dialog_negative_button.apply {
                 setBtnText(it.negBtnText)
                 setOnClickListener { view ->
+                    lifecycleScope.launch {
+                        requireContext().playBtnClickSound()
+                    }
                     it.megListener()
                     dismiss()
                 }
+            }
+            if(it.coinsToTake>0){
+                /*get_coins_tv.visibility = View.VISIBLE
+                coins_for_extra_container.visibility = View.VISIBLE
+                get_coins_tv.text = it.extraCoinsText
+                coins_for_extra.text = it.coinsToTake.toString()
+                get_coins_tv.setOnClickListener {_->
+                    dismiss()
+                    it.extraCoinsListener()
+                }*/
             }
         }
     }

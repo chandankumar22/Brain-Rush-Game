@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="profile_pic_container_size">@dimen/_48sdp</dimen>
+    <dimen name="profile_pic_container_size">@dimen/_52sdp</dimen>
     <dimen name="profile_pic_size">@dimen/_36sdp</dimen>
     <dimen name="app_text_size_medium">@dimen/_16ssp</dimen>
     <dimen name="app_text_size_small">@dimen/_12ssp</dimen>
@@ -13,7 +13,7 @@
     <dimen name="icon_size_large">@dimen/_36sdp</dimen>
     <dimen name="icon_size_small">@dimen/_18sdp</dimen>
     <dimen name="icon_size_xsmall">@dimen/_12sdp</dimen>
-    <dimen name="level_list_item_size">@dimen/_48sdp</dimen>
+    <dimen name="level_list_item_size">@dimen/_52sdp</dimen>
     <dimen name="level_list_jumbled_size">@dimen/_36sdp</dimen>
     <dimen name="screen_mg">@dimen/_12sdp</dimen>
     <dimen name="depth">@dimen/_10sdp</dimen>

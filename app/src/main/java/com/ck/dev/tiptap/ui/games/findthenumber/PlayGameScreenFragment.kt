@@ -1,9 +1,11 @@
 package com.ck.dev.tiptap.ui.games.findthenumber
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,13 +25,20 @@ import com.ck.dev.tiptap.extensions.*
 import com.ck.dev.tiptap.helpers.AppConstants.FIND_THE_NUM_GAME_RULE_FILE_NAME
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_COMPLETE_TAG
 import com.ck.dev.tiptap.helpers.AppConstants.GAME_EXIT_TAG
+import com.ck.dev.tiptap.helpers.GameConstants.EXTRA_TIME_COINS_DEDUCT_VALUE
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_ENDLESS
+import com.ck.dev.tiptap.helpers.SharedPreferenceHelper
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
+import com.ck.dev.tiptap.helpers.updateCoins
 import com.ck.dev.tiptap.models.DialogData
 import com.ck.dev.tiptap.models.FindTheNumberGameRule
 import com.ck.dev.tiptap.models.GridNumberElement
 import com.ck.dev.tiptap.models.VisibleNumberElement
+import com.ck.dev.tiptap.sounds.GameSound.playFindTheNumSuccess
+import com.ck.dev.tiptap.sounds.GameSound.playFindTheNumWrong
+import com.ck.dev.tiptap.sounds.GameSound.playLevelFinish
+import com.ck.dev.tiptap.sounds.GameSound.playTimerSound
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import com.google.gson.Gson
@@ -81,7 +90,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 )
         )
         //  requireActivity().findViewById<>()
-        if (!isEndless) startTimer(gameTimeLimit)
+        if (!isEndless) startTimer(gameTimeLimit*1000)
         live_score_tv.text = currentScore.toString()
         reload.setOnClickListener {
             setMovingListNumbers()
@@ -174,6 +183,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
     private fun startTimer(gameTimeLimit: Long) {
         Timber.i("startTimer called")
+        var player:MediaPlayer?=null
         timer = object : CountDownTimer(gameTimeLimit, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 if (!isExit) {
@@ -182,9 +192,14 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                         timer_tv.text =
                                 getString(R.string.time_left, (timeSpentInEndless / 1000).toString())
                     } else {
+                        Timber.i("miliuntil : $millisUntilFinished")
+                        if(millisUntilFinished in 4000L..4999L || millisUntilFinished in 1000L..2000L){
+                            lifecycleScope.launch {
+                                player = requireContext().playTimerSound()
+                            }
+                        }
                         currentTimeSpentInGame = millisUntilFinished
-                        timer_tv.text =
-                                getString(R.string.time_left, (millisUntilFinished / 1000).toString())
+                        timer_tv.text = getString(R.string.time_left, (millisUntilFinished / 1000).toString())
                     }
                 }
             }
@@ -192,7 +207,13 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
             override fun onFinish() {
                 //exitGame()
                 Timber.i("timer onFinish called")
-                if (!isEndless) showGameCompletePopup()
+                if (!isEndless){
+                    player?.let {
+                        if(it.isPlaying)   it.stop()
+                        it.release()
+                    }
+                    showGameCompletePopup()
+                }
             }
         }
         timer.start()
@@ -217,11 +238,17 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
 
     }
 
-    override fun numSelected(number: Int) {
-        if (number == -1) {
-            currentScore--
+    override fun numSelected(number: Int,isCorrect:Boolean) {
+        if (!isCorrect) {
+            currentScore -= number
+            lifecycleScope.launch {
+                requireContext().playFindTheNumWrong()
+            }
         } else {
-            currentScore++
+            lifecycleScope.launch {
+                requireContext().playFindTheNumSuccess()
+            }
+            currentScore += number
             val currentGrid = gridAdapter.getCurrentGrid()
             val positionIdentified = listOfNums.indexOfFirst {
                 it.number == number
@@ -232,12 +259,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 for (i in 0 until moving_num_list.childCount) {
                     val view = moving_num_list.getChildAt(i)
                     if (view.number_tv.text == number.toString()) {
-                        //  view.number_tv.text = newElement.number.toString()
                         view.occurrences_tv.text = element.occurrences.toString()
                     }
                 }
             } else {
-
                 listOfNums.remove(element)
                 var isNumAlreadyExists: Boolean
                 var newElement: GridNumberElement =
@@ -292,33 +317,6 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
         }
         view.number_tv.text = element.number.toString()
         view.occurrences_tv.text = element.occurrences.toString()
-
-        /* val size = resources.getDimension(R.dimen._36sdp).toInt()
-         val param = if (moving_num_list.childCount > 0) LinearLayout.LayoutParams(
-             size,
-             size
-         ) else LinearLayout.LayoutParams(0, size)
-         param.weight = if(moving_num_list.childCount>0) 1f / moving_num_list.childCount else 1f
-         view.layoutParams = param
-         view.number_tv.text = element.number.toString()
-         view.occurrences_tv.text = element.occurrences.toString()
-         moving_num_list.addView(view)*/
-        /*val textView = MaterialTextView(requireContext())
-        val size = resources.getDimension(R.dimen._36sdp).toInt()
-        val mgn = resources.getDimension(R.dimen._12sdp).toInt()
-        val textSize = resources.getDimension(R.dimen.app_text_size_small)
-        val param = LinearLayout.LayoutParams(size, size)
-        param.setMargins(mgn, mgn, mgn, mgn)
-        textView.gravity = Gravity.CENTER
-        textView.text = num
-        textView.layoutParams = param
-        textView.background = requireContext().fetchDrawable(R.drawable.layer_list_button_ui)
-        textView.textSize = textSize*/
-        /*   val m = MarqueeLayout(requireContext())
-           m.setDuration(2000)
-           m.addView(textView)
-           m.startAnimation()
-           moving_num_list.addView(m)*/
     }
 
     private fun setMovingListNumbers() {
@@ -349,20 +347,25 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
     private fun exitGame(it: DialogFragment? = null) {
         Timber.i("exitGame called")
         it?.dismiss()
-        navController.popBackStack()
+        if(isEndless){
+            navController.navigate(R.id.action_gameScreenFragment_to_infinitePlayGameFragment)
+        }else{
+            navController.navigate(R.id.action_gameScreenFragment_to_gameLevelsFragment)
+        }
     }
 
     private fun showGameCompletePopup() {
         Timber.i("showGameCompletePopup called")
         lifecycleScope.launch {
             if (isEndless) {
+                requireContext().playLevelFinish()
                 timer.cancel()
                 viewModel.apply {
                     updateHighScoreForInfinite(
                             FIND_THE_NUMBER_GAME_NAME_ENDLESS,
                             gridSize,
                             currentScore,
-                            timeSpentInEndless / 1000
+                            timeSpentInEndless / 1000,coinsToAdd = (currentScore/2).toInt()
                     )
                     updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
                     updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND, timeSpentInEndless / 1000)
@@ -372,14 +375,14 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                     updateHighScoreIfApplicable(
                             FIND_THE_NUMBER_GAME_NAME_TIME_BOUND,
                             currentLevel,
-                            currentScore, coinsToAdd = coins
+                            currentScore, coinsToAdd = (currentScore/2).toInt()
                     )
                     updateGameLevel(
                             FIND_THE_NUMBER_GAME_NAME_TIME_BOUND,
                             (currentLevel.toInt() + 1).toString()
                     )
                     updateTotalGamePlayed(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
-                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND, gameTimeLimit / 1000)
+                    updateTotalTimePlayed(FIND_THE_NUMBER_GAME_NAME_TIME_BOUND, gameTimeLimit)
                 }
             }
         }
@@ -409,7 +412,7 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 content = getString(
                         R.string.game_complete_content,
                         currentScore.toString(),
-                        (gameTimeLimit / 1000).toString()
+                        (gameTimeLimit).toString()
                 ),
                 posBtnText = getString(R.string.game_complete_positive_btn_txt),
                 negBtnText = getString(R.string.game_complete_negative_btn_txt),
@@ -421,7 +424,10 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
                 },
                 megListener = {
                     exitGame()
-                }
+                },
+                extraCoinsText = getString(R.string.get_extra_coins_tv,(gameTimeLimit/2).toInt().toString()),
+                coinsToTake = EXTRA_TIME_COINS_DEDUCT_VALUE,
+                extraCoinsListener = {reloadCurrentLevel()}
         )
         _gameCompletePopup = ConfirmationDialog.newInstance(dialogData)
         _gameCompletePopup.isCancelable = false
@@ -429,6 +435,17 @@ class PlayGameScreenFragment : BaseFragment(R.layout.fragment_find_the_num_game_
             _gameCompletePopup.show(parentFragmentManager, GAME_COMPLETE_TAG)
         }else{
             isGameCompletePopupToShow = true
+        }
+    }
+
+    private fun reloadCurrentLevel() {
+        Timber.i("reloadCurrentLevel called")
+        if(SharedPreferenceHelper.coins< EXTRA_TIME_COINS_DEDUCT_VALUE){
+            Toast.makeText(requireContext(), "Not enough coins", Toast.LENGTH_SHORT).show()
+            exitGame()
+        }else{
+            updateCoins(EXTRA_TIME_COINS_DEDUCT_VALUE*-1)
+            startTimer(gameTimeLimit/2)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.ck.dev.tiptap.ui.games.jumbledwords
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -28,6 +29,12 @@ import com.ck.dev.tiptap.helpers.GameConstants.JUMBLED_NUMBER_GAME_NAME_TIME_BOU
 import com.ck.dev.tiptap.helpers.GameConstants.TIME_BOUND
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.*
+import com.ck.dev.tiptap.sounds.GameSound.playFindTheNumSuccess
+import com.ck.dev.tiptap.sounds.GameSound.playJwWordFail
+import com.ck.dev.tiptap.sounds.GameSound.playJwWordSuccess
+import com.ck.dev.tiptap.sounds.GameSound.playJwWordTap
+import com.ck.dev.tiptap.sounds.GameSound.playLevelFinish
+import com.ck.dev.tiptap.sounds.GameSound.playTimerSound
 import com.ck.dev.tiptap.ui.custom.CrosswordPuzzleView
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
@@ -44,6 +51,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import timber.log.Timber
+import kotlin.math.abs
 
 class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled_words_game) {
 
@@ -69,6 +77,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
 
     private val gameArgs: PlayJumbledWordsGameFragmentArgs by navArgs()
     private lateinit var navController: NavController
+    private var player: MediaPlayer?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
@@ -124,6 +133,11 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
             if (word.isNotEmpty()) {
                 var isWord = false
                 if (wordsDone.contains(word)) {
+                    lifecycleScope.launch {
+                        requireContext().playJwWordFail()
+                    }
+                    setRandomChars()
+                    inp_text.text = ""
                     Toast.makeText(requireContext(), "$word is already found", Toast.LENGTH_SHORT)
                             .show()
                 } else {
@@ -133,11 +147,19 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
                             crosswordPuzzleView.revealTheChar(it.startPos, it.endPos)
                             setRandomChars()
                             inp_text.text = ""
+                            lifecycleScope.launch {
+                                requireContext().playJwWordSuccess()
+                            }
                         }
                     }
                     if (isWord) wordsDone.add(word)
-                    else Toast.makeText(requireContext(), "$word is not a word", Toast.LENGTH_SHORT)
-                            .show()
+                    else{
+                        lifecycleScope.launch {
+                            requireContext().playJwWordFail()
+                        }
+                        Toast.makeText(requireContext(), "$word is not a word", Toast.LENGTH_SHORT)
+                                .show()
+                    }
                     if (wordsDone.size == jumbledFormed.size || crosswordPuzzleView.isAllCharRevealed()) {
                         showGameCompletePopup()
                     }
@@ -166,6 +188,11 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
                     jumbled_timer.text =
                             getString(R.string.time_left, (timeSpentInEndless / 1000).toString())
                 } else {
+                    if(millisUntilFinished in 4000L..4999L || millisUntilFinished in 1000L..2000L){
+                        lifecycleScope.launch {
+                            player = requireContext().playTimerSound()
+                        }
+                    }
                     currentTimeSpentInGame = millisUntilFinished
                     jumbled_timer.text =
                             getString(R.string.time_left, (millisUntilFinished / 1000).toString())
@@ -174,6 +201,10 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
 
             override fun onFinish() {
                 Timber.i("timer onFinish called")
+                player?.let {
+                    if(it.isPlaying) it.stop()
+                    it.release()
+                }
                 if (gameName == JUMBLED_NUMBER_GAME_NAME_TIME_BOUND) {
                     showGameCompletePopup()
                 }
@@ -261,6 +292,9 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
         Timber.i("letterClicked clicked")
         val text = inp_text.text
         inp_text.text = "$text$letter"
+        lifecycleScope.launch {
+            requireContext().playJwWordTap()
+        }
     }
 
     private fun setNextLevel() {
@@ -313,14 +347,16 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
     private fun showGameCompletePopup() {
         Timber.i("showGameCompletePopup called")
         lifecycleScope.launch {
+            requireContext().playLevelFinish()
             viewModel.apply {
                 if (gameName == JUMBLED_NUMBER_GAME_NAME_ENDLESS) updateHighScoreIfApplicable(
                         gameName,
-                        level, (timeSpentInEndless / 1000).toInt(), isLowScoreToSave = true
+                        level, (timeSpentInEndless / 1000).toInt(), isLowScoreToSave = true, coinsToAdd = wordsDone.size * 25
                 ) else {
                     updateHighScoreIfApplicable(
                             gameName,
-                            level, wordsDone.size
+                            level, wordsDone.size,
+                            coinsToAdd = wordsDone.size * 25
                     )
                 }
                 updateGameLevel(
@@ -356,7 +392,7 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
                     content = getString(
                             R.string.jumbled_game_time_bound_complete_content,
                             wordsDone.size.toString(),
-                            currentTimeSpentInGame.toString()
+                            (timeLimit-(currentTimeSpentInGame/1000)).toString()
                     ),
                     posBtnText = getString(R.string.game_complete_positive_btn_txt),
                     negBtnText = getString(R.string.game_complete_negative_btn_txt),
@@ -416,9 +452,8 @@ class RandomCharAdapter(val list: ArrayList<Char>, private val ctx: PlayJumbledW
             char_tv.text = list[position].toString()
             setOnClickListener {
                 ctx.letterClicked(char_tv.text.toString())
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, itemCount - position);
                 list.remove(list[position])
+                notifyDataSetChanged()
             }
         }
     }

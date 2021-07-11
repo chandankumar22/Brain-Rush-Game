@@ -53,7 +53,8 @@ fun Context.assetToBitmap(fileName: String): Bitmap? {
 
 fun updateCoins(coinsToAdd:Int){
     Timber.i("updateCoins called")
-    SharedPreferenceHelper.coins = SharedPreferenceHelper.coins+coinsToAdd
+    val coins = SharedPreferenceHelper.coins+coinsToAdd
+    SharedPreferenceHelper.coins = if(coins<0)0 else coins
     val value = GameApp.hasCoinsUpdated.value
     if(value == null) GameApp.hasCoinsUpdated.postValue(true)
     else GameApp.hasCoinsUpdated.postValue(!value)

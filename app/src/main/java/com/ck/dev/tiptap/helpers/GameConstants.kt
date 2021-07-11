@@ -16,6 +16,15 @@ object GameConstants {
     const val ENDLESS = "endless"
     const val TIME_BOUND = "time-bound"
 
+    const val EXTRA_TIME_COINS_DEDUCT_VALUE = 50
+    const val HINT_COINS_DEDUCT_VALUE = -50
+
+    const val RTC_TB_LEVEL_COUNT = 12
+    const val RTC_ENDLESS_LEVEL_COUNT = 6
+    const val FTN_TB_LEVEL_COUNT = 31
+    const val JW_TB_LEVEL_COUNT = 3
+    const val JW_ENDLESS_LEVEL_COUNT = 5
+
     val arrayOfImages = arrayListOf(
         "air_balloon",
         "boat",

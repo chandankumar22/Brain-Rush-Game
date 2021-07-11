@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.AppConstants
+import com.ck.dev.tiptap.helpers.ClickSound
 import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.models.JumbledWordGameLevel
 import com.ck.dev.tiptap.ui.games.jumbledwords.JumbledWordsLevelsFragmentDirections
@@ -15,7 +16,8 @@ import kotlinx.android.synthetic.main.list_item_levels.view.*
 class JumbledWordsLevelsAdapter(
         private val list: ArrayList<JumbledWordGameLevel>,
         private val navController: NavController,
-        private val gameName: String
+        private val gameName: String,
+        private val playCallback: ClickSound
 ) :
         RecyclerView.Adapter<JumbledWordsLevelsAdapter.ViewHolder>() {
 
@@ -35,6 +37,7 @@ class JumbledWordsLevelsAdapter(
             level_num_text.text = list[position].level
             setOnClickListener {
                 if (list[position].isGameUnlocked) {
+                    playCallback.playSound()
                     val action =
                             JumbledWordsLevelsFragmentDirections.actionJumbledWordsLevelsFragmentToPlayJumbledWordsGameFragment(
                                     word = list[position].rule.word,

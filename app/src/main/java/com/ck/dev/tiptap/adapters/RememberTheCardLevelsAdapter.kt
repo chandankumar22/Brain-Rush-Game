@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.AppConstants
+import com.ck.dev.tiptap.helpers.ClickSound
 import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.models.RememberTheCardGameLevel
 import com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameLevelsFragmentDirections
@@ -15,7 +16,8 @@ import kotlinx.android.synthetic.main.list_item_levels.view.*
 class RememberTheCardLevelsAdapter(
     private val list: List<RememberTheCardGameLevel>,
     private val navController: NavController,
-    private val gameName: String
+    private val gameName: String,
+    private val playCallback: ClickSound
 ) :
     RecyclerView.Adapter<RememberTheCardLevelsAdapter.ViewHolder>() {
 
@@ -35,6 +37,7 @@ class RememberTheCardLevelsAdapter(
             level_num_text.text = list[position].levelNum
             setOnClickListener {
                 if (list[position].isGameUnlocked) {
+                    playCallback.playSound()
                     list[position].rule.apply {
                         val action =
                             RememberTheCardGameLevelsFragmentDirections.actionRememberTheCardGameLevelsFragmentToPlayRememberTheCardGameFragment(
@@ -44,7 +47,8 @@ class RememberTheCardLevelsAdapter(
                                 level = level,
                                 isEndless = gameName == GameConstants.REMEMBER_THE_CARD_NAME_GAME_ENDLESS,
                                 cardVisibleTime = cardVisibleTime,
-                                gameName = gameName
+                                gameName = gameName,
+                                    coins = coins
                             )
                         navController.navigate(action)
 

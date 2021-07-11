@@ -1,6 +1,7 @@
 package com.ck.dev.tiptap.ui.games.rememberthecard
 
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -26,10 +27,15 @@ import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.DialogData
 import com.ck.dev.tiptap.models.RememberTheCardData
 import com.ck.dev.tiptap.models.RememberTheCardGameRule
+import com.ck.dev.tiptap.sounds.GameSound.playFlipCard
+import com.ck.dev.tiptap.sounds.GameSound.playLevelFinish
+import com.ck.dev.tiptap.sounds.GameSound.playLevelLose
+import com.ck.dev.tiptap.sounds.GameSound.playRtcSuccess
+import com.ck.dev.tiptap.sounds.GameSound.playRtcWrong
+import com.ck.dev.tiptap.sounds.GameSound.playTimerSound
 import com.ck.dev.tiptap.ui.custom.RememberCardView
 import com.ck.dev.tiptap.ui.dialogs.ConfirmationDialog
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import com.ck.dev.tiptap.ui.games.jumbledwords.PlayJumbledWordsGameFragmentDirections
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_find_the_num_game_play_screen.*
 import kotlinx.android.synthetic.main.fragment_play_jumbled_words_game.*
@@ -64,6 +70,8 @@ class PlayRememberTheCardGameFragment :
     private var model = ArrayList<RememberTheCardData>()
     private var timeSpentInEndless: Long = 0
     private var infTime = 9999999999L
+    private var coins = 0
+    private var player:MediaPlayer?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.i("onViewCreated called")
@@ -100,15 +108,39 @@ class PlayRememberTheCardGameFragment :
         }
     }
 
+    fun checkIfMatchedTb(isMatched: Boolean = false, isCardFlipped: Boolean = false) {
+        lifecycleScope.launch {
+            when {
+                isMatched -> {
+                    requireContext().playRtcSuccess()
+                }
+                isCardFlipped -> {
+                    requireContext().playFlipCard()
+                }
+                else -> {
+                    requireContext().playRtcWrong()
+                }
+            }
+
+        }
+
+    }
+
     fun checkIfMatched(rememberTheCardData: RememberTheCardData, position: Int) {
         Timber.i("checkIfMatched called")
         currentMoves++
         live_moves_tv.text = currentMoves.toString()
         if (rememberTheCardData.id == elementToAsk.id) {
+            lifecycleScope.launch {
+                requireContext().playRtcSuccess()
+            }
             model.remove(rememberTheCardData)
             rememberCardView.showCardAt(position)
             setEndlessGameProperties()
         } else {
+            lifecycleScope.launch {
+                requireContext().playRtcWrong()
+            }
             rememberCardView.hideCardAt(position)
             Toast.makeText(requireContext(), "Wrong card picked", Toast.LENGTH_LONG).show()
         }
@@ -139,6 +171,7 @@ class PlayRememberTheCardGameFragment :
         currentLevel = gameArgs.level
         cardVisibleTime = gameArgs.cardVisibleTime
         gameName = gameArgs.gameName
+        coins = gameArgs.coins
     }
 
     private fun getRecyclerViewDataForCards(): ArrayList<RememberTheCardData> {
@@ -146,6 +179,19 @@ class PlayRememberTheCardGameFragment :
         val list = ArrayList<RememberTheCardData>()
         val listOfDrawable = getTheRandomImagesList()
         Timber.i("size of drawables of filtered list ${listOfDrawable.size}")
+        if (isEndless) {
+            if (listOfDrawable.size != (row * col)) {
+                return arrayListOf()
+            }
+            for (i in 0 until (row * col)) {
+                list.add(RememberTheCardData(listOfDrawable[i], getRandomString()))
+            }
+            val toReturn = list.shuffled() as ArrayList<RememberTheCardData>
+            toReturn.forEach {
+                model.add(it)
+            }
+            return toReturn
+        }
         if (listOfDrawable.size != (row * col) / 2) {
             return arrayListOf()
         }
@@ -180,6 +226,11 @@ class PlayRememberTheCardGameFragment :
                 currentTimeLeft = millisUntilFinished
                 if (isEndless) {
                     if (isCardTimerShowing) {
+                        if (millisUntilFinished in 4000L..4999L || millisUntilFinished in 1000L..2000L) {
+                            lifecycleScope.launch {
+                                player = requireContext().playTimerSound()
+                            }
+                        }
                         rem_card_timer_tv.text =
                                 getString(R.string.time_left, (currentTimeLeft / 1000).toString())
                     } else {
@@ -188,6 +239,11 @@ class PlayRememberTheCardGameFragment :
                                 getString(R.string.time_left, (timeSpentInEndless / 1000).toString())
                     }
                 } else {
+                    if (millisUntilFinished in 4000L..4999L || millisUntilFinished in 1000L..2000L) {
+                        lifecycleScope.launch {
+                            requireContext().playTimerSound()
+                        }
+                    }
                     rem_card_timer_tv.text =
                             getString(R.string.time_left, (currentTimeLeft / 1000).toString())
                 }
@@ -195,6 +251,10 @@ class PlayRememberTheCardGameFragment :
 
             override fun onFinish() {
                 Timber.i("timer onFinish called")
+                player?.let {
+                    if(it.isPlaying)   it.stop()
+                    it.release()
+                }
                 if (isCardTimerShowing) {
                     rememberCardView.hideAllCards()
                     isCardTimerShowing = false
@@ -249,17 +309,31 @@ class PlayRememberTheCardGameFragment :
         Timber.i("showGameCompletePopup called")
         lifecycleScope.launch {
             viewModel.apply {
-                updateHighScoreIfApplicable(
-                        gameName,
-                        currentLevel,
-                        currentMoves,isLowScoreToSave = true
-                )
+                if(isEndless){
+                    updateHighScoreIfApplicable(
+                            gameName,
+                            currentLevel,
+                            currentMoves, isLowScoreToSave = true, coinsToAdd = coins
+                    )
+                }
+                else if(isAllPairsFormed) {
+                    updateHighScoreIfApplicable(
+                            gameName,
+                            currentLevel,
+                            currentMoves, isLowScoreToSave = true, coinsToAdd = coins
+                    )
+                }
                 updateGameLevel(
                         gameName,
                         (currentLevel.toInt() + 1).toString()
                 )
                 updateTotalGamePlayed(gameName)
                 updateTotalTimePlayed(gameName, if (isEndless) timeSpentInEndless / 1000 else currentTimeLeft / 1000)
+            }
+            if (!isEndless && !isAllPairsFormed) {
+                requireContext().playLevelLose()
+            } else {
+                requireContext().playLevelFinish()
             }
         }
         val dialogData = if (isEndless) DialogData(
@@ -322,9 +396,9 @@ class PlayRememberTheCardGameFragment :
         timer.cancel()
         _gameCompletePopup = ConfirmationDialog.newInstance(dialogData)
         _gameCompletePopup.isCancelable = false
-        if(lifecycle.currentState == Lifecycle.State.RESUMED){
+        if (lifecycle.currentState == Lifecycle.State.RESUMED) {
             _gameCompletePopup.show(parentFragmentManager, AppConstants.GAME_COMPLETE_TAG)
-        }else{
+        } else {
             isGameCompletePopupToShow = true
         }
     }
@@ -338,7 +412,7 @@ class PlayRememberTheCardGameFragment :
                         timeLimit = gameTimeLimit,
                         level = currentLevel, isEndless = false,
                         cardVisibleTime = cardVisibleTime,
-                        gameName = gameName
+                        gameName = gameName, coins = coins
                 )
         navController.navigate(action)
     }
@@ -358,14 +432,19 @@ class PlayRememberTheCardGameFragment :
                         }
                     },
                     megListener = {
-                        if (isEndless) startTimer(infTime - timeSpentInEndless)
-                        else startTimer(currentTimeLeft)
+                        if (isEndless) {
+                            if (!isCardTimerShowing) {
+                                startTimer(infTime - timeSpentInEndless)
+                            }
+                        } else startTimer(currentTimeLeft)
                     }
             )
-            timer.cancel()
-            val instance = ConfirmationDialog.newInstance(dialogData)
-            instance.isCancelable = false
-            instance.show(parentFragmentManager, AppConstants.GAME_EXIT_TAG)
+            if (!isCardTimerShowing) {
+                timer.cancel()
+                val instance = ConfirmationDialog.newInstance(dialogData)
+                instance.isCancelable = false
+                instance.show(parentFragmentManager, AppConstants.GAME_EXIT_TAG)
+            }
         }
     }
 
@@ -394,7 +473,7 @@ class PlayRememberTheCardGameFragment :
                             timeLimit = gameRule.timeLimit,
                             level = gameRule.level, isEndless = isEndless,
                             cardVisibleTime = cardVisibleTime,
-                            gameName = gameName
+                            gameName = gameName, coins = coins
                     )
             navController.navigate(action)
         }
@@ -411,6 +490,16 @@ class PlayRememberTheCardGameFragment :
         Timber.i("getTheRandomImagesList called")
         val listOfDrawables = ArrayList<Bitmap>()
         val imagesNameList = (arrayOfImages.shuffled() as ArrayList)
+        if (isEndless) {
+            for (i in 0 until (row * col)) {
+                listOfDrawables.apply {
+                    with(requireContext()) {
+                        assetToBitmap(imagesNameList[i])?.let { add(it) }
+                    }
+                }
+            }
+            return listOfDrawables.shuffled() as ArrayList<Bitmap>
+        }
         for (i in 0 until (row * col) / 2) {
             listOfDrawables.apply {
                 with(requireContext()) {
@@ -423,8 +512,8 @@ class PlayRememberTheCardGameFragment :
 
     override fun onResume() {
         super.onResume()
-        if(isGameCompletePopupToShow){
-            isGameCompletePopupToShow=false
+        if (isGameCompletePopupToShow) {
+            isGameCompletePopupToShow = false
             _gameCompletePopup.show(parentFragmentManager, AppConstants.GAME_COMPLETE_TAG)
         }
     }

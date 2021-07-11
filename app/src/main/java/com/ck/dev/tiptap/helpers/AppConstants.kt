@@ -1,5 +1,7 @@
 package com.ck.dev.tiptap.helpers
 
+import androidx.lifecycle.MutableLiveData
+
 object AppConstants {
     const val APP_DB_NAME: String = "games_data_db"
     const val FIND_THE_NUM_GAME_RULE_FILE_NAME: String="find_the_num_game_rule.json"
@@ -13,4 +15,5 @@ object AppConstants {
     const val STATISTICS_SCREEN_TAG = "statistics_screen"
     const val GET_COINS_SCREEN_TAG = "get_coins_screen"
     const val NOT_PLAYED_TAG = -1
+    val darkModeChanged = MutableLiveData<Int>()
 }

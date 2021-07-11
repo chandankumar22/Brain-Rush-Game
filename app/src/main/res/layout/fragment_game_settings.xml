@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryLightColor"
     tools:context=".ui.lastscreen.GameSettingsFragment">
 
- <com.google.android.material.textview.MaterialTextView
-     android:id="@+id/game_setting_tv"
-     style="@style/AppTextStyle"
-  android:text="Game Settings"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toTopOf="parent"
-  android:textSize="@dimen/app_text_size_large"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/game_setting_tv"
+        style="@style/AppTextStyle"
+        android:text="Game Settings"
+        android:textSize="@dimen/app_text_size_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-   <com.google.android.material.textview.MaterialTextView
-       android:id="@+id/user_name_label"
-       style="@style/AppTextStyle"
-       android:layout_marginStart="@dimen/screen_mg"
-       android:text="Username"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/game_setting_tv"
-       />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/user_name_label"
+        style="@style/AppTextStyle"
+        android:layout_marginStart="@dimen/screen_mg"
+        android:text="Username"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_setting_tv" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_name_tv"
         style="@style/AppTextStyle"
-        android:text="uhduhduhsd"
+        android:layout_marginEnd="@dimen/screen_mg"
+        app:layout_constraintBottom_toBottomOf="@id/user_name_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/user_name_label"
-        app:layout_constraintBottom_toBottomOf="@id/user_name_label"
-        />
+        tools:text="c" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/user_pic_label"
@@ -40,54 +39,49 @@
         android:layout_marginStart="@dimen/screen_mg"
         android:text="Avtar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name_label"
-        />
+        app:layout_constraintTop_toBottomOf="@id/user_name_label" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/avtar_iv"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/screen_mg"
+        android:layout_marginEnd="@dimen/screen_mg"
         android:src="@drawable/ic_avtar_boy_2"
-        app:layout_constraintEnd_toEndOf="@id/user_name_tv"
-        app:layout_constraintStart_toStartOf="@id/user_name_tv"
-        app:layout_constraintTop_toTopOf="@id/user_pic_label"
         app:layout_constraintBottom_toBottomOf="@id/user_pic_label"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/user_pic_label" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dark_mode_label"
         style="@style/AppTextStyle"
         android:layout_marginStart="@dimen/screen_mg"
         android:text="Dark mode"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_pic_label"
-        />
+        app:layout_constraintTop_toBottomOf="@id/user_pic_label" />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/dark_mode_switch"
         style="@style/AppTextStyle"
         android:src="@drawable/ic_avtar_boy_2"
-        app:layout_constraintStart_toStartOf="@id/avtar_iv"
-        app:layout_constraintEnd_toEndOf="@id/avtar_iv"
-        app:layout_constraintTop_toTopOf="@id/dark_mode_label"
         app:layout_constraintBottom_toBottomOf="@id/dark_mode_label"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dark_mode_label" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sound_label"
         style="@style/AppTextStyle"
-        android:text="Sound"
         android:layout_marginStart="@dimen/screen_mg"
+        android:text="Sound"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dark_mode_label"
-        />
+        app:layout_constraintTop_toBottomOf="@id/dark_mode_label" />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sound_switch"
         style="@style/AppTextStyle"
-        app:layout_constraintStart_toStartOf="@id/avtar_iv"
-        app:layout_constraintEnd_toEndOf="@id/avtar_iv"
         android:src="@drawable/ic_avtar_boy_2"
-        app:layout_constraintTop_toTopOf="@id/sound_label"
         app:layout_constraintBottom_toBottomOf="@id/sound_label"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sound_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

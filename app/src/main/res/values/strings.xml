@@ -50,4 +50,5 @@
     <string name="current_level_on">Current Level : %s</string>
     <string name="never_played">Never played</string>
     <string name="all_level_complete_msg">Wooaaaa!!!, Game finished..You can try improving scores of previous levels to get on top of leader board or wait for new updates with new levels and games</string>
+    <string name="get_extra_coins_tv"><u>Get %s extra time</u></string>
 </resources>

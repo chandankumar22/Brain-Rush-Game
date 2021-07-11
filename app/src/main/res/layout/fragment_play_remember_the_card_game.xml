@@ -131,7 +131,6 @@
         android:layout_width="@dimen/_62sdp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/screen_mg"
-        android:background="@color/primaryLightColor"
         android:gravity="center"
         android:text="@string/you_have_s_seconds_to_remember_the_cards"
         android:visibility="invisible"

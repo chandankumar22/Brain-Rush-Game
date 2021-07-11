@@ -1,36 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:background="@drawable/layer_list_card"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="@dimen/screen_mg">
+    android:background="@drawable/layer_list_card">
 
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/statistics"
-        style="@style/MenuButtonStyle"
-        android:text="Statistics"
-        app:leftIcon="@drawable/ic_timer" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/find_the_num_game_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="@string/app_name"
+        android:textSize="@dimen/app_text_size_large" />
 
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/watch_ad"
-        style="@style/MenuButtonStyle"
-        android:text="get coins"
-        app:leftIcon="@drawable/ic_infinite" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/settings"
-        style="@style/MenuButtonStyle"
-        android:text="Settings"
-        app:leftIcon="@drawable/ic_infinite" />
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/statistics"
+            style="@style/MenuButtonStyle"
+            android:text="Statistics"
+            app:leftIcon="@drawable/ic_timer" />
 
-    <com.ck.dev.tiptap.ui.custom.CustomButtonView
-        android:id="@+id/about"
-        style="@style/MenuButtonStyle"
-        android:text="About"
-        app:leftIcon="@drawable/ic_infinite" />
-</LinearLayout>
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/settings"
+            style="@style/MenuButtonStyle"
+            android:text="Settings"
+            app:leftIcon="@drawable/ic_infinite" />
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/watch_ad"
+            style="@style/MenuButtonStyle"
+            android:text="Share"
+            app:leftIcon="@drawable/ic_infinite" />
+
+        <com.ck.dev.tiptap.ui.custom.CustomButtonView
+            android:id="@+id/about"
+            style="@style/MenuButtonStyle"
+            android:text="About"
+            app:leftIcon="@drawable/ic_infinite" />
+
+    </LinearLayout>
+</RelativeLayout>
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -38,6 +39,9 @@ class InfinitePlayGameFragment : BaseFragment(R.layout.fragment_infinite_play_ga
         setVisibleNumPreview()
         (requireActivity() as AppCompatActivity).changeStatusBarColor(R.color.primaryLightColor)
         (requireActivity() as AppCompatActivity).setHeaderBgColor(R.color.primaryLightColor)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finish()
+        }
     }
 
     private fun setGridPreview(size: Int) {

@@ -4,16 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_ENDLESS
 import com.ck.dev.tiptap.helpers.roundTo2Digit
+import com.ck.dev.tiptap.sounds.GameSound.playBtnClickSound
 import com.ck.dev.tiptap.ui.GameApp
 import com.ck.dev.tiptap.ui.games.BaseFragment
-import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.infinite_game_play
-import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.time_bound_play
-import kotlinx.android.synthetic.main.fragment_find_the_number_menu_screen.*
+import kotlinx.android.synthetic.main.fragment_find_numbers_game_main_screen.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class FindNumbersMainScreenFragment : BaseFragment(R.layout.fragment_find_numbers_game_main_screen) {
@@ -38,12 +39,18 @@ class FindNumbersMainScreenFragment : BaseFragment(R.layout.fragment_find_number
         Timber.i("setListeners called")
         time_bound_play.setOnClickListener {
             Timber.i("time_bound_play.onclick called")
+            lifecycleScope.launch {
+                requireContext().playBtnClickSound()
+            }
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
             intent.putExtra("gameMode", FIND_THE_NUMBER_GAME_NAME_TIME_BOUND)
             startActivity(intent)
         }
         infinite_game_play.setOnClickListener {
             Timber.i("infinite_game_play.onclick called")
+            lifecycleScope.launch {
+                requireContext().playBtnClickSound()
+            }
             val intent = Intent(requireContext(), FindTheNumbersActivity::class.java)
             intent.putExtra("gameMode", FIND_THE_NUMBER_GAME_NAME_ENDLESS)
             startActivity(intent)

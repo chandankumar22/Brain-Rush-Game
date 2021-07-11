@@ -15,10 +15,12 @@ import com.ck.dev.tiptap.data.entity.Games
 import com.ck.dev.tiptap.extensions.changeStatusBarColor
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants
+import com.ck.dev.tiptap.helpers.ClickSound
 import com.ck.dev.tiptap.helpers.GameConstants.DESTINATION_FIND_THE_NUMBER
 import com.ck.dev.tiptap.helpers.GameConstants.FIND_THE_NUMBER_GAME_NAME_TIME_BOUND
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.FindTheNumberGameRule
+import com.ck.dev.tiptap.sounds.GameSound.playBtnClickSound
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_game_levels.*
@@ -27,7 +29,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
+class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels),ClickSound {
 
     private lateinit var navController: NavController
 
@@ -67,8 +69,14 @@ class GameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
                 game_levels_tv.text = "${gameData?.currentLevel}/${getLevels.size}"
                 val gridLayoutManager = GridLayoutManager(requireContext(), 5)
                 levels_rv.layoutManager = gridLayoutManager
-                levels_rv.adapter = FindTheNumberLevelsAdapter(getLevels, navController, DESTINATION_FIND_THE_NUMBER)
+                levels_rv.adapter = FindTheNumberLevelsAdapter(getLevels, navController, DESTINATION_FIND_THE_NUMBER,this@GameLevelsFragment)
             }
+        }
+    }
+
+    override fun playSound() {
+        lifecycleScope.launch {
+            requireContext().playBtnClickSound()
         }
     }
 

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Base64
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -14,6 +15,7 @@ import com.ck.dev.tiptap.extensions.fetchDrawable
 import com.ck.dev.tiptap.helpers.SharedPreferenceHelper
 import com.ck.dev.tiptap.models.RememberTheCardData
 import com.ck.dev.tiptap.ui.custom.OnItemClick
+import kotlinx.android.synthetic.main.activity_game_main_screen.*
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
@@ -27,14 +29,22 @@ class MainActivity : BaseActivity() {
         Timber.i("onCreate called")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if(SharedPreferenceHelper.isLoggedIn){
+        if (SharedPreferenceHelper.isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        if (SharedPreferenceHelper.isLoggedIn) {
             val gameScreenIntent = Intent(this, GameMainScreen::class.java)
             viewModel.profilePic = SharedPreferenceHelper.profilePic!!
             viewModel.name = SharedPreferenceHelper.userName!!
-            gameScreenIntent.putExtra("userName",  SharedPreferenceHelper.userName)
+            gameScreenIntent.putExtra("userName", SharedPreferenceHelper.userName)
             gameScreenIntent.putExtra("profilePic", SharedPreferenceHelper.profilePic)
+            gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(gameScreenIntent)
-        }else{
+        } else {
             val listOfAvtarDrawables = getAvtarDrawableList()
             Glide.with(this@MainActivity).load(listForCurrentScreen[currentPicSelPos]).into(profile_pic_iv)
             avatar_rv.adapter = MainScreenAvtarAdapter(listOfAvtarDrawables, object : OnItemClick {
@@ -44,9 +54,10 @@ class MainActivity : BaseActivity() {
                 }
 
                 override fun onPicSelectedEndless(
-                    rememberTheCardData: RememberTheCardData,
-                    position: Int
-                ) {}
+                        rememberTheCardData: RememberTheCardData,
+                        position: Int
+                ) {
+                }
 
             })
             avatar_rv.setHasFixedSize(true)
@@ -88,12 +99,15 @@ class MainActivity : BaseActivity() {
                     SharedPreferenceHelper.isLoggedIn = true
                     SharedPreferenceHelper.userName = text
                     val bos = ByteArrayOutputStream()
-                    listForCurrentScreen[currentPicSelPos].toBitmap().compress(Bitmap.CompressFormat.PNG,100,bos)
-                  val profilePic = Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT)
+                    listForCurrentScreen[currentPicSelPos].toBitmap().compress(Bitmap.CompressFormat.PNG, 100, bos)
+                    val profilePic = Base64.encodeToString(bos.toByteArray(), Base64.DEFAULT)
                     SharedPreferenceHelper.profilePic = profilePic
                     viewModel.name = text
                     viewModel.profilePic = profilePic
                     gameScreenIntent.putExtra("profilePic", profilePic)
+                    gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    gameScreenIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(gameScreenIntent)
                 }
             }

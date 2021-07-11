@@ -9,7 +9,10 @@ data class DialogData(
     val posBtnText: String,
     val negBtnText: String,
     val posListener: () -> Unit,
-    val megListener: () -> Unit
+    val megListener: () -> Unit,
+    val extraCoinsText:String = "",
+    val coinsToTake:Int = 0,
+    val extraCoinsListener: () -> Unit = {},
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,

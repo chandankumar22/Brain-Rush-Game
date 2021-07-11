@@ -1,16 +1,98 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.TipTap" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TipTap" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primaryDarkColor</item>
-        <item name="colorPrimaryVariant">@color/primaryLightColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnPrimary">@color/primaryTextColor</item>
+        <item name="colorAccent">@color/primaryDarkColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/primaryLightColor</item>
         <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
         <item name="colorOnSecondary">@color/primaryTextColor</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/primaryDarkColor</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/jumpman</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
     </style>
+
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CustomButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_12sdp</item>
+    </style>
+
+    <style name="CustomButtonStyleWidth" parent="CustomButtonStyle">
+        <item name="android:layout_width">@dimen/_64sdp</item>
+    </style>
+
+    <style name="MenuButtonStyle" parent="CustomButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="CustomCardViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:background">@drawable/layer_list_card</item>
+        <item name="android:textSize">@dimen/app_text_size_medium</item>
+    </style>
+
+    <style name="AppTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:background">@color/primaryLightColor</item>
+        <item name="android:textSize">@dimen/app_text_size_medium</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="AppTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/app_text_size_large</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.MaterialComponents">
+        <item name="colorControlNormal">@color/greyShadowColor</item>
+        <item name="colorControlActivated">@color/golden</item>
+    </style>
+
+    <style name="AppRatingBarStyle" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/RatingBar</item>
+        <item name="android:progressTint">@color/golden</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+
+    <style name="StatisticScreenStyle" parent="AppTextStyle">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginStart">@dimen/_24sdp</item>
+        <item name="android:layout_marginTop">@dimen/_2sdp</item>
+        <item name="android:textSize">@dimen/app_text_size_small</item>
+    </style>
+
+    <style name="SubHeadingStyle" parent="AppTextStyle">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginStart">@dimen/_18sdp</item>
+        <item name="android:layout_marginTop">@dimen/_4sdp</item>
+        <item name="android:textSize">@dimen/app_text_size_medium</item>
+    </style>
+
+    <style name="ContainerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/layer_list_depth</item>
+        <item name="android:padding">@dimen/_12sdp</item>
+        <item name="android:layout_margin">@dimen/_6sdp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

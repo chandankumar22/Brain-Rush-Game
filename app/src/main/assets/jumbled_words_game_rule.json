@@ -15,7 +15,7 @@
           "endPos": "2-3"
         }
       ],
-      "timeLimit": 25,
+      "timeLimit": 10,
       "rowSize": 3,
       "colSize": 3
     },

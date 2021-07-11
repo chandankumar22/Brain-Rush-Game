@@ -12,7 +12,11 @@ object SharedPreferenceHelper {
     private val PROFILE_PIC = Pair("profilePic", null)
     private val IS_LOGGED_IN = Pair("isLoggedIn", false)
     private val COINS_LEFT = Pair("coins", 0)
-    private val CURRENT_USER_RATING = Pair("coins", 0)
+    private val CURRENT_USER_RATING = Pair("ratings", 0f)
+    private val IS_SOUNDS_ON = Pair("isSoundOn", true)
+    private val IS_DARK_MODE = Pair("isDarkMode", true)
+    private val IS_FIRST_LAUNCH = Pair("isFirstLaunch",null)
+
     fun init(context: Context) {
         userDetailsPreferences = context.getSharedPreferences(
             USER_SP_NAME,
@@ -35,6 +39,14 @@ object SharedPreferenceHelper {
             it.putString(USER_NAME.first, value)
         }
 
+    var isFirstLaunch: String?
+        get() = userDetailsPreferences.getString(
+                IS_FIRST_LAUNCH.first, IS_FIRST_LAUNCH.second
+        )
+        set(value) = userDetailsPreferences.edit {
+            it.putString(IS_FIRST_LAUNCH.first, value)
+        }
+
     var profilePic: String?
         get() = userDetailsPreferences.getString(
             PROFILE_PIC.first, PROFILE_PIC.second
@@ -51,12 +63,12 @@ object SharedPreferenceHelper {
             it.putInt(COINS_LEFT.first, value)
         }
 
-    var currentUserRating: Int
-        get() = userDetailsPreferences.getInt(
+    var currentUserRating: Float
+        get() = userDetailsPreferences.getFloat(
             CURRENT_USER_RATING.first, CURRENT_USER_RATING.second
         )
         set(value) = userDetailsPreferences.edit {
-            it.putInt(CURRENT_USER_RATING.first, value)
+            it.putFloat(CURRENT_USER_RATING.first, value)
         }
 
 
@@ -66,6 +78,22 @@ object SharedPreferenceHelper {
         )
         set(value) = userDetailsPreferences.edit {
             it.putBoolean(IS_LOGGED_IN.first, value)
+        }
+
+    var isSoundsOn: Boolean
+        get() = userDetailsPreferences.getBoolean(
+                IS_SOUNDS_ON.first, IS_SOUNDS_ON.second
+        )
+        set(value) = userDetailsPreferences.edit {
+            it.putBoolean(IS_SOUNDS_ON.first, value)
+        }
+
+    var isDarkMode: Boolean
+        get() = userDetailsPreferences.getBoolean(
+                IS_DARK_MODE.first, IS_DARK_MODE.second
+        )
+        set(value) = userDetailsPreferences.edit {
+            it.putBoolean(IS_DARK_MODE.first, value)
         }
 
 

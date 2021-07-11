@@ -43,13 +43,12 @@ class FindTheNumGridAdapter(
                 val nums = listOfVisibleNums.filter {
                     it.number == list[position].number
                 }
-
+                val currentNum=list[position].number
                 if (nums.isNotEmpty()) {
                     // list[position].isSelected = true
-                    val currentNum=list[position].number
                     var number:Int
                     while (true){
-                        number = java.util.Random().nextInt(25) + 1
+                        number = java.util.Random().nextInt(list.size) + 1
                         if(number!=currentNum){
                             break
                         }
@@ -58,7 +57,7 @@ class FindTheNumGridAdapter(
                     number_tv.text = number.toString()
                     callback.numSelected(currentNum)
                 } else {
-                    callback.numSelected(-1)
+                    callback.numSelected(currentNum,false)
                 }
 
 
@@ -87,5 +86,5 @@ class FindTheNumGridAdapter(
 }
 
 interface GridNumSelectCallback {
-    fun numSelected(number: Int)
+    fun numSelected(number: Int,isCorrect:Boolean=true)
 }

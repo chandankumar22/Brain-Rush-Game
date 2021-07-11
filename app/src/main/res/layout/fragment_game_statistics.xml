@@ -178,7 +178,7 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/SubHeadingStyle"
-                        android:text="Medium" />
+                        android:text="Time Bound" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/jumbled_best_score_medium"
@@ -202,7 +202,7 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         style="@style/SubHeadingStyle"
-                        android:text="Easy" />
+                        android:text="Endless" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/jumbled_best_score_easy"
