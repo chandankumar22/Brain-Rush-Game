@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Tip Tap</string>
+    <string name="main_screen_btn_text">Let\'s play</string>
+    <string name="sign_up_info_text">Every user on our platform has a unique name, by which we recognise them. So ,</string>
+    <string name="login_screen_hint">What should we call you ?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="game_1">Find the number</string>
+    <string name="game_2">Remember the cards</string>
+    <string name="find_the_number">Find \nthe \nNumber</string>
+    <string name="time_left">%s seconds</string>
+    <string name="find_the_number_game_name">Find the Number</string>
+    <string name="game_exit_title">Exit Game ?</string>
+    <string name="game_exit_content">Are you sure you want to exit this game ? This game progress will be lost forever.</string>
+    <string name="game_exit_positive_btn_txt">Exit</string>
+    <string name="game_exit_negative_btn_txt">No</string>
+    <string name="game_pause_title">Game Paused</string>
+    <string name="game_pause_content">You game is paused. Do you wish to resume or exit ?</string>
+    <string name="game_pause_positive_btn_txt">Resume</string>
+    <string name="game_pause_negative_btn_txt">Exit</string>
+    <string name="game_complete_title">Time Over</string>
+    <string name="game_complete_content">Congo!!, You have completed this level. You scored %s in %s seconds</string>
+    <string name="game_complete_negative_btn_txt">Exit</string>
+    <string name="game_complete_positive_btn_txt">Next</string>
+    <string name="current_level">Level %s</string>
+</resources>

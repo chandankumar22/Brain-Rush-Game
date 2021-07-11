@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/profile_pic_container"
+    android:layout_width="@dimen/profile_pic_container_size"
+    android:layout_height="@dimen/profile_pic_container_size"
+    android:padding="@dimen/_5sdp"
+    android:layout_centerHorizontal="true"
+    android:backgroundTint="@color/primaryLightColor"
+    android:layout_centerVertical="true"
+    android:background="@drawable/shape_circle_border"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:cardElevation="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profile_pic_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_avtar_girl_3" />
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/layer_list_card"
+    android:paddingBottom="@dimen/screen_mg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dialog_title_tv"
+        style="@style/TitleTextStyle"
+        android:text="The Large Title"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dialog_content_tv"
+        android:layout_width="match_parent"
+        style="@style/AppTextStyle"
+        android:text="The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here. The dialog message will be shown here."
+        app:layout_constraintTop_toBottomOf="@id/dialog_title_tv"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/dialog_positive_button"
+        style="@style/CustomButtonStyle"
+        tools:text="CONFIRM"
+        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        app:layout_constraintEnd_toStartOf="@id/dialog_negative_button" />
+
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/dialog_negative_button"
+        style="@style/CustomButtonStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_content_tv"
+        tools:text="CANCEL"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

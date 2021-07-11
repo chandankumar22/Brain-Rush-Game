@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/primaryLightColor" xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <!-- Gray shadow. -->
+            <item
+                android:left="@dimen/_2sdp"
+                android:right="@dimen/_5sdp"
+                android:top="0dp">
+                <shape>
+                    <solid android:color="@color/blackShadowColor" />
+                    <corners android:radius="@dimen/_10sdp" />
+                </shape>
+            </item>
+            <!-- White foreground. -->
+            <item
+                android:bottom="@dimen/_4sdp"
+                android:right="@dimen/_3sdp">
+                <shape>
+                    <solid android:color="@color/primaryDarkColor" />
+                    <corners android:radius="@dimen/_10sdp" />
+                </shape>
+            </item>
+            <item>
+                <ripple android:color="@color/primaryLightColor" />
+            </item>
+        </layer-list>
+    </item>
+</ripple>

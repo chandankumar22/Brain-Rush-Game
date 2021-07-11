@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/primaryLightColor"
+    tools:context=".ui.games.findthenumber.FindNumbersMainScreenFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/find_the_num_game_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/screen_mg"
+        android:text="@string/find_the_number_game_name"
+        android:textSize="@dimen/app_text_size_large"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/score_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/find_the_num_game_name_tv">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_score_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="Best Score : 12"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toStartOf="@+id/best_time_tv"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/best_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_mg"
+            android:text="Best Time : 45 selects in 15 sec"
+            android:textSize="@dimen/app_text_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/best_score_tv"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:id="@+id/scroller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/_1sdp"
+        android:fitsSystemWindows="true"
+        android:layout_below="@id/score_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Play"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        android:id="@+id/time_bound_play"
+                        style="@style/MenuButtonStyle"
+                        android:text="Time Bound"
+                        app:leftIcon="@drawable/ic_number" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Infinitely"
+                        app:leftIcon="@drawable/ic_number" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="View"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Score"
+                        app:leftIcon="@drawable/ic_number" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Leaderboard"
+                        app:leftIcon="@drawable/ic_number" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryLightColor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:background="@drawable/layer_list_depth"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_6sdp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Get coins"
+                        android:textSize="@dimen/app_text_size_large" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Share"
+                        app:leftIcon="@drawable/ic_number" />
+
+                    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+                        style="@style/MenuButtonStyle"
+                        android:text="Watch ad"
+                        app:leftIcon="@drawable/ic_number" />
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

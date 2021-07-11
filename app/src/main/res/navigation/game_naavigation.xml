@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_naavigation"
+    app:startDestination="@id/findNumbersMainScreenFragment">
+    <fragment
+        android:id="@+id/findNumbersMainScreenFragment"
+        android:name="com.ck.dev.tiptap.ui.games.findthenumber.FindTheNumberMenuScreen"
+        android:label="fragment_find_the_number_menu_screen"
+        tools:layout="@layout/fragment_find_the_number_menu_screen" >
+        <action
+            android:id="@+id/action_findNumbersMainScreenFragment_to_gameLevelsFragment"
+            app:destination="@id/gameLevelsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameScreenFragment"
+        android:name="com.ck.dev.tiptap.ui.games.findthenumber.PlayGameScreenFragment"
+        android:label="fragment_find_the_num_game_screen"
+        tools:layout="@layout/fragment_find_the_num_game_play_screen" >
+        <action
+            android:id="@+id/action_gameScreenFragment_to_findNumbersMainScreenFragment"
+            app:destination="@id/findNumbersMainScreenFragment" />
+        <argument
+            android:name="gridSize"
+            app:argType="integer"
+            android:defaultValue="4" />
+        <argument
+            android:name="visibleNums"
+            app:argType="integer"
+            android:defaultValue="3" />
+        <argument
+            android:name="time"
+            app:argType="long"
+            android:defaultValue="20000L" />
+        <argument
+            android:name="level"
+            app:argType="string"
+            android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameLevelsFragment"
+        android:name="com.ck.dev.tiptap.ui.GameLevelsFragment"
+        android:label="fragment_game_levels"
+        tools:layout="@layout/fragment_game_levels" >
+        <action
+            android:id="@+id/action_gameLevelsFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+    </fragment>
+</navigation>

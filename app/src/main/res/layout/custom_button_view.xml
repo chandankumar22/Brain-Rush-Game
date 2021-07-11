@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:textSize="@dimen/app_text_size_medium">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/left_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_number" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:textSize="@dimen/app_text_size_medium"
+            app:layout_constraintEnd_toStartOf="@id/right_ic"
+            app:layout_constraintStart_toEndOf="@id/left_ic"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Shadow Button" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/right_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_number" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryDarkColor"
+    tools:context=".ui.MainActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/app_name"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="@dimen/logo_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/avtar_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/avatar_rv"
+        app:layout_constraintEnd_toEndOf="@id/avatar_rv"
+        app:layout_constraintStart_toStartOf="@id/avatar_rv"
+        app:srcCompat="@drawable/ic_up_arrow" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/avatar_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_200sdp"
+        android:layout_margin="@dimen/screen_mg"
+        android:orientation="vertical"
+        android:padding="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/login_container"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/avtar_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/avatar_rv"
+        app:layout_constraintStart_toStartOf="@id/avatar_rv"
+        app:layout_constraintTop_toBottomOf="@id/avatar_rv"
+        app:srcCompat="@drawable/ic_down_arrow" />
+
+
+    <RelativeLayout
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_56sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/profile_pic_container"
+            android:layout_width="@dimen/profile_pic_container_size"
+            android:layout_height="@dimen/profile_pic_container_size"
+            android:padding="@dimen/_2sdp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/primaryLightColor"
+            android:background="@drawable/shape_circle_border">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/profile_pic_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_avtar_boy_1" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/login_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:backgroundTint="@color/primaryLightColor"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:cardElevation="@dimen/_minus12sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/layer_list_card"
+                android:paddingTop="@dimen/_20sdp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:text="@string/sign_up_info_text"
+                    android:textSize="@dimen/app_text_size_medium" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/login_input"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_14sdp"
+                    android:background="@android:color/transparent"
+                    android:textColorHint="@color/primaryTextColor"
+                    app:boxBackgroundColor="@color/primaryLightColor"
+                    app:boxStrokeColor="@drawable/selector_et"
+                    app:errorEnabled="false"
+                    app:hintTextColor="@color/primaryTextColor">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/login_screen_hint"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/app_text_size_small" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </RelativeLayout>
+
+    <com.ck.dev.tiptap.ui.custom.CustomButtonView
+        android:id="@+id/start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layer_list_card"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:text="Let's Play"
+        android:elevation="@dimen/_22sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

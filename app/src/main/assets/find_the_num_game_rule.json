@@ -1,0 +1,220 @@
+[
+
+  {
+    "level": "1",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "2",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 12000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "3",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 8000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "4",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "5",
+    "gridSize": 2,
+    "visibleNumSize": 2,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "6",
+    "gridSize": 2,
+    "visibleNumSize": 2,
+    "time": 17000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "7",
+    "gridSize": 2,
+    "visibleNumSize": 2,
+    "time": 13000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "8",
+    "gridSize": 2,
+    "visibleNumSize": 2,
+    "time": 10000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "9",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 7000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "10",
+    "gridSize": 2,
+    "visibleNumSize": 1,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "11",
+    "gridSize": 3,
+    "visibleNumSize": 1,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "12",
+    "gridSize": 3,
+    "visibleNumSize": 1,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "13",
+    "gridSize": 3,
+    "visibleNumSize": 1,
+    "time": 10000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "14",
+    "gridSize": 3,
+    "visibleNumSize": 1,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "15",
+    "gridSize": 3,
+    "visibleNumSize": 2,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "15",
+    "gridSize": 3,
+    "visibleNumSize": 2,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "16",
+    "gridSize": 3,
+    "visibleNumSize": 2,
+    "time": 10000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "17",
+    "gridSize": 3,
+    "visibleNumSize": 2,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "18",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "19",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "20",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "21",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "22",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 10000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "23",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "24",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 30000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "25",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 25000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "26",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 20000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "27",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 15000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "28",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 10000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "29",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 5000,
+    "coinsReqd": 0
+  },
+  {
+    "level": "30*",
+    "gridSize": 3,
+    "visibleNumSize": 3,
+    "time": 60000,
+    "coinsReqd": 0
+  }
+]

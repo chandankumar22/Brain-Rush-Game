@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btn_shadow">
+        <shape
+            android:width="@dimen/_24sdp"
+            android:height="@dimen/_24sdp"
+            android:shape="oval">
+            <solid android:color="@color/buttonShadowColor" />
+            <corners android:radius="@dimen/_20sdp" />
+        </shape>
+    </item>
+
+    <item
+        android:id="@+id/btn_front"
+        android:bottom="@dimen/_3sdp"
+        android:right="@dimen/_3sdp">
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/_24sdp"
+                android:height="@dimen/_24sdp" />
+            <solid android:color="@color/primaryDarkColor" />
+            <corners android:radius="@dimen/_12sdp" />
+        </shape>
+    </item>
+</layer-list>

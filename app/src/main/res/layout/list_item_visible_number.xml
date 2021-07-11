@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_30sdp"
+    android:layout_height="@dimen/_30sdp"
+    android:layout_margin="@dimen/_2sdp"
+    android:background="@drawable/layer_list_number">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_2sdp"
+        android:text="1"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_text_size_medium"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/occurrences_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_2sdp"
+        android:text="99"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_text_size_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/number_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/primaryLightColor"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_margin="@dimen/_4sdp"
+            android:background="@drawable/layer_list_number">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_2sdp"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/app_text_size_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    -->
