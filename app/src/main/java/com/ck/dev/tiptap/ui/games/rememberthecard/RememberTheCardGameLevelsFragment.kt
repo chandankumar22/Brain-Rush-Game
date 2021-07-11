@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_game_levels.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import timber.log.Timber
 
 class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_levels) {
@@ -60,7 +61,13 @@ class RememberTheCardGameLevelsFragment : BaseFragment(R.layout.fragment_game_le
             }
             withContext(Dispatchers.Main) {
                 val rulesJson = (requireActivity() as AppCompatActivity).readJsonFromAsset(REMEMBER_CARDS_GAME_RULE_FILE_NAME)
-                val jumbledRules = Gson().fromJson(rulesJson, Array<RememberTheCardGameRule>::class.java)
+
+                val json = JSONObject(rulesJson)
+                val jumbledRules  =if(gameName==GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND){
+                    Gson().fromJson(json.getJSONArray("time-bound").toString(), Array<RememberTheCardGameRule>::class.java)
+                }else{
+                    Gson().fromJson(json.getJSONArray("endless").toString(), Array<RememberTheCardGameRule>::class.java)
+                }
                 val getLevels = viewModel.getRememberTheCardGameRules(gameData, jumbledRules)
                 game_levels_tv.text = "${gameData?.currentLevel}/${getLevels.size}"
                 val gridLayoutManager = GridLayoutManager(requireContext(), 5)

@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
+import com.ck.dev.tiptap.helpers.GameConstants.REMEMBER_THE_CARD_NAME_GAME_ENDLESS
 import com.ck.dev.tiptap.helpers.GameConstants.REMEMBER_THE_CARD_NAME_GAME_TIME_BOUND
 import com.ck.dev.tiptap.ui.games.BaseFragment
 import kotlinx.android.synthetic.main.fragment_remeber_the_card_menu.*
@@ -41,10 +42,12 @@ class RememberTheCardMenuFragment : BaseFragment(R.layout.fragment_remeber_the_c
             }
         }
         rem_the_card_infinite_game_play.setOnClickListener {
-            Timber.i("infinite_game_play.onclick called")
-            /* (requireActivity() as FindTheNumbersActivity).apply {
-                 navController.navigate(R.id.action_findNumbersMainScreenFragment_to_infinitePlayGameFragment)
-             }*/
+            Timber.i("rem_the_card_infinite_game_play.onclick called")
+            val action =
+                RememberTheCardMenuFragmentDirections.actionRememberTheCardMenuFragmentToRememberTheCardGameLevelsFragment(
+                    REMEMBER_THE_CARD_NAME_GAME_ENDLESS
+                )
+            navController.navigate(action)
         }
     }
 

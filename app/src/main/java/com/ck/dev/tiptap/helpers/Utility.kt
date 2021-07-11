@@ -1,5 +1,8 @@
 package com.ck.dev.tiptap.helpers
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import com.ck.dev.tiptap.models.FindTheNumberGameRule
 import com.google.gson.Gson
@@ -27,4 +30,22 @@ fun Double.roundTo2Digit(): Double {
     val df = DecimalFormat("#.##")
     df.roundingMode = RoundingMode.CEILING
     return df.format(this).toDouble()
+}
+
+fun getRandomString(length: Int = 30): String {
+    val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+    return (1..length)
+        .map { allowedChars.random() }
+        .joinToString("")
+}
+
+fun Context.assetToBitmap(fileName: String): Bitmap? {
+    return try {
+        with(assets.open("$fileName.png")) {
+            BitmapFactory.decodeStream(this)
+        }
+    } catch (e: IOException) {
+        Timber.e(e)
+        null
+    }
 }

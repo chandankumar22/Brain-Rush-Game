@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ck.dev.tiptap.R
+import com.ck.dev.tiptap.helpers.GameConstants
 import com.ck.dev.tiptap.models.RememberTheCardGameLevel
 import com.ck.dev.tiptap.ui.games.rememberthecard.RememberTheCardGameLevelsFragmentDirections
 import kotlinx.android.synthetic.main.list_item_levels.view.*
@@ -13,18 +14,18 @@ import kotlinx.android.synthetic.main.list_item_levels.view.*
 class RememberTheCardLevelsAdapter(
     private val list: List<RememberTheCardGameLevel>,
     private val navController: NavController,
-    private val gameName:String
+    private val gameName: String
 ) :
-        RecyclerView.Adapter<RememberTheCardLevelsAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RememberTheCardLevelsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ViewHolder(
-                    LayoutInflater.from(parent.context).inflate(R.layout.list_item_levels, parent, false)
-            )
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_levels, parent, false)
+        )
 
     override fun getItemCount() = list.size
 
@@ -34,14 +35,16 @@ class RememberTheCardLevelsAdapter(
             setOnClickListener {
                 if (list[position].isGameUnlocked) {
                     list[position].rule.apply {
-                        val action = RememberTheCardGameLevelsFragmentDirections.actionRememberTheCardGameLevelsFragmentToPlayRememberTheCardGameFragment(
-                            row = row,
-                            col = col,
-                            timeLimit = timeLimit,
-                            level = level, isEndless = false,
-                            cardVisibleTime = cardVisibleTime,
-                            gameName = gameName
-                        )
+                        val action =
+                            RememberTheCardGameLevelsFragmentDirections.actionRememberTheCardGameLevelsFragmentToPlayRememberTheCardGameFragment(
+                                row = row,
+                                col = col,
+                                timeLimit = timeLimit,
+                                level = level,
+                                isEndless = gameName == GameConstants.REMEMBER_THE_CARD_NAME_GAME_ENDLESS,
+                                cardVisibleTime = cardVisibleTime,
+                                gameName = gameName
+                            )
                         navController.navigate(action)
 
                     }

@@ -24,9 +24,11 @@
     <string name="game_pause_positive_btn_txt">Resume</string>
     <string name="game_pause_negative_btn_txt">Exit</string>
     <string name="game_complete_title">Time Over</string>
+    <string name="rem_the_card_game_complete_title">Level Complete</string>
     <string name="jumbled_game_complete_title">Level Complete</string>
     <string name="game_complete_infinite_title">Game Over</string>
     <string name="game_complete_content">Congo!!, You have completed this level. You scored %s in %s seconds</string>
+    <string name="rem_the_card_game_complete_content">Congo!!, You have completed this level in %s moves.</string>
     <string name="jumbled_game_complete_content">Congo!!, You have completed this level. You earned %s stars in %s seconds</string>
     <string name="game_complete_infinite_content">Congo!!, You have played %s seconds and scored %s points</string>
     <string name="game_complete_negative_btn_txt">Exit</string>

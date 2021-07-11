@@ -87,11 +87,11 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="center"
-                android:text="Score"
+                android:text="Moves"
                 android:textSize="@dimen/app_text_size_medium" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/live_score_tv"
+                android:id="@+id/live_moves_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -99,10 +99,8 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:gravity="center"
-                android:text="999"
+                android:text="0"
                 android:textSize="@dimen/app_text_size_medium" />
-
-
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -119,11 +117,32 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/msg_tv"
         style="@style/AppTextStyle"
+        android:layout_marginBottom="@dimen/screen_mg"
         android:background="@color/primaryDarkColor"
         android:gravity="center"
         android:text="@string/you_have_s_seconds_to_remember_the_cards"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.ck.dev.tiptap.ui.custom.SquareView
+        android:id="@+id/where_card_cont"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/primaryLightColor"
+        android:layout_marginBottom="@dimen/screen_mg"
+        android:gravity="center"
+        android:text="@string/you_have_s_seconds_to_remember_the_cards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/where_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:src="@drawable/ic_avtar_boy_1"/>
+
+    </com.ck.dev.tiptap.ui.custom.SquareView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

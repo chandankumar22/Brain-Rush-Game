@@ -51,6 +51,7 @@ class ConfirmationDialog : DialogFragment() {
             dialog_title_tv.text = it.title
             dialog_content_tv.text = it.content
             dialog_positive_button.apply {
+                if(it.posBtnText.trim().isEmpty()) dialog_positive_button.visibility = View.GONE
                 setBtnText(it.posBtnText)
                 setOnClickListener { view ->
                     it.posListener()

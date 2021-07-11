@@ -18,4 +18,32 @@ object GameConstants {
     const val EASY_MODE = "easy"
     const val MEDIUM_MODE = "medium"
     const val HARD_MODE = "hard"
+
+    val arrayOfImages = arrayListOf(
+        "air_balloon",
+        "boat",
+        "butterfly",
+        "cap",
+        "cat",
+        "chair",
+        "dice",
+        "dolphin",
+        "fan",
+        "football",
+        "guitar",
+        "hammer",
+        "head_phone",
+        "helmet",
+        "horse",
+        "ladder",
+        "magnet",
+        "magnify_glass",
+        "microphone",
+        "parachute",
+        "phone",
+        "pigeon",
+        "scissors",
+        "sim_card",
+        "wallet"
+    )
 }

@@ -18,6 +18,8 @@ import com.ck.dev.tiptap.R
 import com.ck.dev.tiptap.extensions.getGameExitPopup
 import com.ck.dev.tiptap.extensions.setHeaderBgColor
 import com.ck.dev.tiptap.helpers.AppConstants
+import com.ck.dev.tiptap.helpers.GameConstants.JUMBLED_NUMBER_GAME_NAME_EASY
+import com.ck.dev.tiptap.helpers.GameConstants.JUMBLED_NUMBER_GAME_NAME_MED
 import com.ck.dev.tiptap.helpers.readJsonFromAsset
 import com.ck.dev.tiptap.models.*
 import com.ck.dev.tiptap.ui.custom.CrosswordPuzzleView
@@ -237,7 +239,8 @@ class PlayJumbledWordsGameFragment : BaseFragment(R.layout.fragment_play_jumbled
             AppConstants.JUMBLED_WORDS_GAME_RULE_FILE_NAME
         )
         val json = JSONObject(rulesJson)
-        val easyGameRules = json.getJSONArray("easy").toString()
+
+        val easyGameRules =if(gameName==JUMBLED_NUMBER_GAME_NAME_EASY) json.getJSONArray("easy").toString() else if(gameName== JUMBLED_NUMBER_GAME_NAME_MED) json.getJSONArray("medium").toString() else json.getJSONArray("hard").toString()
         val obj = Gson().fromJson(easyGameRules, Array<JumbledWordGameLevelData>::class.java)
         val gameRule = obj[level.toInt()]
         timer.cancel()

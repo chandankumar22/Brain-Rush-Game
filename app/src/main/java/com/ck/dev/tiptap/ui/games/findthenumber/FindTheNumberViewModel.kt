@@ -35,7 +35,12 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
         }
     }
 
-    suspend fun updateHighScoreIfApplicable(gameName: String, levelNum: String, score: Int) {
+    suspend fun updateHighScoreIfApplicable(
+        gameName: String,
+        levelNum: String,
+        score: Int,
+        isLowScoreToSave: Boolean = false
+    ) {
         Timber.i("updateHighScoreIfApplicable called")
         val highScore = database.getHighScore(gameName, levelNum)
         if (highScore == null) {
@@ -49,17 +54,27 @@ class FindTheNumberViewModel(private val database: AppDatabaseHelperImpl) : View
             }
             return
         }
-        if (highScore < score) {
-            database.executeDbQuery(
-                successMsg = "successfully updated high score for $gameName at level $levelNum with $score",
-                errorMsg = "exception in updating high score for the $gameName"
-            ) {
-                viewModelScope.launch {
-                    database.updateBestScore(BestScores(gameName, levelNum, score))
-                }
+        //val isHighScore = if (isLowScoreToSave) highScore > score else highScore < score
+        val scoreToUpdate = if (isLowScoreToSave) {
+            if (highScore > score) {
+                score
+            } else {
+                highScore
             }
         } else {
-            Timber.i("high score $highScore is greater than current score $score")
+            if (highScore < score) {
+                highScore
+            } else {
+                score
+            }
+        }
+        database.executeDbQuery(
+            successMsg = "successfully updated high score for $gameName at level $levelNum with $score",
+            errorMsg = "exception in updating high score for the $gameName"
+        ) {
+            viewModelScope.launch {
+                database.updateBestScore(BestScores(gameName, levelNum, scoreToUpdate))
+            }
         }
     }
 
