@@ -21,3 +21,5 @@ c. 2 modes (Time bound and Endless)
 d. Challenge you quickness by scoring maximum in each level.
 
 Try out these offline games and stay tuned for more updates with more exciting games, levels and features.
+
+Get the game at https://play.google.com/store/apps/details?id=com.ck.dev.tiptap 
